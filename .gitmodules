@@ -3,4 +3,4 @@
 	url = https://github.com/bast/runtest.git
 [submodule "submodules/geom"]
 	path = submodules/geom
-	url = https://github.com/pgrobasillobre/geom
+	url = https://github.com/pgrobasillobre/geom.git
