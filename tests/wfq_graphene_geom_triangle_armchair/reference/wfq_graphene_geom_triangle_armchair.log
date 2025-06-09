@@ -1,0 +1,513 @@
+ --------------------------------------------------------------------------------
+                                               ______ ____  
+                                              |  ____/ __ \ 
+                       _ __   __ _ _ __   ___ | |__ | |  | |
+                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
+                      | | | | (_| | | | | (_) | |   | |__| |
+                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+
+ --------------------------------------------------------------------------------
+ Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
+ Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
+ Stefano Corni         Univerisy of Padova, Padova, Italy
+ Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
+ Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
+ Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
+ Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
+ --------------------------------------------------------------------------------
+ Configuration date : 2025-03-13 16:55:13 CET
+ Git branch         : new_master
+ Fortran compiler   : GNU 9.4.0
+ Lapack type        : MKL
+ Blas type          : MKL
+ Integers 64bit     : ON
+ OpenMP             : ON
+ --------------------------------------------------------------------------------
+ Input File         : wfq_graphene_geom_triangle_armchair.tmp
+ Output File        : wfq_graphene_geom_triangle_armchair.log
+ OMP Threads        :   8
+ Memory (GB)        :   31.07
+ --------------------------------------------------------------------------------
+ What               : dynamic response
+ Verbose            : 0
+ Principal Axis     : F
+ Restart            : F
+ Save info          : F
+ Info File          : none
+ tar.gz File        : none
+ --------------------------------------------------------------------------------
+ Field type         : dynamic
+ Field Intensity    : 0.1000E-03 au
+ Field Polarization : all
+ Num. Freq.         :   10
+ Min. Freq.         : 0.1000E+00 eV
+ Max. Freq.         : 0.1000E+01 eV
+ Step Freq.         : 0.1000E+00 eV
+ --------------------------------------------------------------------------------
+ Parallel execution : frequencies
+ Algorithm method   : Inverstion
+ Adaptive Tuning    : T
+ --------------------------------------------------------------------------------
+ Target             : wfq
+ ForceField         : fq
+ Kernel             : gaussian
+ RHS Type           : field
+ Num. AtomTypes     :   1
+ Heterogeneous      : F
+ Used defaults      : T
+ --------------------------------------------------------------------------------
+ AtomType           : C
+ Chi                :      0.000 a.u.
+ Eta                :      0.372 a.u.
+ R_q                :      2.144 a.u.
+
+ tau                :  0.170E+03 a.u.
+ sigma_0            :  0.000E+00 a.u.
+ scaling sigma0-tau :  0.100E+01 a.u.
+ A_ij               :  0.174E+01 a.u.
+ fermi_d            :  0.100E+03 a.u.
+ fermi_s            :  0.120E+01 a.u.
+ density            :  0.468E-02 a.u.
+ --------------------------------------------------------------------------------
+
+                               Input Geometry (Ang)
+
+ --------------------------------------------------------------------------------
+             Atom               X                   Y                   Z
+ --------------------------------------------------------------------------------
+           1    C            7.952423           13.490000           -0.000000
+           2    C            7.952423           12.070000           -0.000000
+           3    C            9.182179           11.360000           -0.000000
+           4    C            9.182179            9.940000           -0.000000
+           5    C            7.952423            9.230000           -0.000000
+           6    C            7.952423            7.810000           -0.000000
+           7    C            9.182179            7.100000           -0.000000
+           8    C            9.182179            5.680000           -0.000000
+           9    C            7.952423            4.970000           -0.000000
+          10    C            7.952423            3.550000           -0.000000
+          11    C            9.182179            2.840000           -0.000000
+          12    C            9.182179            1.420000           -0.000000
+          13    C            7.952423            0.710000           -0.000000
+          14    C            7.952423           -0.710000            0.000000
+          15    C            9.182179           -1.420000            0.000000
+          16    C            9.182179           -2.840000            0.000000
+          17    C            7.952423           -3.550000            0.000000
+          18    C            7.952423           -4.970000            0.000000
+          19    C            9.182179           -5.680000            0.000000
+          20    C            9.182179           -7.100000            0.000000
+          21    C            7.952423           -7.810000            0.000000
+          22    C            7.952423           -9.230000            0.000000
+          23    C            9.182179           -9.940000            0.000000
+          24    C            9.182179          -11.360000            0.000000
+          25    C            7.952423          -12.070000            0.000000
+          26    C            7.952423          -13.490000            0.000000
+          27    C            6.722667           14.200000           -0.000000
+          28    C            5.492910           13.490000           -0.000000
+          29    C            5.492910           12.070000           -0.000000
+          30    C            6.722667           11.360000           -0.000000
+          31    C            6.722667            9.940000           -0.000000
+          32    C            5.492910            9.230000           -0.000000
+          33    C            5.492910            7.810000           -0.000000
+          34    C            6.722667            7.100000           -0.000000
+          35    C            6.722667            5.680000           -0.000000
+          36    C            5.492910            4.970000           -0.000000
+          37    C            5.492910            3.550000           -0.000000
+          38    C            6.722667            2.840000           -0.000000
+          39    C            6.722667            1.420000           -0.000000
+          40    C            5.492910            0.710000           -0.000000
+          41    C            5.492910           -0.710000            0.000000
+          42    C            6.722667           -1.420000            0.000000
+          43    C            6.722667           -2.840000            0.000000
+          44    C            5.492910           -3.550000            0.000000
+          45    C            5.492910           -4.970000            0.000000
+          46    C            6.722667           -5.680000            0.000000
+          47    C            6.722667           -7.100000            0.000000
+          48    C            5.492910           -7.810000            0.000000
+          49    C            5.492910           -9.230000            0.000000
+          50    C            6.722667           -9.940000            0.000000
+          51    C            6.722667          -11.360000            0.000000
+          52    C            5.492910          -12.070000            0.000000
+          53    C            5.492910          -13.490000            0.000000
+          54    C            6.722667          -14.200000            0.000000
+          55    C            3.033398           12.070000           -0.000000
+          56    C            4.263154           11.360000           -0.000000
+          57    C            4.263154            9.940000           -0.000000
+          58    C            3.033398            9.230000           -0.000000
+          59    C            3.033398            7.810000           -0.000000
+          60    C            4.263154            7.100000           -0.000000
+          61    C            4.263154            5.680000           -0.000000
+          62    C            3.033398            4.970000           -0.000000
+          63    C            3.033398            3.550000           -0.000000
+          64    C            4.263154            2.840000           -0.000000
+          65    C            4.263154            1.420000           -0.000000
+          66    C            3.033398            0.710000           -0.000000
+          67    C            3.033398           -0.710000            0.000000
+          68    C            4.263154           -1.420000            0.000000
+          69    C            4.263154           -2.840000            0.000000
+          70    C            3.033398           -3.550000            0.000000
+          71    C            3.033398           -4.970000            0.000000
+          72    C            4.263154           -5.680000            0.000000
+          73    C            4.263154           -7.100000            0.000000
+          74    C            3.033398           -7.810000            0.000000
+          75    C            3.033398           -9.230000            0.000000
+          76    C            4.263154           -9.940000            0.000000
+          77    C            4.263154          -11.360000            0.000000
+          78    C            3.033398          -12.070000            0.000000
+          79    C            1.803642           11.360000           -0.000000
+          80    C            1.803642            9.940000           -0.000000
+          81    C            0.573886            9.230000           -0.000000
+          82    C            0.573886            7.810000           -0.000000
+          83    C            1.803642            7.100000           -0.000000
+          84    C            1.803642            5.680000           -0.000000
+          85    C            0.573886            4.970000           -0.000000
+          86    C            0.573886            3.550000           -0.000000
+          87    C            1.803642            2.840000           -0.000000
+          88    C            1.803642            1.420000           -0.000000
+          89    C            0.573886            0.710000           -0.000000
+          90    C            0.573886           -0.710000            0.000000
+          91    C            1.803642           -1.420000            0.000000
+          92    C            1.803642           -2.840000            0.000000
+          93    C            0.573886           -3.550000            0.000000
+          94    C            0.573886           -4.970000            0.000000
+          95    C            1.803642           -5.680000            0.000000
+          96    C            1.803642           -7.100000            0.000000
+          97    C            0.573886           -7.810000            0.000000
+          98    C            0.573886           -9.230000            0.000000
+          99    C            1.803642           -9.940000            0.000000
+         100    C            1.803642          -11.360000            0.000000
+         101    C           -0.655870            9.940000           -0.000000
+         102    C           -1.885626            9.230000           -0.000000
+         103    C           -1.885626            7.810000           -0.000000
+         104    C           -0.655870            7.100000           -0.000000
+         105    C           -0.655870            5.680000           -0.000000
+         106    C           -1.885626            4.970000           -0.000000
+         107    C           -1.885626            3.550000           -0.000000
+         108    C           -0.655870            2.840000           -0.000000
+         109    C           -0.655870            1.420000           -0.000000
+         110    C           -1.885626            0.710000           -0.000000
+         111    C           -1.885626           -0.710000            0.000000
+         112    C           -0.655870           -1.420000            0.000000
+         113    C           -0.655870           -2.840000            0.000000
+         114    C           -1.885626           -3.550000            0.000000
+         115    C           -1.885626           -4.970000            0.000000
+         116    C           -0.655870           -5.680000            0.000000
+         117    C           -0.655870           -7.100000            0.000000
+         118    C           -1.885626           -7.810000            0.000000
+         119    C           -1.885626           -9.230000            0.000000
+         120    C           -0.655870           -9.940000            0.000000
+         121    C           -4.345138            7.810000           -0.000000
+         122    C           -3.115382            7.100000           -0.000000
+         123    C           -3.115382            5.680000           -0.000000
+         124    C           -4.345138            4.970000           -0.000000
+         125    C           -4.345138            3.550000           -0.000000
+         126    C           -3.115382            2.840000           -0.000000
+         127    C           -3.115382            1.420000           -0.000000
+         128    C           -4.345138            0.710000           -0.000000
+         129    C           -4.345138           -0.710000            0.000000
+         130    C           -3.115382           -1.420000            0.000000
+         131    C           -3.115382           -2.840000            0.000000
+         132    C           -4.345138           -3.550000            0.000000
+         133    C           -4.345138           -4.970000            0.000000
+         134    C           -3.115382           -5.680000            0.000000
+         135    C           -3.115382           -7.100000            0.000000
+         136    C           -4.345138           -7.810000            0.000000
+         137    C           -5.574894            7.100000           -0.000000
+         138    C           -5.574894            5.680000           -0.000000
+         139    C           -6.804650            4.970000           -0.000000
+         140    C           -6.804650            3.550000           -0.000000
+         141    C           -5.574894            2.840000           -0.000000
+         142    C           -5.574894            1.420000           -0.000000
+         143    C           -6.804650            0.710000           -0.000000
+         144    C           -6.804650           -0.710000            0.000000
+         145    C           -5.574894           -1.420000            0.000000
+         146    C           -5.574894           -2.840000            0.000000
+         147    C           -6.804650           -3.550000            0.000000
+         148    C           -6.804650           -4.970000            0.000000
+         149    C           -5.574894           -5.680000            0.000000
+         150    C           -5.574894           -7.100000            0.000000
+         151    C           -8.034406            5.680000           -0.000000
+         152    C           -9.264162            4.970000           -0.000000
+         153    C           -9.264162            3.550000           -0.000000
+         154    C           -8.034406            2.840000           -0.000000
+         155    C           -8.034406            1.420000           -0.000000
+         156    C           -9.264162            0.710000           -0.000000
+         157    C           -9.264162           -0.710000            0.000000
+         158    C           -8.034406           -1.420000            0.000000
+         159    C           -8.034406           -2.840000            0.000000
+         160    C           -9.264162           -3.550000            0.000000
+         161    C           -9.264162           -4.970000            0.000000
+         162    C           -8.034406           -5.680000            0.000000
+         163    C          -11.723675            3.550000           -0.000000
+         164    C          -10.493918            2.840000           -0.000000
+         165    C          -10.493918            1.420000           -0.000000
+         166    C          -11.723675            0.710000           -0.000000
+         167    C          -11.723675           -0.710000            0.000000
+         168    C          -10.493918           -1.420000            0.000000
+         169    C          -10.493918           -2.840000            0.000000
+         170    C          -11.723675           -3.550000            0.000000
+         171    C          -12.953431            2.840000           -0.000000
+         172    C          -12.953431            1.420000           -0.000000
+         173    C          -14.183187            0.710000           -0.000000
+         174    C          -14.183187           -0.710000            0.000000
+         175    C          -12.953431           -1.420000            0.000000
+         176    C          -12.953431           -2.840000            0.000000
+         177    C          -15.412943            1.420000           -0.000000
+         178    C          -16.642699            0.710000           -0.000000
+         179    C          -16.642699           -0.710000            0.000000
+         180    C          -15.412943           -1.420000            0.000000
+ --------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------
+ Cycle     1 out of     2
+ --------------------------------------------------------------------------------
+ Cycle     2 out of     2
+ --------------------------------------------------------------------------------
+
+ I am cleaning up the backup (*.nanofq.bk)
+
+ --------------------------------------------------------------------------------
+ Results for w = 0.367E-02 a.u.   0.124E+05 nm   0.100E+00 eV
+
+ Isotr. Real Polar.       =         0.594916E+04 a.u.
+ Isotr. Imag Polar.       =         0.249115E+03 a.u.
+ Long. Real Polar. X      =         0.915808E+04 a.u.
+ Long. Real Polar. Y      =         0.868939E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.394733E+03 a.u.
+ Long. Imag Polar. Y      =         0.352613E+03 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.839513E-01 a.u.
+ Long Abs. Cross. Sect. X =         0.133024E+00 a.u.
+ Long Abs. Cross. Sect. Y =         0.118830E+00 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.153624E-09 a.u.
+ Long Sca. Cross. Sect. X =         0.364084E-09 a.u.
+ Long Sca. Cross. Sect. Y =         0.327703E-09 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.839513E-01 a.u.
+ Long Ext. Cross. Sect. X =         0.133024E+00 a.u.
+ Long Ext. Cross. Sect. Y =         0.118830E+00 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.735E-02 a.u.   0.620E+04 nm   0.200E+00 eV
+
+ Isotr. Real Polar.       =         0.641177E+04 a.u.
+ Isotr. Imag Polar.       =         0.592050E+03 a.u.
+ Long. Real Polar. X      =         0.989062E+04 a.u.
+ Long. Real Polar. Y      =         0.934468E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.942286E+03 a.u.
+ Long. Imag Polar. Y      =         0.833864E+03 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.399039E+00 a.u.
+ Long Abs. Cross. Sect. X =         0.635096E+00 a.u.
+ Long Abs. Cross. Sect. Y =         0.562021E+00 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.287442E-08 a.u.
+ Long Sca. Cross. Sect. X =         0.684350E-08 a.u.
+ Long Sca. Cross. Sect. Y =         0.610211E-08 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.399039E+00 a.u.
+ Long Ext. Cross. Sect. X =         0.635096E+00 a.u.
+ Long Ext. Cross. Sect. Y =         0.562021E+00 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.110E-01 a.u.   0.413E+04 nm   0.300E+00 eV
+
+ Isotr. Real Polar.       =         0.734470E+04 a.u.
+ Isotr. Imag Polar.       =         0.122824E+04 a.u.
+ Long. Real Polar. X      =         0.113753E+05 a.u.
+ Long. Real Polar. Y      =         0.106588E+05 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.197200E+04 a.u.
+ Long. Imag Polar. Y      =         0.171271E+04 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.124174E+01 a.u.
+ Long Abs. Cross. Sect. X =         0.199368E+01 a.u.
+ Long Abs. Cross. Sect. Y =         0.173154E+01 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.194625E-07 a.u.
+ Long Sca. Cross. Sect. X =         0.467800E-07 a.u.
+ Long Sca. Cross. Sect. Y =         0.409033E-07 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.124174E+01 a.u.
+ Long Ext. Cross. Sect. X =         0.199368E+01 a.u.
+ Long Ext. Cross. Sect. Y =         0.173154E+01 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.147E-01 a.u.   0.310E+04 nm   0.400E+00 eV
+
+ Isotr. Real Polar.       =         0.904891E+04 a.u.
+ Isotr. Imag Polar.       =         0.280193E+04 a.u.
+ Long. Real Polar. X      =         0.140981E+05 a.u.
+ Long. Real Polar. Y      =         0.130486E+05 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.458441E+04 a.u.
+ Long. Imag Polar. Y      =         0.382138E+04 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.377698E+01 a.u.
+ Long Abs. Cross. Sect. X =         0.617975E+01 a.u.
+ Long Abs. Cross. Sect. Y =         0.515118E+01 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.995364E-07 a.u.
+ Long Sca. Cross. Sect. X =         0.243782E-06 a.u.
+ Long Sca. Cross. Sect. Y =         0.205065E-06 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.377698E+01 a.u.
+ Long Ext. Cross. Sect. X =         0.617975E+01 a.u.
+ Long Ext. Cross. Sect. Y =         0.515118E+01 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.184E-01 a.u.   0.248E+04 nm   0.500E+00 eV
+
+ Isotr. Real Polar.       =         0.111196E+05 a.u.
+ Isotr. Imag Polar.       =         0.803419E+04 a.u.
+ Long. Real Polar. X      =         0.170461E+05 a.u.
+ Long. Real Polar. Y      =         0.163126E+05 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.135125E+05 a.u.
+ Long. Imag Polar. Y      =         0.105901E+05 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.135375E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.227683E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.178442E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.509650E-06 a.u.
+ Long Sca. Cross. Sect. X =         0.128136E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.102435E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.135375E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.227683E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.178442E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.220E-01 a.u.   0.207E+04 nm   0.600E+00 eV
+
+ Isotr. Real Polar.       =         0.184723E+04 a.u.
+ Isotr. Imag Polar.       =         0.166806E+05 a.u.
+ Long. Real Polar. X      =         0.178267E+03 a.u.
+ Long. Real Polar. Y      =         0.536344E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.251678E+05 a.u.
+ Long. Imag Polar. Y      =         0.248740E+05 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.337279E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.508890E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.502949E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.158164E-05 a.u.
+ Long Sca. Cross. Sect. X =         0.355717E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.363596E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.337279E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.508890E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.502949E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.257E-01 a.u.   0.177E+04 nm   0.700E+00 eV
+
+ Isotr. Real Polar.       =        -0.528225E+04 a.u.
+ Isotr. Imag Polar.       =         0.797570E+04 a.u.
+ Long. Real Polar. X      =        -0.792227E+04 a.u.
+ Long. Real Polar. Y      =        -0.792449E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.110320E+05 a.u.
+ Long. Imag Polar. Y      =         0.128951E+05 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.188146E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.260242E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.304194E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.952065E-06 a.u.
+ Long Sca. Cross. Sect. X =         0.191910E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.238325E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.188146E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.260242E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.304194E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.294E-01 a.u.   0.155E+04 nm   0.800E+00 eV
+
+ Isotr. Real Polar.       =        -0.330868E+04 a.u.
+ Isotr. Imag Polar.       =         0.407138E+04 a.u.
+ Long. Real Polar. X      =        -0.476412E+04 a.u.
+ Long. Real Polar. Y      =        -0.516191E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.590564E+04 a.u.
+ Long. Imag Polar. Y      =         0.630849E+04 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.109764E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.159215E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.170076E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.488483E-06 a.u.
+ Long Sca. Cross. Sect. X =         0.102181E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.117921E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.109764E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.159215E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.170076E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.331E-01 a.u.   0.138E+04 nm   0.900E+00 eV
+
+ Isotr. Real Polar.       =        -0.204534E+04 a.u.
+ Isotr. Imag Polar.       =         0.382508E+04 a.u.
+ Long. Real Polar. X      =        -0.290396E+04 a.u.
+ Long. Real Polar. Y      =        -0.323206E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.558595E+04 a.u.
+ Long. Imag Polar. Y      =         0.588930E+04 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.116014E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.169421E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.178621E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.534877E-06 a.u.
+ Long Sca. Cross. Sect. X =         0.112680E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.128299E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.116014E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.169421E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.178621E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Results for w = 0.367E-01 a.u.   0.124E+04 nm   0.100E+01 eV
+
+ Isotr. Real Polar.       =        -0.268108E+04 a.u.
+ Isotr. Imag Polar.       =         0.361975E+04 a.u.
+ Long. Real Polar. X      =        -0.402808E+04 a.u.
+ Long. Real Polar. Y      =        -0.401517E+04 a.u.
+ Long. Real Polar. Z      =         0.000000E+00 a.u.
+ Long. Imag Polar. X      =         0.562549E+04 a.u.
+ Long. Imag Polar. Y      =         0.523375E+04 a.u.
+ Long. Imag Polar. Z      =         0.000000E+00 a.u.
+ Iso. Abs. Cross. Sect.   =         0.121985E+02 a.u.
+ Long Abs. Cross. Sect. X =         0.189578E+02 a.u.
+ Long Abs. Cross. Sect. Y =         0.176376E+02 a.u.
+ Long Abs. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Sca. Cross. Sect.   =         0.879197E-06 a.u.
+ Long Sca. Cross. Sect. X =         0.207427E-05 a.u.
+ Long Sca. Cross. Sect. Y =         0.188544E-05 a.u.
+ Long Sca. Cross. Sect. Z =         0.000000E+00 a.u.
+ Iso. Ext. Cross. Sect.   =         0.121985E+02 a.u.
+ Long Ext. Cross. Sect. X =         0.189578E+02 a.u.
+ Long Ext. Cross. Sect. Y =         0.176376E+02 a.u.
+ Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
+ --------------------------------------------------------------------------------
+ Maxima Analysis: NumExFreq =  10
+
+          NState      Freq(eV)     Isotr. Abs. Cross. Sec.  (a.u.)
+            1          0.600              0.33728E+02
+ --------------------------------------------------------------------------------
+ Peak memory used  :      6.572 MB       
+ --------------------------------------------------------------------------------
+
+                           🎸 Ob-La-Di, Ob-La-Done! 🎶                           
+
+ --------------------------------------------------------------------------------
+                                                  CPU Time:     0 h 00 min 00 sec
+                                              Elapsed Time:     0 h 00 min 00 sec
+ --------------------------------------------------------------------------------
+              Normal Termination of nanoFQ program in date 13/03/2025 at 16:57:44
+ --------------------------------------------------------------------------------

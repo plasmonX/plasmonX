@@ -1,0 +1,86 @@
+what:
+  - dynamic response
+
+algorithm:
+  method: iterative on the fly
+  adaptive tuning: 'no'
+  tolerance: 1.0d-9
+  parallel execution: matrix
+
+forcefield:
+  static: fqfmu
+  dynamic: wFQFMu
+  kernel: gaussian
+
+field:
+  type: dynamic
+  rhs type: field
+  nfreq: 1
+  external freq: 2.12
+
+parameters:
+  Au:
+    tau: 318.018
+    sigma0: 11834849.81
+    A_ij: 9.61
+    fermi_function:
+      d: 12.0
+      s: 1.1
+    wfqfmu file: jc_gold_polar.csv
+    scaling sigma0-tau: 1.0
+  Ag:
+    tau: 1633.608
+    sigma0: 65313000.0
+    A_ij: 9.61
+    fermi_function:
+      d: 12.0
+      s: 1.1
+    wfqfmu file: jc_silver_polar.csv
+    scaling sigma0-tau: 1.0
+  interaction Au->Ag:
+    fermi_function:
+      d: 12.0
+      s: 0.82555
+  interaction Ag->Au:
+    fermi_function:
+      d: 12.0
+      s: 0.82555
+
+atom_types:
+  Au:
+    chi: 0.0
+    eta: 0.52685
+    alpha: 39.5297
+    rq: 3.4996572071713126
+    rmu: 3.0710227258450864
+  Ag:
+    chi: 0.0
+    eta: 0.4829838
+    alpha: 49.9843
+    rq: 3.3775793621738925
+    rmu: 2.368922250085755
+
+control:
+  - no info file
+
+output:
+  verbose: 3
+
+input_geometry: |
+  Au        0.720930       -0.416230       -3.531820
+  Ag       -2.162790       -2.081150       -1.177270
+  Ag        0.720930       -2.081150       -1.177270
+  Au       -3.604650        0.416230       -1.177270
+  Ag       -0.720930        0.416230       -1.177270
+  Ag        2.162790        0.416230       -1.177270
+  Ag       -2.162790        2.913610       -1.177270
+  Ag        0.720930        2.913610       -1.177270
+  Ag        0.720930       -3.746070        1.177270
+  Au       -3.604650       -1.248690        1.177270
+  Au       -0.720930       -1.248690        1.177270
+  Ag        2.162790       -1.248690        1.177270
+  Ag       -2.162790        1.248690        1.177270
+  Au        0.720930        1.248690        1.177270
+  Ag        3.604650        1.248690        1.177270
+  Ag       -0.720930        3.746070        1.177270
+  Ag        0.720930       -0.416230        3.531820

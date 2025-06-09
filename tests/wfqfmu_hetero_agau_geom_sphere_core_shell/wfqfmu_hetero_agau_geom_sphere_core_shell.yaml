@@ -1,0 +1,21 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQFMu
+
+field:
+  type: dynamic
+  rhs type: field
+  nfreq: 1
+  external freq: 2.12
+
+control:
+  - no info file
+
+input_geometry:
+  shape: sphere
+  core_atomtype: Au
+  core_radius: 7.0
+  shell_atomtype: Ag
+  shell_radius: 14.0

@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import shutil  
+import re
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from runtest import version_info, get_filter, cli, run
+from runtest_config import configure
+
+# Copia i file plasmonX.bk dalla cartella "bk" alla directory di esecuzione
+bk_dir = os.path.join(os.path.dirname(__file__), 'bk')
+current_dir = os.path.dirname(__file__)
+
+frequencies = []  # Lista per memorizzare le frequenze estratte
+
+for file_name in os.listdir(bk_dir):
+    match = re.match(r"^(.*?)-([\d.]+)\.plasmonX\.bk$", file_name)
+    if match:
+        base_name, freq = match.groups()
+        src = os.path.join(bk_dir, file_name)
+        dst = os.path.join(current_dir, file_name)
+        shutil.copy(src, dst)
+        frequencies.append(float(freq))  # Salva la frequenza come numero float
+
+f = [
+    get_filter(from_string=' Maxima Analysis',
+               num_lines=3,
+               abs_tolerance=1.0e-8)
+]
+
+for freq in frequencies:
+    f.append(
+        get_filter(
+            string=f"Recovering from backup frequency: {freq:.5f} eV.",
+            abs_tolerance=0.0  # Deve essere esattamente presente
+        )
+    )
+
+# invoke the command line interface parser which returns options
+options = cli()
+
+ierr=0
+ierr += run(options,
+            configure,
+            input_files=['wfqfmu_ag_restart.yaml -omp 1'],
+            filters={'log':f})
+
+sys.exit(ierr)

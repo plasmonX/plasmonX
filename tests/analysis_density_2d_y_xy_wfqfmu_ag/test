@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from runtest import version_info, get_filter, cli, run
+from runtest_config import configure_analysis
+
+f = [
+    get_filter(num_lines=1000,
+               abs_tolerance=1.0e-10)
+]
+
+# invoke the command line interface parser which returns options
+options = cli()
+
+ierr=0
+ierr += run(options,
+            configure_analysis,
+            input_files=['analysis_density_2d_y_xy_wfqfmu_ag.tar.gz -w field -n 1 -freq 3.00 -field_dir y -plane xy -n_plane 1 -start 0.00 -nx_points 30 -nz_points 30'],
+            filters={'/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ez-3.0000000000-p-0.00.csv':f, 
+                     '/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ez-3.0000000000-p-0.00.py':f})
+
+sys.exit(ierr)

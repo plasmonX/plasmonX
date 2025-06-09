@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+/* Font globale base */
+html, body,
+.wy-nav-content,
+.rst-content,
+.rst-content p,
+.rst-content li,
+.rst-content dd,
+.rst-content dt,
+.rst-content blockquote,
+.rst-content .line-block,
+.rst-content .field-body,
+.rst-content .citation {
+    font-size: 18px !important;
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: white !important;
+}
+
+h1, h2, h3 {
+    font-weight: 400;
+    color: #222;
+}
+
+pre {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Sidebar completamente bianca */
+.wy-nav-side {
+    background-color: white !important;
+    border-right: 1px solid #eee;
+}
+
+/* Area di ricerca in alto nella sidebar */
+.wy-side-nav-search {
+    background-color: white !important;
+    border-bottom: 1px solid #eee;
+}
+
+/* Link della sidebar */
+.wy-menu-vertical a {
+    color: #333 !important;
+    background-color: white !important;
+}
+
+/* Quando un link è attivo/selezionato */
+.wy-menu-vertical li.current > a {
+    background-color: #f4f4f4 !important;
+}
+
+/* Rimuovi ombre o trasparenze su mobile */
+.wy-nav-shift {
+    background-color: white !important;
+}
+
+.wy-nav-content-wrap {
+    background-color: white !important;
+}
+
+/* Corpo centrale più largo */
+.wy-nav-content {
+    max-width: 1200px;
+    width: 95%;
+    background-color: white;
+    padding: 2em;
+}
+
+/* Tabelle personalizzate */
+.rst-content table.docutils {
+    background-color: white !important;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em 0;
+    margin-top: 0 !important;
+}
+
+.rst-content table.docutils th,
+.rst-content table.docutils td {
+    background-color: white !important;
+    color: #333;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+    font-size: 18px;
+}
+
+/* Rimuove colore grigio dai titoli colonna */
+.rst-content table.docutils th {
+    background-color: #f9f9f9 !important;
+    font-weight: 600;
+}
+
+
+/* Aumenta font nei blocchi di codice */
+.rst-content pre.literal-block,
+.rst-content div.highlight pre,
+.rst-content .highlight {
+    font-size: 16px !important;  /* o 20px se vuoi ancora più grande */
+    line-height: 1.5;
+    background-color: #f9f9f9;   /* facoltativo: sfondo leggermente più chiaro */
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+/* Aumenta la dimensione del testo inline tra ``code`` */
+.rst-content code.literal {
+    font-size: 16px !important;  /* oppure 1.2em, o 18px */
+    font-family: 'Roboto Mono', monospace;
+    color: #E74C3C !important;  /* rosso tipo sphinx_rtd_theme */
+    background-color: #f3f3f3;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+
+/* Fix definitivo per il bold stronzo */
+.wy-nav-content .rst-content ul li strong code.literal {
+    font-weight: normal !important;
+}
+
+/* Fixa inline code solo nei bullet points che causano problemi */
+.wy-nav-content .rst-content ul li code.literal {
+    font-weight: normal !important;
+}

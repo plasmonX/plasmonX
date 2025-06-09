@@ -1,0 +1,19 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQFMu
+
+field:
+  type: dynamic
+  nfreq: 1
+  external freq: 3.0
+  field intensity: 0.1
+
+control:
+  - no info file
+
+input_geometry:            
+  shape: icosahedron #this can also be ico, ih
+  atomtype: Au             
+  radius: 14.0             

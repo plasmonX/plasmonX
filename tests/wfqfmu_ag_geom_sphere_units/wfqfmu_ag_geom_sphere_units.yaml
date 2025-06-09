@@ -1,0 +1,19 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQFMu
+
+field:
+  type: dynamic
+  nfreq: 1
+  external freq: 3.0
+  field intensity: 0.1
+
+control:
+  - no info file
+
+input_geometry:            
+  shape: sphere
+  atomtype: Ag             
+  radius: 1.40 nm

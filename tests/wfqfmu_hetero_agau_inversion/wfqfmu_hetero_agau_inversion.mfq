@@ -1,0 +1,78 @@
+what              
+   cross section  
+end what          
+
+algorithm
+  inversion
+  matrix in parallel
+end algorithm
+
+forcefield          
+  static:  fqfmu_pqeq
+  dynamic: wFQFMu   
+  kernel: gaussian
+end forcefield      
+
+field                
+   efield: dynamic   
+   rhs: field        
+   nfreq: 1
+   external freq: 2.12
+end field            
+
+parameters                                                                        
+   atomtype Au                                                                    
+      tau:318.018                                                                 
+      sigma0: 11834849.81                                                         
+      RI: 3.10                                                                    
+      fermi function d: 12.0                                                      
+      fermi function s: 1.1                                                       
+      wfqfmu file: jc_gold_polar.csv                                              
+   end atomtype Au                                                                
+   atomtype Ag                                                                    
+      tau: 1633.608                                                               
+      sigma0: 6.5313E7                                                            
+      RI: 3.10                                                                    
+      fermi function d: 12.0                                                      
+      fermi function s: 1.1                                                       
+      wfqfmu file: jc_silver_polar.csv                                            
+   end atomtype Ag                                                                
+   interaction Au->Ag             
+      fermi function d: 12.0    
+      fermi function s: 0.82555 
+   end interaction Au->Ag         
+   interaction Ag->Au             
+      fermi function d: 12.0    
+      fermi function s: 0.82555 
+   end interaction Ag->Au         
+end parameters                                                                    
+                                                                                  
+atom types                                                                        
+   number: 2                                                                      
+   Au: [chi=0.000000, eta=0.52685, alpha=39.5297, rq=1.69327, rmu=1.48588]        
+   Ag: [chi=0.000000, eta=0.4829838, alpha=49.9843, rq=1.634204, rmu=1.146176537] 
+end atom types                                                                    
+                                                                                  
+output
+   verbose: 3 
+end output
+
+input geometry
+ Au        0.720930       -0.416230       -3.531820
+ Ag       -2.162790       -2.081150       -1.177270
+ Ag        0.720930       -2.081150       -1.177270
+ Au       -3.604650        0.416230       -1.177270
+ Ag       -0.720930        0.416230       -1.177270
+ Ag        2.162790        0.416230       -1.177270
+ Ag       -2.162790        2.913610       -1.177270
+ Ag        0.720930        2.913610       -1.177270
+ Ag        0.720930       -3.746070        1.177270
+ Au       -3.604650       -1.248690        1.177270
+ Au       -0.720930       -1.248690        1.177270
+ Ag        2.162790       -1.248690        1.177270
+ Ag       -2.162790        1.248690        1.177270
+ Au        0.720930        1.248690        1.177270
+ Ag        3.604650        1.248690        1.177270
+ Ag       -0.720930        3.746070        1.177270
+ Ag        0.720930       -0.416230        3.531820
+end input geometry

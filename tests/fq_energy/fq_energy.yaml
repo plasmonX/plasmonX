@@ -1,0 +1,28 @@
+what:
+  - energy
+
+forcefield:
+  static: fq
+  kernel: ohno
+
+atom_types:
+  O-OW:
+    chi: 0.11685879436
+    eta: 0.58485173233
+  H-HW:
+    chi: 1.0e-11
+    eta: 0.62501048888
+
+output:
+  verbose: 2
+
+control:
+  - no info file
+
+input_geometry: |
+  O-OW[IMol= 1]      0.09543100      0.65652700      1.21555100
+  H-HW[IMol= 1]      0.67989369      0.65652700      1.97965006
+  H-HW[IMol= 1]      0.67989417      0.65652700      0.45145232
+  O-OW[IMol= 2]     -0.09543100     -0.65652700     -1.21555100
+  H-HW[IMol= 2]     -0.67989417     -0.65652700     -0.45145232
+  H-HW[IMol= 2]     -0.67989369     -0.65652700     -1.97965006

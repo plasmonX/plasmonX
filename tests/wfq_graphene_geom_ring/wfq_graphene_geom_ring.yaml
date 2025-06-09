@@ -1,0 +1,21 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQ
+
+field:
+  type: dynamic
+  nfreq: 10
+  min freq: 0.1
+  max freq: 1.0
+
+control:
+  - no info file
+
+input_geometry:
+  shape: ring
+  atomtype: C
+  radius: 20.0
+  radius_in: 10.0
+  

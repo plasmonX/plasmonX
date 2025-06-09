@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import griddata
+
+csv_file = 'analysis_density_2d_x_wfq_sodium_n_planes-Ex-1.5800000000-p-7.35-densityRe.csv'
+output = 'analysis_density_2d_x_wfq_sodium_n_planes-Ex-1.5800000000-p-7.35-densityRe.svg'
+output_png = 'analysis_density_2d_x_wfq_sodium_n_planes-Ex-1.5800000000-p-7.35-densityRe.png'
+
+data = []
+with open(csv_file, 'r') as file:
+    for line in file:
+        if line.strip():
+            data.append([float(line[:25]), float(line[28:53]), float(line[56:81])])
+data = np.array(data)
+
+x = data[:, 0]
+y = data[:, 1]
+z = data[:, 2]
+
+point = 500
+xi = np.linspace(min(x), max(x), point)
+yi = np.linspace(min(y), max(y), point)
+X, Y = np.meshgrid(xi, yi)
+Z = griddata((x, y), z, (X, Y), method='linear')
+
+fig = plt.figure(figsize=(10, 10))
+plt.pcolormesh(X, Y, Z, cmap='seismic', shading='auto')
+cbar = plt.colorbar(extend='both')
+cbar.formatter.set_useMathText(True)
+cbar.update_ticks()
+plt.xlabel('x [Å]')
+plt.ylabel('y [Å]')
+plt.savefig(output_png, dpi=300)
+plt.savefig(output, format='svg')
+plt.close()

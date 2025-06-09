@@ -1,0 +1,6 @@
+build*
+tests/runtest_config.pyc
+*/.*.swp
+.*.swp
+tests/__pycache__
+**/__pycache__/

@@ -1,0 +1,10 @@
+# Include essential documentation
+include README.md
+include LICENSE
+include install.sh
+
+# Include test files (Python and XYZ)
+recursive-include tests *.py
+recursive-include tests *.xyz
+recursive-include tests *.msh
+

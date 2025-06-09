@@ -1,0 +1,24 @@
+what:
+  - dynamic response
+
+field:
+  type: dynamic
+  rhs type: field
+  nfreq: 10
+  min freq: 3.00
+  max freq: 4.00
+
+bem:
+  permittivity: silver etchegoin
+  variant: dpcm
+
+control:
+  - no info file
+
+input_geometry: 
+  type: implicit
+  shape: rod
+  main_axis: Z
+  length: 100.0
+  width: 30.0
+  mesh_size: 5.0

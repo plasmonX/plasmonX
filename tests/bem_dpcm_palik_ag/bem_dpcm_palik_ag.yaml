@@ -1,0 +1,20 @@
+what:
+  - dynamic response
+
+field:
+  type: dynamic
+  rhs type: field
+  min freq: 3.0
+  max freq: 4.0
+  step freq: 0.1
+
+
+bem:
+  mesh file: matlab.msh
+  normal scalar factor: -1.0
+  permittivity: silver palik
+  green function: exact
+  variant: dpcm
+
+control:
+  - no info file

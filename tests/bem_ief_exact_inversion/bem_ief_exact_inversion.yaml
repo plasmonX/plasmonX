@@ -1,0 +1,18 @@
+what:
+  - dynamic response
+
+field:
+  type: dynamic
+  rhs type: field
+  nfreq: 1
+  external freq: 1.91
+
+bem:
+  mesh file: matlab.msh
+  normal scalar factor: -1.0
+  permittivity: silver etchegoin
+  green function: exact
+  variant: iefpcm
+
+control:
+  - no info file

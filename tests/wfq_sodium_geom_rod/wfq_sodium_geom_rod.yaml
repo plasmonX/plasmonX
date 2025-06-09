@@ -1,0 +1,21 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQ
+
+field:
+  type: dynamic
+  nfreq: 300
+  min freq: 0.01
+  max freq: 3.00
+
+control:
+  - no info file
+
+input_geometry:
+  shape: rod
+  atomtype: na
+  length: 50.0
+  width: 20.0
+  main_axis: x

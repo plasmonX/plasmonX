@@ -1,0 +1,21 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQ
+
+field:
+  type: dynamic
+  nfreq: 10
+  min freq: 0.1
+  max freq: 1.0
+
+control:
+  - no info file
+
+input_geometry:
+  shape: triangle
+  atomtype: C
+  side_length: 30.0
+  edge_type: zigzag #this is the main axis -- default AC
+  

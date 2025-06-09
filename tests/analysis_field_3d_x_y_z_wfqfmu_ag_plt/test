@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import shutil
+import glob
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from runtest import version_info, get_filter, cli, run
+from runtest_config import configure_analysis
+
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+for d in glob.glob(os.path.join(script_dir, 'post_process*')):
+    if os.path.isdir(d):
+        shutil.rmtree(d)
+
+
+f = [
+    get_filter(from_string="Field           X                Y                Z             Max.",
+               num_lines=2,
+               mask = [4],
+               abs_tolerance=1.0e-10)
+]
+
+# invoke the command line interface parser which returns options
+options = cli()
+
+ierr=0
+ierr += run(options,
+            configure_analysis,
+            input_files=['analysis_field_3d_x_y_z_wfqfmu_ag_plt.tar.gz -w field -n 1 -freq 3.0 -nx_points 30 -ny_points 30 -nz_points 30 -format_grid plt'],
+            filters={'/analysis_field_3d_x_y_z_wfqfmu_ag_plt_analysis.log':f})
+
+sys.exit(ierr)

@@ -1,0 +1,20 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQ
+
+field:
+  type: dynamic
+  nfreq: 300
+  min freq: 0.01
+  max freq: 3.00
+  step freq: 0.01
+
+control:
+  - no info file
+
+input_geometry:
+  shape: sphere
+  atomtype: na
+  radius: 10.0

@@ -1,0 +1,28 @@
+name: plasmonX-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.9
+  - numpy>=1.24.3
+  - matplotlib
+  - scipy
+  - ase>=3.22.1
+  - pyyaml
+  - psutil
+  - pytest>=8.3.4
+  - libglu
+  - libglvnd
+  - gmsh>=4.11.1
+  - python-gmsh
+  - xorg-libxinerama
+  - xorg-libxrandr
+  - xorg-libxcursor
+  - xorg-libxcomposite
+  - xorg-libxdamage
+  - xorg-libxfixes
+  - xorg-libxi
+  - xorg-libxtst
+  - pip
+  - pip:
+      - launchpadlib>=2.1.0

@@ -1,0 +1,27 @@
+what 
+   energy
+end what
+
+forcefield
+  static:  fqfmu_pqeq
+  kernel: gaussian
+end forcefield
+
+atom types
+   number: 2
+   O-OW: [chi=0.321226,eta=0.491118,alpha=2.752769,rq=0.8028,rmu=0.8028]
+   H-HW: [chi=0.166401,eta=0.660903,alpha=1.099978,rq=0.4452,rmu=0.4452]
+end atom types
+
+output
+   verbose: 3
+end output
+
+input geometry
+O-OW[IMol= 1]      0.009319      1.133156        0.000000 
+H-HW[IMol= 1]      0.023452      0.185621        0.000000  
+H-HW[IMol= 1]      0.906315      1.422088        0.000000 
+O-OW[IMol= 1]     -0.042964     -1.404707       -0.000000
+H-HW[IMol= 1]     -0.419020     -1.818953        0.760190
+H-HW[IMol= 1]     -0.419020     -1.818953       -0.760190
+end input geometry

@@ -1,0 +1,39 @@
+output file: bem_ief_exact_inversion.log
+omp threads: 8
+memory: 31.074302673339844
+what: dynamic response
+algorithm method: inversion
+algorithm parallel execution: matrix
+algorithm number of iterations: 0
+algorithm gmres dimension: 0
+algorithm tolerance: 0.0
+algorithm adaptive tuning: yes
+forcefield static: none
+forcefield dynamic: none
+forcefield kernel: none
+field type: dynamic
+field rhs type: field
+field field intensity: 0.0001
+field nfreq: 1
+field min freq: 0.0
+field max freq: 0.0
+field step freq: 0.0
+field external freq: 0.07019120535551908
+field polarization: all
+control no info file: True
+control principal axes: False
+output verbose: 0
+output maxima analysis: absorption
+bem mesh file: matlab.msh
+bem normal scalar factor: -1.0
+bem permittivity file: none
+bem permittivity: silver etchegoin
+bem green function: exact
+bem sphere radius: 0.0d0
+bem solvent: vacuum
+bem epsilon solvent: 1.0
+bem variant: iefpcm
+used defaults for atom_types or parameters: False
+atom_types number: 0
+number of atoms: 0
+number of molecules: 0

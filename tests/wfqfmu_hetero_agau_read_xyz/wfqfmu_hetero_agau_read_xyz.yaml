@@ -1,0 +1,20 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQFMu
+
+field:
+  type: dynamic
+  rhs type: field
+  nfreq: 1
+  external freq: 2.12
+
+output:
+  verbose: 3
+
+control:
+  - no info file
+
+input_geometry: 
+  external xyz file: input.xyz

@@ -1,0 +1,22 @@
+what:
+  - dynamic response
+
+forcefield:
+  dynamic: wFQFMu
+
+field:
+  type: dynamic
+  nfreq: 1
+  external freq: 3.0
+  field intensity: 0.1
+
+control:
+  - no info file
+
+input_geometry:            
+  shape: cone 
+  atomtype: Ag
+  height: 10.0
+  radius: 20.0
+  dimer: bowtie
+  distance: 10.0
