@@ -29,7 +29,7 @@ Install on Linux
 
         .. code-block:: bash
 
-           pip install -r requirements.txt
+           pip3 install -r requirements.txt
 
    2.2. Alternatively, use conda:
 
@@ -46,28 +46,35 @@ Install on Linux
            bash Miniconda3-latest-Linux-x86_64.sh
            source ~/.bashrc
 
-3. (Suggested) Install MKL for Lapack/BLAS
-
-4. Install CMake [minumum version required: 3.15]
+3. Install gfortran [tested versions: 9, 10, 11]
 
    .. code-block:: bash
    
-      sudo apt get install cmake
+      sudo apt-get install gfortran
 
-5. Run the setup.sh [type -h for options]
+4. (Suggested) Install MKL for Lapack/BLAS
+   `link <https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html?packages=oneapi-toolkit&oneapi-toolkit-os=linux&oneapi-lin=offline>`_
+
+5. Install CMake [minumum version required: 3.15]
+
+   .. code-block:: bash
+   
+      sudo apt-get install cmake
+
+6. Run the setup.sh [type -h for options]
 
    .. code-block:: bash
    
       ./setup.sh -omp -b BUILD_DIR
 
-6. Compile the code
+7. Compile the code
 
    .. code-block:: bash
    
       cd BUILD_DIR
       make -j
 
-7. Run the tests [Please, avoid the -j option]
+8. Run the tests [Please, avoid the -j option]
 
    .. code-block:: bash
    
@@ -109,7 +116,11 @@ Install on macOS
            bash Miniconda3-latest-MacOSX-x86_64.sh
            source ~/.bash_profile
 
-3. (Suggested) Install MKL for Lapack/BLAS
+3. Install gfortran [tested versions: 9, 10, 11]
+
+   .. code-block:: bash
+   
+      brew install gcc
 
 4. Install CMake [minimum version required: 3.15]
 
