@@ -3,7 +3,7 @@
 !! This module contains the parameters used in the code, the parameters of 
 !! the models (chi, eta, etc...), and some subroutines
 !!
-!! Date         : 2024 
+!! Date         : 2025
 !!
 module parameters_module
       

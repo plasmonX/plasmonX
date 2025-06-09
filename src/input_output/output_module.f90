@@ -2,7 +2,7 @@
 !!
 !! This module contains the subroutines for the output type
 !!
-!! Date         : 2024 
+!! Date         : 2025
 !!
 module output_module
 

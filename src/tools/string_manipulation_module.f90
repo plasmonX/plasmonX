@@ -2,7 +2,7 @@
 !!
 !! This module contains the subroutines and functions for manipulating strings
 !!
-!! Date         : 2022
+!! Date         : 2025
 !!
 module string_manipulation_module
 

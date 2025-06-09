@@ -3,7 +3,7 @@
 !! This module contains the subroutines and variables related to the type
 !! field, which is used for all info about the external field 
 !!
-!! Date         : 2022
+!! Date         : 2025
 !!
 module field_module
 

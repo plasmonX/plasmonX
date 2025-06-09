@@ -2,7 +2,7 @@
 !!
 !! This module contains the subroutines and functions for manipulating arrays
 !!
-!! Date         : 2022
+!! Date         : 2025
 !!
 module array_manipulation_module
 

@@ -12,7 +12,7 @@
 !!  9. refinement_off_diagonal_elements (function)
 !!
 !! Author       : Tommaso Giovannini
-!! Date         : 2024 
+!! Date         : 2025
 !!
 submodule (bem_module) exact_green_function
  

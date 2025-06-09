@@ -1,8 +1,8 @@
 !> FQFMu module
 !!
-!! This module contains the subroutines for the fq type
+!! This module contains the subroutines for the fqfmu type
 !!
-!! Date         : 2024 
+!! Date         : 2025
 !!
 module fqfmu_module
       

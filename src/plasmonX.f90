@@ -1,6 +1,6 @@
 !> Main Program plasmonX
 !!
-!! Date : 2020
+!! Date : 2025
 program plasmonX
 
 use input_module

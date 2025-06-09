@@ -23,53 +23,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
 
-# # ========================
-# # Ensure OpenMP is Enabled
-# # ========================
-# if(ENABLE_OMP)
-#     find_package(OpenMP REQUIRED COMPONENTS Fortran)
-# 
-#     if(OpenMP_Fortran_FOUND)
-#         message(STATUS "OpenMP Fortran found: ${OpenMP_Fortran_FLAGS}")
-# 
-#         # Manually force OpenMP flags in compilation and linking
-#         set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${OpenMP_Fortran_FLAGS} -fopenmp")
-#         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenmp")
-#     else()
-#         message(FATAL_ERROR "OpenMP Fortran NOT FOUND! Check compiler or flags.")
-#     endif()
-# else()
-#     message(WARNING "OpenMP is DISABLED! Re-run cmake with -DENABLE_OMP=ON")
-# endif()
-# 
-# 
-# if(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
-#     set(dialect "-ffree-form -O3 -march=native -funroll-loops -Wall") 
-#     #set(dialect "-ffree-form -O3 -funroll-loops -Wall -fcheck=all -fbacktrace -g")
-#     #set(dialect "-ffree-form -O0 -Wall -Wextra -Wconversion -Wimplicit-interface -fcheck=all -fbacktrace -finit-real=snan -finit-integer=-999999 -finit-logical=false -g")
-#     set(bounds "-fbounds-check")
-# endif()
-# if(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
-# # 
-# #   Set standard flags 
-# # 
-#     set(CMAKE_Fortran_FLAGS "-fpp -g -O0 -traceback -debug full -check bounds -warn all -warn interfaces")
-# # 
-# #   Enable openmp if requested (default) 
-# # 
-#     if(ENABLE_OMP)
-#         set(CMAKE_Fortran_FLAGS
-#             "${CMAKE_Fortran_FLAGS} -qopenmp -parallel"
-#             )
-#     endif()
-# #
-# endif()
-# 
-# if(ENABLE_OMP)
-#    find_package(OpenMP COMPONENTS Fortran)
-# endif()
-
-
 # ============================
 # Build Type and Compilation Flags
 # ============================
@@ -188,11 +141,11 @@ endif()
 set(ENV{PYTHONPATH} "${CMAKE_SOURCE_DIR}/submodules/geom:$ENV{PYTHONPATH}")
 
 # Percorso per i requirements e i test
-set(GEOM_REQUIREMENTS "${CMAKE_SOURCE_DIR}/submodules/geom/requirements.txt")
+set(PYTHON_REQUIREMENTS "${CMAKE_SOURCE_DIR}/python/requirements.txt")
 set(GEOM_TESTS_PATH "${CMAKE_SOURCE_DIR}/submodules/geom/geom/tests")
 
 # Controlla se tutti i requirements sono già installati
-if(EXISTS "${GEOM_REQUIREMENTS}")
+if(EXISTS "${PYTHON_REQUIREMENTS}")
     message(STATUS "Checking GEOM dependencies...")
 
     execute_process(
@@ -206,7 +159,7 @@ if(EXISTS "${GEOM_REQUIREMENTS}")
         message(STATUS "Installing missing GEOM dependencies globally...")
 
         execute_process(
-            COMMAND ${Python3_EXECUTABLE} -m pip install --no-cache-dir -r ${GEOM_REQUIREMENTS}
+            COMMAND ${Python3_EXECUTABLE} -m pip install -q --disable-pip-version-check --no-cache-dir -r ${PYTHON_REQUIREMENTS}
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/submodules/geom
             RESULT_VARIABLE REQUIREMENTS_FAILED
         )
@@ -220,29 +173,6 @@ if(EXISTS "${GEOM_REQUIREMENTS}")
 else()
     message(WARNING "requirements.txt not found in ${GEOM_REQUIREMENTS}. Skipping dependency installation.")
 endif()
-
-# # Esegui i test di GEOM solo se lo script esiste
-# if(EXISTS "${GEOM_TESTS_PATH}/run_all_tests.sh")
-#     message(STATUS "Running GEOM tests...")
-# 
-#     execute_process(
-#         COMMAND bash -c "PYTHONPATH=${CMAKE_SOURCE_DIR}/submodules/geom:\$PYTHONPATH ${GEOM_TESTS_PATH}/run_all_tests.sh > ${CMAKE_BINARY_DIR}/geom_test_log.txt 2>&1"
-#         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#         RESULT_VARIABLE TEST_RESULT
-#     )
-# 
-#     # Controlliamo se i test hanno avuto errori
-#     file(STRINGS "${CMAKE_BINARY_DIR}/geom_test_log.txt" TEST_LOG_CONTENT)
-#     string(FIND "${TEST_LOG_CONTENT}" "ERROR" ERROR_FOUND)
-# 
-#     if (ERROR_FOUND GREATER -1)
-#         message(FATAL_ERROR "GEOM tests failed! Check ${CMAKE_BINARY_DIR}/geom_test_log.txt")
-#     else()
-#         message(STATUS "GEOM tests passed!")
-#     endif()
-# else()
-#     message(FATAL_ERROR "GEOM tests not found in ${GEOM_TESTS_PATH}.")
-# endif()
 
 # Assicuriamoci che i test di GEOM esistano prima di procedere
 if(NOT EXISTS "${GEOM_TESTS_PATH}/run_all_tests.sh")

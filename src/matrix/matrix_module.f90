@@ -3,7 +3,7 @@
 !! This module contains the subroutines for calculating quantities
 !! common to more than one model.
 !!
-!! Date         : 2024 
+!! Date         : 2025
 !!
 module matrix_module
 
