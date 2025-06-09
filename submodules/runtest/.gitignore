@@ -1,8 +1,0 @@
-*.py[cod]
-_build/
-*.diff
-*.filtered
-*.reference
-.coverage
-.cache/
-venv/
