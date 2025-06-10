@@ -152,15 +152,15 @@ contains
               index_1 = 3*(J-1) 
 
               matrix_block(i,index_1+1) = x_ij/distij_3 *                      & 
-                                          (derf(distij/f_erf_ij) -             &
+                                          (erf(distij/f_erf_ij) -              &
                                           ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                             dexp(-distij_2/f_erf_ij_2))
               matrix_block(i,index_1+2) = y_ij/distij_3 *                      &
-                                          (derf(distij/f_erf_ij) -             &
+                                          (erf(distij/f_erf_ij) -              &
                                           ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                             dexp(-distij_2/f_erf_ij_2))
               matrix_block(i,index_1+3) = z_ij/distij_3 *                      &
-                                          (derf(distij/f_erf_ij) -             &
+                                          (erf(distij/f_erf_ij) -              &
                                           ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                             dexp(-distij_2/f_erf_ij_2))
            endif
@@ -213,15 +213,15 @@ contains
                index_1 = 3*(J-1) 
 
                matrix_block(index_1+1,i) = x_ij/distij_3 *                      & 
-                                           (derf(distij/f_erf_ij) -             &
+                                           (erf(distij/f_erf_ij) -              &
                                            ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                              dexp(-distij_2/f_erf_ij_2))
                matrix_block(index_1+2,i) = y_ij/distij_3 *                      &
-                                           (derf(distij/f_erf_ij) -             &
+                                           (erf(distij/f_erf_ij) -              &
                                            ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                              dexp(-distij_2/f_erf_ij_2))
                matrix_block(index_1+3,i) = z_ij/distij_3 *                      &
-                                           (derf(distij/f_erf_ij) -             &
+                                           (erf(distij/f_erf_ij) -              &
                                            ((two*distij)/(dsqrt(pi)*f_erf_ij))* &
                                              dexp(-distij_2/f_erf_ij_2))
             endif
@@ -292,7 +292,7 @@ contains
                f_erf_IJ_2 = f_erf_IJ**two
                f_erf_IJ_3 = f_erf_IJ**three
 
-               fD1 = derf(distIJ/f_erf_IJ) - ( (two*distIJ) /             &
+               fD1 = erf(distIJ/f_erf_IJ) - ( (two*distIJ) /              &
                                                (dsqrt(pi)*f_erf_IJ) ) *   &
                                                 dexp(-distIJ_2/f_erf_IJ_2)
 
@@ -450,11 +450,13 @@ contains
       do i = 1, target_%n_atoms
          ! w_i = 2 * n_i * tau_i / (1 - i w tau_i)
          w_i = two * parameters%density(target_%map_atomtypes(i)) /   &
-                     dcmplx(one/parameters%tau(target_%map_atomtypes(i)), -freq)
+                     cmplx(one/parameters%tau(target_%map_atomtypes(i)), -freq,&
+                           kind=dp)
          do j = i + 1, target_%n_atoms
             ! w_j = 2 * n_j * tau_j / (1 - i w tau_j)
             w_j = two * parameters%density(target_%map_atomtypes(j)) /   &
-                     dcmplx(one/parameters%tau(target_%map_atomtypes(j)), -freq)
+                     cmplx(one/parameters%tau(target_%map_atomtypes(j)),-freq,&
+                           kind=dp)
 
             distij    = sqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                              (target_%coord(2,i)-target_%coord(2,j))**2 + &
@@ -604,20 +606,20 @@ contains
       call mem_man%alloc(T_qq_complex,target_%n_q,target_%n_q,"T_qq_complex")
       call construct_static_t_qq(target_,T_qq)
 
-      T_qq_complex = dcmplx ( T_qq, zero)
-      scale_cmp    = dcmplx(scale_,zero)
+      T_qq_complex = cmplx ( T_qq, zero,kind=dp)
+      scale_cmp    = cmplx(scale_,zero,kind=dp)
 
-      call zgemm('n','n',          &
-                 target_%n_q,      &
-                 target_%n_q,      &
-                 target_%n_q,      &
-                 scale_cmp,        &
-                 K_plus_H,         &
-                 target_%n_q,      &
-                 T_qq_complex,     &
-                 target_%n_q,      &
-                 dcmplx(zero,zero),&
-                 A_qq,             &
+      call zgemm('n','n',                  &
+                 target_%n_q,              &
+                 target_%n_q,              &
+                 target_%n_q,              &
+                 scale_cmp,                &
+                 K_plus_H,                 &
+                 target_%n_q,              &
+                 T_qq_complex,             &
+                 target_%n_q,              &
+                 cmplx(zero,zero,kind=dp), &
+                 A_qq,                     &
                  target_%n_q) ! (K+P)*T_qq*scale_
       
       call mem_man%dealloc(T_qq, "T_qq")
@@ -654,26 +656,26 @@ contains
       call mem_man%alloc(T_qmu_complex,target_%n_q,target_%n_mu,"T_qmu_complex")
 
       if(present(T_muq)) then 
-         T_qmu_complex = dcmplx(transpose(T_muq), zero)
+         T_qmu_complex = cmplx(transpose(T_muq), zero, kind=dp)
       else 
          call mem_man%alloc(T_qmu,target_%n_q,target_%n_mu,"T_qmu")
          call construct_static_t_qmu(target_,T_qmu)
-         T_qmu_complex = dcmplx(T_qmu, zero)
+         T_qmu_complex = cmplx(T_qmu, zero, kind=dp)
          call mem_man%dealloc(T_qmu, "T_qmu")
       endif
 
-      scale_cmp = dcmplx(scale_,zero)
-      call zgemm('n','n',           &
-                 target_%n_q,       &
-                 target_%n_mu,      &
-                 target_%n_q,       &
-                 scale_cmp,         &
-                 K_plus_H,          &
-                 target_%n_q,       &
-                 T_qmu_complex,     &
-                 target_%n_q,       &
-                 dcmplx(zero,zero), &
-                 A_qmu,             &
+      scale_cmp = cmplx(scale_,zero,kind=dp)
+      call zgemm('n','n',                  &
+                 target_%n_q,              &
+                 target_%n_mu,             &
+                 target_%n_q,              &
+                 scale_cmp,                &
+                 K_plus_H,                 &
+                 target_%n_q,              &
+                 T_qmu_complex,            &
+                 target_%n_q,              &
+                 cmplx(zero,zero,kind=dp), &
+                 A_qmu,                    &
                  target_%n_q) ! scale_*(H+K)*T_qmu
 
       call mem_man%dealloc(T_qmu_complex, "T_qmu_complex")
@@ -744,13 +746,16 @@ contains
          !$omp do schedule(guided)
          do i = 1, target_%n_q
             temp_array(i) = temp_array(i) +  & 
-                          dcmplx(target_%eta(target_%map_atomtypes(i)),zero)*x(i)
+                            cmplx(target_%eta(target_%map_atomtypes(i)),zero,&
+                                  kind=dp)*x(i)
             do j = 1, i-1
                distij = dsqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                               (target_%coord(2,i)-target_%coord(2,j))**2 + &
                               (target_%coord(3,i)-target_%coord(3,j))**2 )
-               temp_array(i) = temp_array(i)+dcmplx(one/distij,zero)*x(j)
-               temp_array(j) = temp_array(j)+dcmplx(one/distij,zero)*x(i)
+               temp_array(i) = temp_array(i) + &
+                               cmplx(one/distij,zero,kind=dp)*x(j)
+               temp_array(j) = temp_array(j) + &
+                               cmplx(one/distij,zero,kind=dp)*x(i)
             enddo
          enddo
          !$omp end do
@@ -765,7 +770,8 @@ contains
          !$omp do schedule(guided)
          do i = 1, target_%n_q
             temp_array(i) = temp_array(i) +  &
-                          dcmplx(target_%eta(target_%map_atomtypes(i)),zero)*x(i)
+                            cmplx(target_%eta(target_%map_atomtypes(i)),zero, &
+                                  kind=dp)*x(i)
             do j = 1, i-1
                distij = dsqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                               (target_%coord(2,i)-target_%coord(2,j))**2 + &
@@ -773,8 +779,8 @@ contains
                etaij = half*(target_%eta(target_%map_atomtypes(i))+ &
                              target_%eta(target_%map_atomtypes(j)))
                dij   = (one+(etaij**two)*(distij**two))**(half)
-               temp_array(i) = temp_array(i)+dcmplx(etaij/dij,zero)*x(j)
-               temp_array(j) = temp_array(j)+dcmplx(etaij/dij,zero)*x(i)
+               temp_array(i) = temp_array(i)+cmplx(etaij/dij,zero,kind=dp)*x(j)
+               temp_array(j) = temp_array(j)+cmplx(etaij/dij,zero,kind=dp)*x(i)
             enddo
          enddo
          !$omp end do
@@ -789,7 +795,8 @@ contains
          !$omp do schedule(guided)
          do i = 1, target_%n_q
             temp_array(i) = temp_array(i) +  &
-                          dcmplx(target_%eta(target_%map_atomtypes(i)),zero)*x(i)
+                            cmplx(target_%eta(target_%map_atomtypes(i)),zero, &
+                                  kind=dp)*x(i)
             do j = 1, i-1
                distij = dsqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                               (target_%coord(2,i)-target_%coord(2,j))**2 + &
@@ -798,8 +805,8 @@ contains
                            dsqrt(target_%r_q(target_%map_atomtypes(i))**2 + &
                                  target_%r_q(target_%map_atomtypes(j))**2))/ &
                                  distIJ
-               temp_array(i) = temp_array(i)+dcmplx(dij,zero)*x(j)
-               temp_array(j) = temp_array(j)+dcmplx(dij,zero)*x(i)
+               temp_array(i) = temp_array(i)+cmplx(dij,zero,kind=dp)*x(j)
+               temp_array(j) = temp_array(j)+cmplx(dij,zero,kind=dp)*x(i)
             enddo
          enddo
          !$omp end do
@@ -833,7 +840,6 @@ contains
  
       !internal variables
       integer  :: i, j
-      integer  :: index_1
       real(dp) :: distij
       real(dp) :: distij_2
       real(dp) :: distij_3
@@ -854,7 +860,9 @@ contains
       !Perform the matrix-vector multiplication on the fly
       !See construct_static_t_qmu, t_muq, t_mumu for the definition 
       !of the matrices 
-      !$omp parallel private(i,j,x_ij,y_ij,z_ij,distij,f_erf_ij,tqmux,tqmuy,tqmuz) &
+      !$omp parallel private(i,j,x_ij,y_ij,z_ij) &
+      !$omp private(distij,distij_2,distij_3,distij_5) &
+      !$omp private(f_erf_ij,f_erf_ij_2,f_erf_ij_3,tqmux,tqmuy,tqmuz) &
       !$omp private(fd1,fd2,txx,txy,txz,tyy,tyz,tzz) firstprivate(temp_array)
       !$omp do schedule(guided)
       do i = 1, target_%n_atoms
@@ -870,12 +878,11 @@ contains
             f_erf_IJ   = dsqrt(target_%r_q(target_%map_atomtypes(i))**2 + &
                                target_%r_mu(target_%map_atomtypes(j))**2)
             f_erf_IJ_2 = f_erf_IJ**two
-            index_1 = 3*(j-1) 
-            TqmuX = x_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ & 
+            TqmuX = x_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ & 
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
-            TqmuY = y_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ &
+            TqmuY = y_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ &
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
-            TqmuZ = z_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ &
+            TqmuZ = z_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ &
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
  
             !T^{q mu} x
@@ -896,11 +903,11 @@ contains
                                target_%r_mu(target_%map_atomtypes(i))**2)
             f_erf_IJ_2 = f_erf_IJ**two
 
-            TqmuX = x_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ &
+            TqmuX = x_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ &
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
-            TqmuY = y_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ &
+            TqmuY = y_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ &
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
-            TqmuZ = z_ij/distij_3 * (derf(distij/f_erf_ij) - ((two*distij)/ &
+            TqmuZ = z_ij/distij_3 * (erf(distij/f_erf_ij) - ((two*distij)/ &
                                (dsqrt(pi)*f_erf_ij))*dexp(-distij_2/f_erf_ij_2))
  
             !T^{q mu} x
@@ -922,7 +929,7 @@ contains
             f_erf_IJ_2 = f_erf_IJ**two
             f_erf_IJ_3 = f_erf_IJ**three
 
-            fD1 = derf(distIJ/f_erf_IJ) - ((two*distIJ)/(dsqrt(pi)*f_erf_IJ))* &
+            fD1 = erf(distIJ/f_erf_IJ) - ((two*distIJ)/(dsqrt(pi)*f_erf_IJ))* &
                   dexp(-distIJ_2/f_erf_IJ_2)
             fD2 = (four/(sqrt(pi)*f_erf_IJ_3)) * dexp(-distIJ_2/f_erf_IJ_2)
 
@@ -1028,20 +1035,22 @@ contains
          do i = 1, target_%n_q
             ! w_i = 2 * n_i * tau_i / (1 - i w tau_i)
             w_i = two * parameters%density(target_%map_atomtypes(i)) /       &
-                        dcmplx(one/parameters%tau(target_%map_atomtypes(i)), &
-                               - freq)
+                        cmplx(one/parameters%tau(target_%map_atomtypes(i)), &
+                              - freq, kind=dp)
             do j = 1, i-1
                ! w_j = 2 * n_j * tau_j / (1 - i w tau_j)
                distij    = sqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                                 (target_%coord(2,i)-target_%coord(2,j))**2 + &
                                 (target_%coord(3,i)-target_%coord(3,j))**2 )
-               K_ij = dcmplx( (one-fermi_function(i,j,distij))* &
-                      (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero)
-               K_ji = dcmplx( (one-fermi_function(j,i,distij))* &
-                      (parameters%a_ij(target_%map_atomtypes(j)))/distij, zero)
+               K_ij = cmplx( (one-fermi_function(i,j,distij))* &
+                      (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero,&
+                       kind=dp)
+               K_ji = cmplx( (one-fermi_function(j,i,distij))* &
+                      (parameters%a_ij(target_%map_atomtypes(j)))/distij, zero,&
+                       kind=dp)
                w_j  = two * parameters%density(target_%map_atomtypes(j)) /   &
-                         dcmplx(one/parameters%tau(target_%map_atomtypes(j)),&
-                                -freq)
+                         cmplx(one/parameters%tau(target_%map_atomtypes(j)),&
+                               -freq,kind=dp)
                H_ij = (w_j / w_i) * K_ji
                H_ji = (w_i / w_j) * K_ij
                temp_array(i) = temp_array(i) + half * (K_ij + H_ij) *  &
@@ -1066,8 +1075,9 @@ contains
                               (target_%coord(2,i)-target_%coord(2,j))**2 + &
                               (target_%coord(3,i)-target_%coord(3,j))**2 )
                !K_ij is symmetric in this case
-               K_ij = dcmplx((one-fermi_function(i,j,distij))* &
-                      (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero)
+               K_ij = cmplx((one-fermi_function(i,j,distij))* &
+                      (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero,&
+                       kind=dp)
                temp_array(i) = temp_array(i) + K_ij * (M_dot_x(j) - M_dot_x(i))
                temp_array(j) = temp_array(j) + K_ij * (M_dot_x(i) - M_dot_x(j))
             enddo
@@ -1152,7 +1162,7 @@ contains
          R_Q_I_2 = R_Q_I**two
 
          const = two/(sqrt(pi)*R_Q_I)
-         factor = derf(distIJ/R_Q_I) - const *distIJ * dexp(-distIJ_2/R_Q_I_2)
+         factor = erf(distIJ/R_Q_I) - const *distIJ * dexp(-distIJ_2/R_Q_I_2)
 
          EField(:) = EField(:) - factor*d_IJ(:)*variable_w/distIJ_3
       endif
@@ -1198,7 +1208,7 @@ contains
          R_Mu_I_2 = R_Mu_I**two
          R_Mu_I_3 = R_Mu_I**three
 
-         fD1 = derf(distIJ/R_Mu_I) - ((two*distIJ)/(dsqrt(pi)*R_Mu_I))* &
+         fD1 = erf(distIJ/R_Mu_I) - ((two*distIJ)/(dsqrt(pi)*R_Mu_I))* &
                                        dexp(-distIJ_2/R_Mu_I_2)
          fD2 = (four/(sqrt(pi)*R_Mu_I_3)) * dexp(-distIJ_2/R_Mu_I_2)
       

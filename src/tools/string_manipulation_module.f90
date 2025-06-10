@@ -316,9 +316,9 @@ contains
 
       !get the first key name
       if (trim(keyword).ne.trim(expected_string)) then
-         write(out_unit, '(a)') "Keyword mismatch: expected " // &
-                                 trim(expected_string)//", found "//&
-                                 trim(keyword)
+         write(out_unit_internal, '(a)') "Keyword mismatch: expected " // &
+                                         trim(expected_string)//", found "//&
+                                         trim(keyword)
          stop
       endif
 

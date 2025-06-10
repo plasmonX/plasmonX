@@ -128,7 +128,7 @@ contains
       real(dp), parameter        :: MM_Ag      = 107.8682d0 !in g/mol
   
       !fitted parameters 
-      bsline = dcmplx(1.469322d0,0.2450325d0)
+      bsline = cmplx(1.469322d0,0.2450325d0,kind=dp)
       aj(1)  = 0.1632212d0
       aj(2)  = 0.9672775d0
       aj(3)  = 0.6150938d0
@@ -154,16 +154,17 @@ contains
             !freq3 = one/freq_in(i) !1/nm
             freq3 = one/freqnm
             !calcolo epsilon
-            vector(i) = bsline-1.0d0/(lambda**2*freq3*dcmplx(freq3,gammap)) + &
+            vector(i) = bsline-1.0d0/& 
+                        (lambda**2*freq3*cmplx(freq3,gammap,kind=dp)) +       &
                         aj(1)*lamj(1)*(exp(pij(1)) /                          &
-                        dcmplx(lamj(1)-freq3,-gamj(1)) +                      &
-                        exp(-pij(1))/dcmplx(lamj(1)+freq3,gamj(1))) +         &
+                        cmplx(lamj(1)-freq3,-gamj(1),kind=dp) +               &
+                        exp(-pij(1))/cmplx(lamj(1)+freq3,gamj(1),kind=dp)) +  &
                         aj(2)*lamj(2)*(exp(pij(2)) /                          &
-                        dcmplx(lamj(2)-freq3,-gamj(2)) +                      &
-                        exp(-pij(2))/dcmplx(lamj(2)+freq3, gamj(2))) +        &
+                        cmplx(lamj(2)-freq3,-gamj(2),kind=dp) +               &
+                        exp(-pij(2))/cmplx(lamj(2)+freq3, gamj(2),kind=dp)) + &
                         aj(3)*lamj(3)*(exp(pij(3)) /                          &
-                        dcmplx( lamj(3)-freq3,-gamj(3)) +                     &
-                        exp(-pij(3))/dcmplx(lamj(3)+freq3, gamj(3)))
+                        cmplx( lamj(3)-freq3,-gamj(3),kind=dp) +              &
+                        exp(-pij(3))/cmplx(lamj(3)+freq3, gamj(3),kind=dp))
          enddo
       else if(what.eq.'polar') then
          do i = 1, n_freq_in
@@ -171,16 +172,16 @@ contains
             !freq3 = one/freq_in(i) !1/nm
             freq3 = one/freqnm
             !calcolo polar
-            vector(i) = ( bsline-dble(bsline) +                           &
-                          aj(1)*lamj(1)*(exp(pij(1)) /                    &
-                          dcmplx(lamj(1)-freq3,-gamj(1)) +                &
-                          exp(-pij(1))/dcmplx(lamj(1)+freq3, gamj(1))) +  &
-                          aj(2)*lamj(2)*(exp(pij(2)) /                    &
-                          dcmplx( lamj(2)-freq3,-gamj(2))  +              &
-                          exp(-pij(2))/dcmplx(lamj(2)+freq3, gamj(2))) +  &
-                          aj(3)*lamj(3)*(exp(pij(3)) /                    &
-                          dcmplx(lamj(3)-freq3,-gamj(3)) +                &
-                          exp(-pij(3))/dcmplx(lamj(3)+freq3,gamj(3))) ) / &
+            vector(i) = ( bsline-dble(bsline) +                                &
+                          aj(1)*lamj(1)*(exp(pij(1)) /                         &
+                          cmplx(lamj(1)-freq3,-gamj(1), kind=dp) +             &
+                          exp(-pij(1))/cmplx(lamj(1)+freq3, gamj(1),kind=dp)) +&
+                          aj(2)*lamj(2)*(exp(pij(2)) /                         &
+                          cmplx( lamj(2)-freq3,-gamj(2), kind=dp)  +           &
+                          exp(-pij(2))/cmplx(lamj(2)+freq3, gamj(2),kind=dp)) +&
+                          aj(3)*lamj(3)*(exp(pij(3)) /                         &
+                          cmplx(lamj(3)-freq3,-gamj(3),kind=dp) +              &
+                          exp(-pij(3))/cmplx(lamj(3)+freq3,gamj(3),kind=dp)) )/&
                         w_p**2
          enddo
       else
@@ -239,15 +240,18 @@ contains
             call freqautoev(freq_in(i), w)
    
             !Drude term
-            eps_drude = (omega_p**two) / (w * (w + dcmplx(0.0d0, G0)))
+            eps_drude = (omega_p**two) / (w * (w + cmplx(zero, G0, kind=dp)))
    
             !a coefficients (complex)
             do j = 1, 5
-              a_val(j) = dcmplx( w/sqrt2*sqrt(sqrt(one+(G(j)/w)**two)+one), &
-                                 w/sqrt2*sqrt(sqrt(one+(G(j)/w)**two)-one))
+              a_val(j) = cmplx( w/sqrt2*sqrt(sqrt(one+(G(j)/w)**two)+one), &
+                                w/sqrt2*sqrt(sqrt(one+(G(j)/w)**two)-one), &
+                                kind=dp)
    
-              z_m(j) = (a_val(j)-dcmplx(wj(j),zero))/(dcmplx(sqrt2*sj(j),zero))
-              z_p(j) = (a_val(j)+dcmplx(wj(j),zero))/(dcmplx(sqrt2*sj(j),zero))
+              z_m(j) = (a_val(j)-cmplx(wj(j),zero,kind=dp))/ &
+                       (cmplx(sqrt2*sj(j),zero,kind=dp))
+              z_p(j) = (a_val(j)+cmplx(wj(j),zero,kind=dp))/ &
+                       (cmplx(sqrt2*sj(j),zero,kind=dp))
    
               ! U function via Faddeeva (approximation or external lib required)
               ! Here we fake with a simple lorentzian-like model as placeholder
@@ -257,16 +261,16 @@ contains
    
               u(j) = u_m(j) + u_p(j)
    
-              chi_j(j) = dcmplx(zero,(fj(j)*wp**2)) / &
+              chi_j(j) = cmplx(zero,(fj(j)*wp**2),kind=dp) / &
                          (two * sqrt2 * sj(j) * a_val(j)) * u(j)
             end do
    
-            bb_corr = dcmplx(zero, zero)
+            bb_corr = cmplx(zero, zero,kind=dp)
             do j = 1, 5
               bb_corr = bb_corr + chi_j(j)
             end do
    
-            eps_final = dcmplx(one, zero) - eps_drude + bb_corr
+            eps_final = cmplx(one, zero,kind=dp) - eps_drude + bb_corr
    
             vector(i) = eps_final
          end do
@@ -312,11 +316,11 @@ contains
       real(dp), parameter             :: MM_Au      = 196.96657d0 !in g/mol
   
       !fitted parameters
-      bsline = dcmplx(1.54d0 ,zero )
+      bsline = cmplx(1.54d0 ,zero, kind=dp)
       aj(1)  = 1.27d0  !1.27 JC
       aj(2)  = 1.10d0  !1.1
-      pij(1) = dcmplx(zero, - pi / four)
-      pij(2) = dcmplx(zero, - pi / four)
+      pij(1) = cmplx(zero, - pi / four, kind=dp)
+      pij(2) = cmplx(zero, - pi / four, kind=dp)
        
       !the following data are in nm
       lambda = 143.0d0
@@ -335,13 +339,14 @@ contains
             !freq3 = one/freq_in(i) !1/nm
             freq3 = one/freqnm
             ! epsilon for BEM
-            vector(i) = bsline-1.0d0/(lambda**2*freq3*dcmplx(freq3,gammap)) + &
-                        aj(1)*lamj(1)*(exp(pij(1)) /                          &
-                        dcmplx(lamj(1)-freq3,-gamj(1)) +                      &
-                        exp(-pij(1))/dcmplx(lamj(1)+freq3,gamj(1))) +         &
-                        aj(2)*lamj(2)*(exp(pij(2)) /                          &
-                        dcmplx(lamj(2)-freq3,-gamj(2)) +                      &
-                        exp(-pij(2))/dcmplx(lamj(2)+freq3,gamj(2)))                  
+            vector(i) = bsline-1.0d0/ &
+                        (lambda**2*freq3*cmplx(freq3,gammap,kind=dp)) +      &
+                        aj(1)*lamj(1)*(exp(pij(1)) /                         &
+                        cmplx(lamj(1)-freq3,-gamj(1),kind=dp) +              &
+                        exp(-pij(1))/cmplx(lamj(1)+freq3,gamj(1),kind=dp)) + &
+                        aj(2)*lamj(2)*(exp(pij(2)) /                         &
+                        cmplx(lamj(2)-freq3,-gamj(2),kind=dp) +              &
+                        exp(-pij(2))/cmplx(lamj(2)+freq3,gamj(2),kind=dp))                 
          enddo
       else if(what.eq.'polar') then
          do i = 1, n_freq_in
@@ -349,16 +354,16 @@ contains
             !freq3 = one/freq_in(i) !1/nm
             freq3 = one/freqnm
             ! calcolo polar for wfqfmu
-            vector(i) = ( aj(1)*lamj(1)*(exp(pij(1)) /                    &
-                          dcmplx(lamj(1)-freq3,-gamj(1)) +                &
-                          exp(-pij(1))/dcmplx(lamj(1)+freq3,gamj(1))) +   &
-                          aj(2)*lamj(2)*(exp(pij(2))/                     &
-                          dcmplx(lamj(2)-freq3,-gamj(2)) +                &
-                          exp(-pij(2))/dcmplx(lamj(2)+freq3,gamj(2))) ) / &
+            vector(i) = ( aj(1)*lamj(1)*(exp(pij(1)) /                         &
+                          cmplx(lamj(1)-freq3,-gamj(1),kind=dp) +              &
+                          exp(-pij(1))/cmplx(lamj(1)+freq3,gamj(1),kind=dp)) + &
+                          aj(2)*lamj(2)*(exp(pij(2))/                          &
+                          cmplx(lamj(2)-freq3,-gamj(2),kind=dp) +              &
+                          exp(-pij(2))/cmplx(lamj(2)+freq3,gamj(2),kind=dp) ))/&
                           w_p**2
             ! correct if a negative polar is obtained
-            if(dimag(vector(i)) .le. 0.0d0) &
-               vector(i) = dcmplx(dble(vector(i)),1.0d-10)
+            if(aimag(vector(i)) .le. zero) &
+               vector(i) = cmplx(dble(vector(i)),1.0d-10,kind=dp)
          enddo
       else
          write(iunit,'(/1x,a)') "Error during the execution of plasmonX"
@@ -438,7 +443,7 @@ contains
             call freqautoev(freq_in(i), freq_eV)
             do j = 1, num_freq ! num freq file
                if(abs(freq_eV-freq(j)).le.1.0d-08) then
-                  vector(i) = dcmplx(tmp_re(j), tmp_im(j))
+                  vector(i) = cmplx(tmp_re(j), tmp_im(j),kind=dp)
                   exit
                else if(j.eq.num_freq) then
                   write(iunit,'(/1x,a)') "Error during the execution of plasmonX"

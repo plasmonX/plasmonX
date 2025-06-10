@@ -112,7 +112,7 @@ contains
                        trim(out_analysis%root_filename)// "-" // & 
                        field%polarization_name(j)// "-"//       &
                        trim(string_freq)//'-Im.pqr'
-            call write_pqr_file(pqr_file, dimag(variables_w), &
+            call write_pqr_file(pqr_file, aimag(variables_w), &
                                 field%index_rhs_polarization(j))
          enddo
       enddo
@@ -223,8 +223,8 @@ contains
                                                field%index_rhs_polarization(j)))
                   max_quantity(1,j) = maxval(dble(grid%density_3d))
                   i_max(1,j,:)      = maxloc(dble(grid%density_3d))
-                  max_quantity(2,j) = maxval(dimag(grid%density_3d))
-                  i_max(2,j,:)      = maxloc(dimag(grid%density_3d))
+                  max_quantity(2,j) = maxval(aimag(grid%density_3d))
+                  i_max(2,j,:)      = maxloc(aimag(grid%density_3d))
                   !plot based on plt or cube option
                   if(trim(grid%format_).eq.'plt') then
                      plt_file = trim(out_analysis%root_folder) //         &
@@ -236,7 +236,7 @@ contains
                                 trim(out_analysis%root_filename)// "-" // & 
                                 field%polarization_name(j)// "-"//        &
                                 trim(string_freq)//'-densityIm.plt'
-                     call write_plt_file(plt_file, dimag(grid%density_3d))
+                     call write_plt_file(plt_file, aimag(grid%density_3d))
                   else if(trim(grid%format_).eq.'cube') then
                      cube_file = trim(out_analysis%root_folder) //         &
                                  trim(out_analysis%root_filename)// "-" // & 
@@ -247,7 +247,7 @@ contains
                                  trim(out_analysis%root_filename)// "-" // & 
                                  field%polarization_name(j)// "-"//        &
                                  trim(string_freq)//'-densityIm.cube'
-                     call write_cube_file(cube_file, dimag(grid%density_3d))
+                     call write_cube_file(cube_file, aimag(grid%density_3d))
                   endif
                   deallocate(grid%density_3d)
                endif ! field or density for cube or plt
@@ -358,7 +358,7 @@ contains
                     field%polarization_name(i_pol)// "-"//     &
                     trim(string_freq)//"-p-"//                 &
                     trim(string_coord)//'-densityIm.csv'
-         call write_csv_file(csv_file, dimag(grid%density_2d))
+         call write_csv_file(csv_file, aimag(grid%density_2d))
       enddo
       deallocate(grid%density_2d)
   

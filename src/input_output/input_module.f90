@@ -1084,7 +1084,7 @@ module input_module
          write(out_%iunit,out_%sticks) 
       endif
        
-      open(unit=out_%unit_info,file=trim(out_%info_file),status="unknown",iostat=iost,err=03)
+      open(unit=out_%unit_info,file=trim(out_%info_file),status="unknown",iostat=iost)
   
          !write info in the info file
          !first we write all the infos in order
@@ -1199,10 +1199,7 @@ module input_module
             enddo
          endif
   
-  
-      03   Continue      
       Close(out_%unit_info)
-  
   
    end subroutine initialize_save_info
 

@@ -41,8 +41,8 @@ def main():
     if args.output_file:
         output_ = args.output_file
         # Check if the output file has a .log or .out extension
-        output_path = Path(output_)
-        if output_path.suffix.lower() not in [".log", ".out"]:
+        _, ext = os.path.splitext(output_)
+        if ext.lower() not in ('.log', '.out'):        
             print(f"Error: The output file '{output_}' must have a '.log' or '.out' extension.", file=sys.stderr)
             sys.exit(1)
     else: 

@@ -169,14 +169,15 @@ contains
       if (field%polarization .eq. 'all') then
          !$omp parallel do private(i)
          do i=1,target_%n_q
-            rhs_w_q(i,:) = dcmplx(temporary_vector(i,:),zero)
+            rhs_w_q(i,:) = cmplx(temporary_vector(i,:),zero,kind=dp)
          enddo
          !$omp end parallel do
       else 
          !$omp parallel do private(i)
          do i=1,target_%n_q
             rhs_w_q(i,field%polarization_index) = &
-                    dcmplx(temporary_vector(i,field%polarization_index),zero)
+                    cmplx(temporary_vector(i,field%polarization_index),zero, &
+                          kind=dp)
          enddo
          !$omp end parallel do
       endif
@@ -230,7 +231,7 @@ contains
       if (field%polarization.eq.'all') then
          !$omp critical
          do i = 1, target_%n_q
-            rhs_w_q(i,:) = rhs_w_q(i,:) + dcmplx(tmp_vector(i,:),zero)
+            rhs_w_q(i,:) = rhs_w_q(i,:) + cmplx(tmp_vector(i,:),zero,kind=dp)
          enddo
          !$omp end critical
       else
@@ -238,7 +239,8 @@ contains
          do i = 1, target_%n_q
             rhs_w_q(i,field%polarization_index) = &
             rhs_w_q(i,field%polarization_index) + &
-                           dcmplx(tmp_vector(i,field%polarization_index),zero)
+                           cmplx(tmp_vector(i,field%polarization_index),zero, &
+                                 kind=dp)
          enddo
          !$omp end critical
       endif
@@ -271,19 +273,19 @@ contains
       !internal variables
       complex(dp) :: scale_cmp 
 
-      scale_cmp = dcmplx(scale_,zero)
+      scale_cmp = cmplx(scale_,zero,kind=dp)
       if (field%polarization .eq. 'all') then
-         call zgemm('N','N',           &
-                     target_%n_q,      &
-                     3,                &
-                     target_%n_q,      &
-                     -scale_cmp,       &
-                     K_plus_H,         &
-                     target_%n_q,      &
-                     rhs_0,            &
-                     target_%n_q,      &
-                     dcmplx(zero,zero),&
-                     rhs_w_q,          &
+         call zgemm('N','N',                  &
+                     target_%n_q,             &
+                     3,                       &
+                     target_%n_q,             &
+                     -scale_cmp,              &
+                     K_plus_H,                &
+                     target_%n_q,             &
+                     rhs_0,                   &
+                     target_%n_q,             &
+                     cmplx(zero,zero,kind=dp),&
+                     rhs_w_q,                 &
                      target_%n_q)
       else
          call zgemm('N','N',                               &
@@ -293,10 +295,10 @@ contains
                      -scale_cmp,                           &
                      K_plus_H,                             &
                      target_%n_q,                          &
-                     rhs_0(:,field%polarization_index),   &
+                     rhs_0(:,field%polarization_index),    &
                      target_%n_q,                          &
-                     dcmplx(zero,zero),                    &
-                     rhs_w_q(:,field%polarization_index), &
+                     cmplx(zero,zero,kind=dp),             &
+                     rhs_w_q(:,field%polarization_index),  &
                      target_%n_q)
       endif
 
@@ -341,19 +343,22 @@ contains
       do i = 1, target_%n_atoms
          ! w_i = 2 * n_i * tau_i / (1 - i w tau_i)
          w_i = two * parameters%density(target_%map_atomtypes(i)) /   &
-                     dcmplx(one/parameters%tau(target_%map_atomtypes(i)),-freq)
+                     cmplx(one/parameters%tau(target_%map_atomtypes(i)),-freq, &
+                           kind=dp)
          do j = 1, i-1
             ! w_j = 2 * n_j * tau_j / (1 - i w tau_j)
             w_j = two * parameters%density(target_%map_atomtypes(j)) /      &
-                        dcmplx(one/parameters%tau(target_%map_atomtypes(j)),&
-                               -freq)
+                        cmplx(one/parameters%tau(target_%map_atomtypes(j)),&
+                               -freq, kind=dp)
             distij    = sqrt((target_%coord(1,i)-target_%coord(1,j))**2 + &
                              (target_%coord(2,i)-target_%coord(2,j))**2 + &
                              (target_%coord(3,i)-target_%coord(3,j))**2 )
-            K_ij = dcmplx( (one-fermi_function(i,j,distij)) * &
-                   (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero)
-            K_ji = dcmplx( (one-fermi_function(j,i,distij)) * &
-                   (parameters%a_ij(target_%map_atomtypes(j)))/distij, zero)
+            K_ij = cmplx( (one-fermi_function(i,j,distij)) * &
+                   (parameters%a_ij(target_%map_atomtypes(i)))/distij, zero, &
+                   kind=dp)
+            K_ji = cmplx( (one-fermi_function(j,i,distij)) * &
+                   (parameters%a_ij(target_%map_atomtypes(j)))/distij, zero, &
+                   kind=dp)
             H_ij = (w_j / w_i) * K_ji
             H_ji = (w_i / w_j) * K_ij
             temporary_vector(i,:) = temporary_vector(i,:) - scale_ * &
@@ -406,9 +411,9 @@ contains
          !$omp parallel do private(i, index_1)
          do i=1,target_%n_atoms
             index_1 = 3*(i-1)
-            rhs_w_mu(index_1+1,1) = dcmplx(field%e_0,zero)
-            rhs_w_mu(index_1+2,2) = dcmplx(field%e_0,zero)
-            rhs_w_mu(index_1+3,3) = dcmplx(field%e_0,zero)
+            rhs_w_mu(index_1+1,1) = cmplx(field%e_0,zero,kind=dp)
+            rhs_w_mu(index_1+2,2) = cmplx(field%e_0,zero,kind=dp)
+            rhs_w_mu(index_1+3,3) = cmplx(field%e_0,zero,kind=dp)
          enddo
          !$omp end parallel do
       else 
@@ -417,7 +422,7 @@ contains
             index_1 = 3*(i-1)
             rhs_w_mu(index_1+field%polarization_index,&
                              field%polarization_index) = &
-                                                         dcmplx(field%e_0,zero)
+                                                   cmplx(field%e_0,zero,kind=dp)
          enddo
          !$omp end parallel do
       endif

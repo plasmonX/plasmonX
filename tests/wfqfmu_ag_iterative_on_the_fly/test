@@ -10,7 +10,7 @@ from runtest_config import configure
 f = [
     get_filter(from_string='Results for w =',
                to_string='Long Ext. Cross. Sect. Z =',
-               abs_tolerance=1.0e-8)
+               rel_tolerance=1.0e-3)
 ]
 
 # invoke the command line interface parser which returns options

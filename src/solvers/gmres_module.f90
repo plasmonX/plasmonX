@@ -58,8 +58,8 @@ contains
       integer                  :: i, j, m, iter
       logical                  :: converged
 
-      zero_cp = dcmplx(zero, zero)
-      one_cp  = dcmplx(one, zero)
+      zero_cp = cmplx(zero, zero, kind=dp)
+      one_cp  = cmplx(one, zero, kind=dp)
       m = min(restart, n)
 
       call mem_man%alloc(V, n, m+1, "v_gmres")
@@ -89,7 +89,7 @@ contains
          beta = normb
 
          V(:,1) = zero_cp
-         call zaxpy(n, dcmplx(one/beta,zero), r, 1, V(:,1), 1)
+         call zaxpy(n, cmplx(one/beta,zero, kind=dp), r, 1, V(:,1), 1)
 
          s    = zero_cp
          cs   = zero
@@ -171,7 +171,7 @@ contains
             write(out_%iunit,'(1x,i10,5x,e13.5)') j, resid
             flush(out_%iunit)
 
-            if (resid < tol) then
+            if (resid .lt. tol) then
 
                ! Solve upper triangular system H(1:m,1:m)*y = s(1:m)
                call zcopy(j, H(1,m+1), 1, y, 1)

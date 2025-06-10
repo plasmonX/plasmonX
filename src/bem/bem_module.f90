@@ -245,7 +245,7 @@ contains
       If(.not.check_file_gmsh) call out_%error("File "//trim(bem%gmsh_file)// &
                                                " does not exist")
       !read the GMSH file
-      open(unit=unit_gmsh,file=bem%gmsh_file,status="OLD",IOSTAT=io,ERR=01)
+      open(unit=unit_gmsh,file=bem%gmsh_file,status="OLD",IOSTAT=io)
          call get_number_lines(unit_gmsh,n_lines)
          rewind(unit_gmsh)
          !GMSH nodes
@@ -292,7 +292,6 @@ contains
                            num_string_initial)
          !read the faces
          call bem%read_faces(unit_gmsh,n_elements_tot)
-      01 continue 
       close(unit_gmsh)
          
    end subroutine read_gmsh_file
@@ -744,12 +743,12 @@ contains
             if (trim(bem%variant).eq.'iefpcm') then
                if(i.eq.j) then
                   tmp_a_inv(i)    = one/target_%area(i)
-                  bem%SA_inv(i,j) = dcmplx(diag_param * &
-                                    sqrt(four*pi*target_%area(i)),zero)  
+                  bem%SA_inv(i,j) = cmplx(diag_param * &
+                                    sqrt(four*pi*target_%area(i)),zero,kind=dp)  
                   !save -(2pi*I + D) 
                   bem%green_der_ief(i,j) = matrix_constant(i,j) - two*pi
                else
-                  bem%SA_inv(i,j) = dcmplx(target_%area(j)/dist_ij, zero)
+                  bem%SA_inv(i,j) = cmplx(target_%area(j)/dist_ij, zero,kind=dp)
                   !save D off diagonal
                   bem%green_der_ief(i,j) = matrix_constant(i,j)
                endif
@@ -864,7 +863,7 @@ contains
       endif
 
       do i=1,target_%n_var
-         rhs_w(i,:) = dcmplx(rhs_static(i,:),zero)
+         rhs_w(i,:) = cmplx(rhs_static(i,:),zero,kind=dp)
       enddo
 
       if (out_%ivrb.ge.3) call print_dynamic_field_rhs(target_,rhs_w)
@@ -898,7 +897,7 @@ contains
   
       do i = 1, target_%n_var
          do j = 1, target_%n_var
-            matrix_w(i,j) = dcmplx(matrix_constant(i,j),zero)
+            matrix_w(i,j) = cmplx(matrix_constant(i,j),zero,kind=dp)
          enddo
          !diagonal = 2 * pi (eps_solv + eps_w) / (eps_solv - eps_w)
          matrix_w(i,i) = matrix_w(i,i) + two*pi* &
@@ -908,17 +907,17 @@ contains
       if(trim(bem%variant).eq.'iefpcm') then
          !call mem_man%alloc(matrix_out, target_%n_var, target_%n_var, &
          !                   "matrix_out")
-         call zgemm('N', 'N',           &
-                     target_%n_var,     &
-                     target_%n_var,     &
-                     target_%n_var,     &
-                     dcmplx(one,zero),  &
-                     matrix_w,          &
-                     target_%n_var,     &
-                     bem%SA_inv,        &
-                     target_%n_var,     &
-                     dcmplx(zero,zero), &
-                     matrix_out,          &
+         call zgemm('N', 'N',                  &
+                     target_%n_var,            &
+                     target_%n_var,            &
+                     target_%n_var,            &
+                     cmplx(one,zero,kind=dp),  &
+                     matrix_w,                 &
+                     target_%n_var,            &
+                     bem%SA_inv,               &
+                     target_%n_var,            &
+                     cmplx(zero,zero,kind=dp), &
+                     matrix_out,               &
                      target_%n_var)
          matrix_w = -matrix_out
          !call mem_man%dealloc(matrix_out, "matrix_out")
@@ -927,7 +926,7 @@ contains
       if(out_%ivrb.ge.3) then
          call out_%print_matrix("BEM Matrix: Real Part",dble(matrix_w), &
                                 target_%n_var,target_%n_var)
-         call out_%print_matrix("BEM Matrix: IMag Part",dimag(matrix_w), &
+         call out_%print_matrix("BEM Matrix: IMag Part",aimag(matrix_w), &
                                 target_%n_var,target_%n_var)
       endif
   
@@ -1014,9 +1013,9 @@ contains
   
       !internal variables
       integer :: i
-      complex(dp) :: sum_X = dcmplx(zero,zero)
-      complex(dp) :: sum_Y = dcmplx(zero,zero)
-      complex(dp) :: sum_Z = dcmplx(zero,zero)
+      complex(dp) :: sum_X = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Y = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Z = cmplx(zero,zero,kind=dp)
       character(len=21) :: format_1 = "(38x,'BEM Charges',/)"
       character(len=64) :: format_2 = "(13x,'X Component',14x,'Y Component',&
                                       &14x,'Z Component',/)"
@@ -1063,7 +1062,7 @@ contains
       integer :: i
       complex(dp), dimension(3,3) :: internal_polar
   
-      internal_polar = dcmplx(zero,zero)
+      internal_polar = cmplx(zero,zero,kind=dp)
      if(trim(bem%variant).eq.'iefpcm') then
         do i = 1, target_%n_var
           internal_polar(1,1) = internal_polar(1,1) + &
@@ -1124,9 +1123,9 @@ contains
                                    dble(polar_w(2,2)) + &
                                    dble(polar_w(3,3)))/ 3 
       !2) isotropic polar --- imaginary part
-      target_%results(i_freq,2) = (dimag(polar_w(1,1)) + &
-                                   dimag(polar_w(2,2)) + &
-                                   dimag(polar_w(3,3)))/ 3 
+      target_%results(i_freq,2) = (aimag(polar_w(1,1)) + &
+                                   aimag(polar_w(2,2)) + &
+                                   aimag(polar_w(3,3)))/ 3 
       !3) long polar X --- real part                             
       target_%results(i_freq,3) = dble(polar_w(1,1))  
       !4) long polar Y --- real part
@@ -1134,11 +1133,11 @@ contains
       !5) long polar Z --- real part
       target_%results(i_freq,5) = dble(polar_w(3,3))  
       !6) long polar X --- imag part
-      target_%results(i_freq,6) = dimag(polar_w(1,1)) 
+      target_%results(i_freq,6) = aimag(polar_w(1,1)) 
       !7) long polar Y --- imag part
-      target_%results(i_freq,7) = dimag(polar_w(2,2)) 
+      target_%results(i_freq,7) = aimag(polar_w(2,2)) 
       !8) long polar Z --- imag part
-      target_%results(i_freq,8) = dimag(polar_w(3,3)) 
+      target_%results(i_freq,8) = aimag(polar_w(3,3)) 
   
    end subroutine calculate_dynamic_polar_bem
 
@@ -1200,9 +1199,9 @@ contains
       !check if the point is outside or inside the BEM surface
       if(distIJ_grid.gt.distIJ_bem) is_out = .true.
 
-      EField = dcmplx(zero, zero)
+      EField = cmplx(zero, zero, kind=dp)
       if (is_out) then
-         EField(i_pol) = dcmplx(field%e_0, zero)
+         EField(i_pol) = cmplx(field%e_0, zero, kind=dp)
          do i = 1, target_%n_var
             d_IJ(1)   = (target_%coord(1,i)-point_coord(1))*tobohr
             d_IJ(2)   = (target_%coord(2,i)-point_coord(2))*tobohr

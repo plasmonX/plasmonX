@@ -819,7 +819,7 @@ contains
          endif
          !put coordinates in the info file
          open(unit=out_%unit_info,file=out_%info_file,status="old", &
-              iostat=iost,access='append',err=03)
+              iostat=iost,position='append')
             write(out_%unit_info,'(a)') 'Rotated Geometry (Angstrom)'
             do i = 1, target_%n_atoms
                write(out_%unit_info,'(f4.1,2x,3(1x,f25.16))')  &
@@ -828,7 +828,6 @@ contains
                                 target_%coord(2,i),       &
                                 target_%coord(3,i)
             enddo 
-         03   continue      
          close(out_%unit_info)
       endif
   
@@ -952,7 +951,7 @@ contains
       call mem_man%alloc(variables_1, target_%n_var,3, "variables_1")
   
       call mem_man%alloc(rhs_1, target_%n_var, 3, "rhs_1")
-      rhs_1 = dcmplx(one,zero)
+      rhs_1 = cmplx(one,zero,kind=dp)
       
    end subroutine allocate_constant_potential_variables
 
@@ -1637,7 +1636,7 @@ contains
       If (out_%ivrb.ge.2) then 
          call out_%print_matrix('Real Polarizability Tensor',DBle(polar_w),3,3)
          call out_%print_matrix('Imaginary Polarizability Tensor', &
-                                DIMag(polar_w),3,3)
+                                aimag(polar_w),3,3)
       endIf
        
       if(out_%ivrb.ge.2) then
@@ -1798,7 +1797,7 @@ contains
                                                 '-' // freq_char // '.plasmonX.bk'
 
       iunit_bk = 15
-      open(unit=iunit_bk,file=output_bk,status="unknown",iostat=iost,err=05)
+      open(unit=iunit_bk,file=output_bk,status="unknown",iostat=iost)
          write(iunit_bk,out_%sticks) 
          write(iunit_bk,format_1) freq_au, freq_nm, freq_ev
          write(iunit_bk,format_2) 'Isotr. Real Polar.       = ', &
@@ -1843,7 +1842,6 @@ contains
                                   target_%results(i_freq,20)
          write(iunit_bk,out_%sticks) 
          flush(iunit_bk)
-      05 continue      
       close(iunit_bk)
   
    end subroutine save_intermediate_results
@@ -1877,7 +1875,7 @@ contains
       iunit_csv = 18
       Write(output_csv,'(a)') out_%filename(1:(len_trim(out_%filename)-4)) // &
                                                                           '.csv'
-      open(unit=iunit_csv,file=output_csv,status="unknown",iostat=iost,err=05)
+      open(unit=iunit_csv,file=output_csv,status="unknown",iostat=iost)
          write(iunit_csv,'(a)') '#------------------------------------------'
          write(iunit_csv,'(a)') '#    Column          Quantity'
          write(iunit_csv,'(a)') '#------------------------------------------'
@@ -1907,7 +1905,6 @@ contains
             call freqautoev(field%freq(i), freq_ev)
             write(iunit_csv,format_1) freq_ev, (target_%results(i,j), j=1,20)
          enddo
-      05 continue      
       close(iunit_csv)
   
    end subroutine save_csv_file

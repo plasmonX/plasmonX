@@ -280,7 +280,11 @@ def validate_algorithm(data, what, keywords):
             if what in ["energy", "static response"]:
                 algorithm["parallel execution"] = "matrix"
             else:
-                algorithm["parallel execution"] = "frequencies"
+                if "method" in algorithm:
+                    if "iterative on the fly" in algorithm["method"]:
+                        algorithm["parallel execution"] = "matrix"
+                    else:
+                        algorithm["parallel execution"] = "frequencies"
     else: #default inversion
         algorithm["method"] = "inversion"
         algorithm["parallel execution"] = "matrix"

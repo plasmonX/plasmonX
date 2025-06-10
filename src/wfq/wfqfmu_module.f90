@@ -324,11 +324,12 @@ contains
          !if heterogeneous depends on frequency. Thus, it is constructed later
          if (field%polarization.eq.'all') then
             rhs_w(1:target_%n_q,:) = &
-                               dcmplx(target_%rhs_static(1:target_%n_q,:),zero)
+                               cmplx(target_%rhs_static(1:target_%n_q,:),zero,&
+                                     kind=dp)
          else
             rhs_w(1:target_%n_q,field%polarization_index) = &
-            dcmplx(target_%rhs_static(1:target_%n_q,field%polarization_index),&
-                                      zero)
+            cmplx(target_%rhs_static(1:target_%n_q,field%polarization_index),&
+                                     zero,kind=dp)
          endif
       endif
       !wfmu block
@@ -375,11 +376,12 @@ contains
          !if heterogeneous depends on frequency. Thus, it is constructed later
          if (field%polarization.eq.'all') then
             rhs_w(1:target_%n_q,:) = &
-                               dcmplx(target_%rhs_static(1:target_%n_q,:),zero)
+                               cmplx(target_%rhs_static(1:target_%n_q,:),zero,&
+                                     kind=dp)
          else
             rhs_w(1:target_%n_q,field%polarization_index) = &
-            dcmplx(target_%rhs_static(1:target_%n_q,field%polarization_index),&
-                                      zero)
+            cmplx(target_%rhs_static(1:target_%n_q,field%polarization_index),&
+                  zero,kind=dp)
          endif
       endif
       !wfmu block
@@ -437,8 +439,8 @@ contains
             z_w_q = -( freq_au / ( two* &
                                   parameters%density(target_%map_atomtypes(i))*&
                                   parameters%tau(target_%map_atomtypes(i)) ) )*&
-                      dcmplx( freq_au*parameters%tau(target_%map_atomtypes(i)),&
-                              one ) 
+                      cmplx( freq_au*parameters%tau(target_%map_atomtypes(i)),&
+                             one, kind=dp ) 
             !matrix_w(i,i) = matrix_w(i,i) - z_q(w)
             matrix_w(i,i) = matrix_w(i,i) - z_w_q
          enddo 
@@ -451,34 +453,37 @@ contains
          do i = 1, target_%n_atoms
             do j = 1, target_%n_atoms
                !matrix_w = constant_matrix
-               matrix_w(i,j) = dcmplx(matrix_constant(i,j),zero)
+               matrix_w(i,j) = cmplx(matrix_constant(i,j),zero, kind=dp)
             enddo
             !diagonal
             !z(w) = - \frac{ w }{(2 * n_0 * tau)} * ( w * tau + i ) }
             z_w_q = - ( freq_au / ( two* &
                                   parameters%density(target_%map_atomtypes(i))*&
                                   parameters%tau(target_%map_atomtypes(i)) ) )*&
-                      dcmplx( freq_au*parameters%tau(target_%map_atomtypes(i)),&
-                              one ) 
+                      cmplx( freq_au*parameters%tau(target_%map_atomtypes(i)),&
+                             one, kind=dp ) 
             !matrix_w(i,i) = matrix_w(i,i) - z_q(w)
             matrix_w(i,i) = matrix_w(i,i) - z_w_q
          enddo
          !Aqmu block
          matrix_w(1:target_%n_atoms,target_%n_atoms+1:) = &
-             dcmplx(matrix_constant(1:target_%n_atoms,target_%n_atoms+1:),zero)
+             cmplx(matrix_constant(1:target_%n_atoms,target_%n_atoms+1:),zero, &
+                   kind=dp)
       endif
   
       !wFMu-wFQ blocks
       matrix_w(target_%n_atoms+1:,1:target_%n_atoms) = &
-             dcmplx(matrix_constant(target_%n_atoms+1:,1:target_%n_atoms),zero)
+             cmplx(matrix_constant(target_%n_atoms+1:,1:target_%n_atoms),zero, &
+                   kind=dp)
   
       !wFMus block
       matrix_w(target_%n_atoms+1:,target_%n_atoms+1:) = &
-            dcmplx(matrix_constant(target_%n_atoms+1:,target_%n_atoms+1:),zero)
+            cmplx(matrix_constant(target_%n_atoms+1:,target_%n_atoms+1:),zero, &
+                  kind=dp)
   
       !diagonal mu-mu block
       do i = 1, target_%n_atoms 
-         z_w_mu = dcmplx(zero,zero)
+         z_w_mu = cmplx(zero,zero,kind=dp)
          do j = 1, target_%n_atomtypes
             !this is written for the general case of heterogeneous
             !this reduces to 1/alpha(w) for homogeneous
@@ -495,7 +500,7 @@ contains
       If(out_%ivrb.ge.3) then
          call out_%print_matrix("wfqfmu Matrix: Real Part",dble(matrix_w), &
                                                    target_%n_var,target_%n_var)
-         call out_%print_matrix("wfqfmu Matrix: IMag Part",dimag(matrix_w),&
+         call out_%print_matrix("wfqfmu Matrix: IMag Part",aimag(matrix_w),&
                                                    target_%n_var,target_%n_var)
       endif
   
@@ -565,7 +570,7 @@ contains
                          "static_matrix_dot_x")
       !$omp parallel do
       do i=1,target_%n_var
-         y(i) = dcmplx(zero,zero)
+         y(i) = cmplx(zero,zero,kind=dp)
       enddo
       !$omp end parallel do
   
@@ -624,8 +629,8 @@ contains
       start_x = colx - 1
       do i = 1, target_%n_atoms
          z_i = freq_au * &
-               (dcmplx(-freq_au*parameters%tau(target_%map_atomtypes(i)), &
-                       -one)) / & 
+               (cmplx(-freq_au*parameters%tau(target_%map_atomtypes(i)), &
+                      -one,kind=dp)) / & 
                (two*parameters%density(target_%map_atomtypes(i)) * &
                     parameters%tau(target_%map_atomtypes(i)))
          work(start_z+i) = work(start_z + i) - z_i * work(start_x + i)
@@ -635,7 +640,7 @@ contains
       start_z = colz + target_%n_atoms - 1
       start_x = colx + target_%n_atoms - 1
       do i = 1, target_%n_atoms
-         z_i = dcmplx(zero,zero)
+         z_i = cmplx(zero,zero,kind=dp)
          do j = 1, target_%n_atomtypes
             !this is written for the general case of alloys
             z_i = z_i + (real(target_%neighbours(j,i),kind=dp)/ &
@@ -681,8 +686,8 @@ contains
       !diagonal part wfq 
       do i = 1, target_%n_atoms
          z_i = freq_au * &
-               (dcmplx(-freq_au*parameters%tau(target_%map_atomtypes(i)), &
-                       -one)) / & 
+               (cmplx(-freq_au*parameters%tau(target_%map_atomtypes(i)), &
+                      -one,kind=dp)) / & 
                (two*parameters%density(target_%map_atomtypes(i)) * &
                     parameters%tau(target_%map_atomtypes(i)))
          w(i) = w(i) - z_i * r(i)
@@ -691,7 +696,7 @@ contains
       !diagonal part wfqfmu
       start = target_%n_atoms 
       do i = 1, target_%n_atoms
-         z_i = dcmplx(zero,zero)
+         z_i = cmplx(zero,zero,kind=dp)
          do j = 1, target_%n_atomtypes
             !this is written for the general case of alloys
             z_i = z_i + (real(target_%neighbours(j,i),kind=dp)/ &
@@ -726,9 +731,9 @@ contains
   
       !internal variables
       integer :: i
-      complex(dp) :: sum_X = dcmplx(zero,zero)
-      complex(dp) :: sum_Y = dcmplx(zero,zero)
-      complex(dp) :: sum_Z = dcmplx(zero,zero)
+      complex(dp) :: sum_X = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Y = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Z = cmplx(zero,zero,kind=dp)
       character(len=21) :: format_1 = "(38x,'wFQ Charges',/)"
       character(len=64) :: format_2 = "(13x,'X Component',14x,'Y Component',&
                                       &14x,'Z Component',/)"
@@ -855,7 +860,7 @@ contains
       integer :: index_1
       complex(dp), dimension(3,3) :: internal_polar
   
-      internal_polar = dcmplx(zero,zero)
+      internal_polar = cmplx(zero,zero,kind=dp)
       !wfq contribution
       do i = 1, target_%n_atoms
         internal_polar(1,1) = internal_polar(1,1) + &
@@ -909,9 +914,9 @@ contains
                                    dble(polar_w(2,2)) + &
                                    dble(polar_w(3,3)))/ 3 
       !2) isotropic polar --- imaginary part
-      target_%results(i_freq,2) = (dimag(polar_w(1,1)) + &
-                                   dimag(polar_w(2,2)) + &
-                                   dimag(polar_w(3,3)))/ 3 
+      target_%results(i_freq,2) = (aimag(polar_w(1,1)) + &
+                                   aimag(polar_w(2,2)) + &
+                                   aimag(polar_w(3,3)))/ 3 
       !3) long polar X --- real part                             
       target_%results(i_freq,3) = dble(polar_w(1,1))  
       !4) long polar Y --- real part
@@ -919,11 +924,11 @@ contains
       !5) long polar Z --- real part
       target_%results(i_freq,5) = dble(polar_w(3,3))  
       !6) long polar X --- imag part
-      target_%results(i_freq,6) = dimag(polar_w(1,1)) 
+      target_%results(i_freq,6) = aimag(polar_w(1,1)) 
       !7) long polar Y --- imag part
-      target_%results(i_freq,7) = dimag(polar_w(2,2)) 
+      target_%results(i_freq,7) = aimag(polar_w(2,2)) 
       !8) long polar Z --- imag part
-      target_%results(i_freq,8) = dimag(polar_w(3,3)) 
+      target_%results(i_freq,8) = aimag(polar_w(3,3)) 
   
    end subroutine calculate_dynamic_polar_wfqfmu
 
@@ -951,8 +956,8 @@ contains
       integer  :: index_mu
       real(dp), dimension(3) :: d_IJ
        
-      EField = dcmplx(zero, zero)
-      EField(i_pol) = dcmplx(field%e_0, zero)
+      EField = cmplx(zero, zero,kind=dp)
+      EField(i_pol) = cmplx(field%e_0, zero,kind=dp)
       do i = 1, target_%n_atoms 
          d_IJ(1)   = (target_%coord(1,i)-point_coord(1))*tobohr
          d_IJ(2)   = (target_%coord(2,i)-point_coord(2))*tobohr

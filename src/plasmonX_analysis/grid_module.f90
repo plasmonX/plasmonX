@@ -228,9 +228,9 @@ contains
                                                            point_coord, &
                                                            variables_w)
   
-         norm_field = dsqrt(dble(efield(1))**2 + dimag(efield(1))**2 + &
-                            dble(efield(2))**2 + dimag(efield(2))**2 + &
-                            dble(efield(3))**2 + dimag(efield(3))**2)
+         norm_field = dsqrt(dble(efield(1))**2 + aimag(efield(1))**2 + &
+                            dble(efield(2))**2 + aimag(efield(2))**2 + &
+                            dble(efield(3))**2 + aimag(efield(3))**2)
   
          grid%field_3d(i,j,k) = norm_field/field%e_0
   
@@ -309,9 +309,9 @@ contains
                efield = target_%calculate_induced_field_at_point(i_pol, &
                                                                  point_coord, &
                                                                  variables_w)
-               norm_field = dsqrt(dble(efield(1))**2 + dimag(efield(1))**2 + &
-                                  dble(efield(2))**2 + dimag(efield(2))**2 + &
-                                  dble(efield(3))**2 + dimag(efield(3))**2)
+               norm_field = dsqrt(dble(efield(1))**2 + aimag(efield(1))**2 + &
+                                  dble(efield(2))**2 + aimag(efield(2))**2 + &
+                                  dble(efield(3))**2 + aimag(efield(3))**2)
                grid%field_2d(i,j) = norm_field/field%e_0
   
             enddo
@@ -329,9 +329,9 @@ contains
                efield = target_%calculate_induced_field_at_point(i_pol, &
                                                                  point_coord, &
                                                                  variables_w)
-               norm_field = dsqrt(dble(efield(1))**2 + dimag(efield(1))**2 + &
-                                  dble(efield(2))**2 + dimag(efield(2))**2 + &
-                                  dble(efield(3))**2 + dimag(efield(3))**2)
+               norm_field = dsqrt(dble(efield(1))**2 + aimag(efield(1))**2 + &
+                                  dble(efield(2))**2 + aimag(efield(2))**2 + &
+                                  dble(efield(3))**2 + aimag(efield(3))**2)
                grid%field_2d(i,j) = norm_field/field%e_0
             enddo
          enddo
@@ -349,9 +349,9 @@ contains
                efield = target_%calculate_induced_field_at_point(i_pol, &
                                                                  point_coord, &
                                                                  variables_w)
-               norm_field = dsqrt(dble(efield(1))**2 + dimag(efield(1))**2 + &
-                                  dble(efield(2))**2 + dimag(efield(2))**2 + &
-                                  dble(efield(3))**2 + dimag(efield(3))**2)
+               norm_field = dsqrt(dble(efield(1))**2 + aimag(efield(1))**2 + &
+                                  dble(efield(2))**2 + aimag(efield(2))**2 + &
+                                  dble(efield(3))**2 + aimag(efield(3))**2)
                grid%field_2d(i,j) = norm_field/field%e_0
             enddo
          enddo

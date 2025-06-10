@@ -74,7 +74,7 @@ contains
  
       !$omp parallel do
       do i = 1, nlen
-         a(i) = dcmplx(zero,zero)
+         a(i) = cmplx(zero,zero,kind=dp)
       enddo
       !$omp end parallel do
  

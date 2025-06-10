@@ -233,12 +233,13 @@ contains
 
       do i = 1, target_%n_var
          do j = 1, target_%n_var
-            matrix_w(i,j) = dcmplx(matrix_constant(i,j),zero)
+            matrix_w(i,j) = cmplx(matrix_constant(i,j),zero,kind=dp)
          enddo
          !z(w) = - \frac{ w / (2 * n_0 * tau) * ( w * tau + i ) }
          z_w = - ( freq_au /(two*parameters%density(target_%map_atomtypes(i))* &
                                  parameters%tau(target_%map_atomtypes(i))) ) * &
-                    dcmplx(freq_au*parameters%tau(target_%map_atomtypes(i)),one)
+                    cmplx(freq_au*parameters%tau(target_%map_atomtypes(i)),one,&
+                          kind=dp)
          !matrix_w(i,i) = matrix_w(i,i) - z(w)
          matrix_w(i,i) = matrix_w(i,i) - z_w
   
@@ -246,7 +247,7 @@ contains
       if(out_%ivrb.ge.3) then
          call out_%print_matrix("wFQ Matrix: Real Part",dble(matrix_w), &
                                 target_%n_var,target_%n_var)
-         call out_%print_matrix("wFQ Matrix: IMag Part",dimag(matrix_w),&
+         call out_%print_matrix("wFQ Matrix: IMag Part",aimag(matrix_w),&
                                 target_%n_var,target_%n_var)
       endif
   
@@ -337,7 +338,7 @@ contains
       freq_au = field%freq(i_freq)
       !$omp parallel do
       do i=1,target_%n_var
-         y(i) = dcmplx(zero,zero)
+         y(i) = cmplx(zero,zero,kind=dp)
       enddo
       !$omp end parallel do
       call product_q_block_x(target_,x,static_matrix_dot_x)
@@ -378,9 +379,9 @@ contains
       start_z = colz - 1
       start_x = colx - 1
       do i = 1, target_%n_var
-         z_i = freq_au*(dcmplx( -freq_au* &
+         z_i = freq_au*(cmplx( -freq_au* &
                                 parameters%tau(target_%map_atomtypes(i)),  &
-                                -one ))/ & 
+                                -one ,kind=dp))/ & 
                        (two*parameters%density(target_%map_atomtypes(i)) * &
                             parameters%tau(target_%map_atomtypes(i)))
          work(start_z+i) = work(start_z + i) - z_i * work(start_x + i)
@@ -412,9 +413,9 @@ contains
       freq_au = field%freq(i_freq)
   
       do i = 1, target_%n_var
-         z_i = freq_au*(dcmplx( -freq_au* &
+         z_i = freq_au*(cmplx( -freq_au* &
                                 parameters%tau(target_%map_atomtypes(i)),  &
-                                -one ))/ & 
+                                -one, kind=dp ))/ & 
                        (two*parameters%density(target_%map_atomtypes(i)) * &
                             parameters%tau(target_%map_atomtypes(i)))
          w(i) = w(i) - z_i * r(i)
@@ -486,9 +487,9 @@ contains
   
       !internal variables
       integer :: i
-      complex(dp) :: sum_X = dcmplx(zero,zero)
-      complex(dp) :: sum_Y = dcmplx(zero,zero)
-      complex(dp) :: sum_Z = dcmplx(zero,zero)
+      complex(dp) :: sum_X = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Y = cmplx(zero,zero,kind=dp)
+      complex(dp) :: sum_Z = cmplx(zero,zero,kind=dp)
       character(len=21) :: format_1 = "(38x,'wFQ Charges',/)"
       character(len=64) :: format_2 = "(13x,'X Component',14x,'Y Component',&
                                       &14x,'Z Component',/)"
@@ -533,7 +534,7 @@ contains
       integer :: i
       complex(dp), dimension(3,3) :: internal_polar
   
-      internal_polar = dcmplx(zero,zero)
+      internal_polar = cmplx(zero,zero,kind=dp)
       do i = 1, target_%n_var
         internal_polar(1,1) = internal_polar(1,1) + &
                               variables_w(i,1)*target_%coord(1,i)/field%e_0
@@ -563,9 +564,9 @@ contains
                                    dble(polar_w(2,2)) + &
                                    dble(polar_w(3,3)))/ 3 
       !2) isotropic polar --- imaginary part
-      target_%results(i_freq,2) = (dimag(polar_w(1,1)) + &
-                                   dimag(polar_w(2,2)) + &
-                                   dimag(polar_w(3,3)))/ 3 
+      target_%results(i_freq,2) = (aimag(polar_w(1,1)) + &
+                                   aimag(polar_w(2,2)) + &
+                                   aimag(polar_w(3,3)))/ 3 
       !3) long polar X --- real part                             
       target_%results(i_freq,3) = dble(polar_w(1,1))  
       !4) long polar Y --- real part
@@ -573,11 +574,11 @@ contains
       !5) long polar Z --- real part
       target_%results(i_freq,5) = dble(polar_w(3,3))  
       !6) long polar X --- imag part
-      target_%results(i_freq,6) = dimag(polar_w(1,1)) 
+      target_%results(i_freq,6) = aimag(polar_w(1,1)) 
       !7) long polar Y --- imag part
-      target_%results(i_freq,7) = dimag(polar_w(2,2)) 
+      target_%results(i_freq,7) = aimag(polar_w(2,2)) 
       !8) long polar Z --- imag part
-      target_%results(i_freq,8) = dimag(polar_w(3,3)) 
+      target_%results(i_freq,8) = aimag(polar_w(3,3)) 
   
    end subroutine calculate_dynamic_polar_wfq
 
@@ -604,8 +605,8 @@ contains
       integer  :: i
       real(dp), dimension(3) :: d_IJ
        
-      EField = dcmplx(zero, zero)
-      EField(i_pol) = dcmplx(field%e_0, zero)
+      EField = cmplx(zero, zero,kind=dp)
+      EField(i_pol) = cmplx(field%e_0, zero,kind=dp)
       do i = 1, target_%n_var
          d_IJ(1)   = (target_%coord(1,i)-point_coord(1))*tobohr
          d_IJ(2)   = (target_%coord(2,i)-point_coord(2))*tobohr

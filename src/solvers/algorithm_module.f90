@@ -355,7 +355,7 @@ contains
       !construct matrix
       call target_%construct_constant_matrix(matrix_constant)
       !construct matrix for gmres
-      matrix_iterative = dcmplx(matrix_constant,zero)
+      matrix_iterative = cmplx(matrix_constant,zero,kind=dp)
       call mem_man%dealloc(matrix_constant, "matrix_constant")
       !construct rhs
       call target_%construct_dynamic_field_rhs(rhs_w)
@@ -775,7 +775,7 @@ contains
       write(freq_char,'(f7.5)') freq_ev
       write(output_bk,'(a)') out_%filename(1:(len_trim(out_%filename)-4)) // &
                                               '-' // freq_char // '.plasmonX.bk'
-      open(unit=iunit_bk,file=output_bk,status="old",iostat=iost,err=05)
+      open(unit=iunit_bk,file=output_bk,status="old",iostat=iost)
          read(iunit_bk,*) line
          read(iunit_bk,format_1) freq_au,freq_nm,freq_ev
          read(iunit_bk,*)
@@ -800,7 +800,6 @@ contains
          read(iunit_bk,format_2) target_%results(i_freq,19)
          read(iunit_bk,format_2) target_%results(i_freq,20)
          read(iunit_bk,*) line
-      05 continue      
       close(iunit_bk)
       
    end subroutine recover_from_backup_file
@@ -854,14 +853,14 @@ contains
                if (trim(bem%variant).eq.'dpcm') then
                   write(unit_freq,format_1) i, &
                                        dble(variables_w(i,1))*bem%area(i), &
-                                      dimag(variables_w(i,1))*bem%area(i)
+                                      aimag(variables_w(i,1))*bem%area(i)
                else
                   write(unit_freq,format_1) i, dble(variables_w(i,1)), &
-                                               dimag(variables_w(i,1))
+                                               aimag(variables_w(i,1))
                endif
             else
                write(unit_freq,format_1) i, dble(variables_w(i,1)), &
-                                            dimag(variables_w(i,1))
+                                            aimag(variables_w(i,1))
             endif
          enddo 
          ! Y 
@@ -872,14 +871,14 @@ contains
                if (trim(bem%variant).eq.'dpcm') then
                   write(unit_freq,format_1) i, &
                                        dble(variables_w(i,2))*bem%area(i), &
-                                      dimag(variables_w(i,2))*bem%area(i)
+                                      aimag(variables_w(i,2))*bem%area(i)
                else
                   write(unit_freq,format_1) i, dble(variables_w(i,2)), &
-                                               dimag(variables_w(i,2))
+                                               aimag(variables_w(i,2))
                endif
             else
                write(unit_freq,format_1) i, dble(variables_w(i,2)), &
-                                            dimag(variables_w(i,2))
+                                            aimag(variables_w(i,2))
             endif
          enddo 
          write(unit_freq,'(a,f25.16)') 'complex '//trim(variable)// &
@@ -890,14 +889,14 @@ contains
                if (trim(bem%variant).eq.'dpcm') then
                   write(unit_freq,format_1) i, &
                                        dble(variables_w(i,3))*bem%area(i), &
-                                      dimag(variables_w(i,3))*bem%area(i)
+                                      aimag(variables_w(i,3))*bem%area(i)
                else
                   write(unit_freq,format_1) i, dble(variables_w(i,3)), &
-                                               dimag(variables_w(i,3))
+                                               aimag(variables_w(i,3))
                endif
             else
                write(unit_freq,format_1) i, dble(variables_w(i,3)), &
-                                            dimag(variables_w(i,3))
+                                            aimag(variables_w(i,3))
             endif
          enddo 
       close(unit_freq)

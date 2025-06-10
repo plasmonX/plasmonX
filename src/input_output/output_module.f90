@@ -182,7 +182,7 @@ contains
       write(out_%iunit,out_%sticks)
       write(out_%iunit,'(/ a /)') ' I am cleaning up the backup (*.plasmonX.bk)'
       write(out_%iunit,out_%sticks)
-      call system('rm *.plasmonX.bk')
+      call execute_command_line('rm *.plasmonX.bk')
       
    end subroutine clean_up_scratch
 
@@ -219,21 +219,19 @@ contains
       inquire(file="info_freq.txt",exist=info_freq_exist)
       if(info_freq_exist) then
          unit_freq = 13
-         Open(unit=unit_freq,file="info_freq.txt",status="OLD",ERR=02)
+         Open(unit=unit_freq,file="info_freq.txt",status="OLD")
             read(unit_freq,'(a)') line_file_freq
             if(index(line_file_freq,"exists one or more files").gt.0) &
                exist_freq = .true.
-         02 Continue      
          Close(unit_freq)
          call execute_command_line("rm info_freq.txt")
       endif
   
       !open unit_info for writing the correct execution
-      Open(unit=unit_info,file=file_info,status="OLD",ACCESS='APPEND',ERR=03)
+      Open(unit=unit_info,file=file_info,status="OLD",position='APPEND')
          write(unit_info,out_%sticks)
          write(unit_info,'(24x,a)') 'Normal termination of plasmonX'
          write(unit_info,out_%sticks)
-      03 Continue      
       close(unit_info)
   
       !creation of the tar.gz (with all relevant files)
