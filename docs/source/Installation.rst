@@ -16,7 +16,7 @@ Install on Linux
 
    .. code-block:: bash
 
-      git clone --recursive https://github.com/your_project.git
+      git clone --recursive git@github.com:plasmonX/plasmonX.git
 
 2. Install python:
 
@@ -29,7 +29,7 @@ Install on Linux
 
         .. code-block:: bash
 
-           pip3 install -r requirements.txt
+           pip3 install -r python/requirements.txt
 
    2.2. Alternatively, use conda:
 
@@ -87,7 +87,7 @@ Install on macOS
 
    .. code-block:: bash
 
-      git clone --recursive https://github.com/your_project.git
+      git clone --recursive git@github.com:plasmonX/plasmonX.git
 
 2. Install python:
 
@@ -99,7 +99,7 @@ Install on macOS
 
         .. code-block:: bash
 
-           pip3 install -r requirements.txt
+           pip3 install -r python/requirements.txt
 
    2.2. Alternatively, use conda:
 
