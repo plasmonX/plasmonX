@@ -19,7 +19,7 @@ ierr=0
 ierr += run(options,
             configure_analysis,
             input_files=['analysis_density_2d_y_xy_wfqfmu_ag.tar.gz -w field -n 1 -freq 3.00 -field_dir y -plane xy -n_plane 1 -start 0.00 -nx_points 30 -nz_points 30'],
-            filters={'/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ez-3.0000000000-p-0.00.csv':f, 
-                     '/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ez-3.0000000000-p-0.00.py':f})
+            filters={'/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.csv':f, 
+                     '/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.py':f})
 
 sys.exit(ierr)

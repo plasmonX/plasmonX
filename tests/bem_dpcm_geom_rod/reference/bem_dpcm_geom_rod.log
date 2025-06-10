@@ -1,22 +1,22 @@
  --------------------------------------------------------------------------------
-                                               ______ ____  
-                                              |  ____/ __ \ 
-                       _ __   __ _ _ __   ___ | |__ | |  | |
-                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
-                      | | | | (_| | | | | (_) | |   | |__| |
-                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+                         _                                __  __ 
+                   _ __ | | __ _ ___ _ __ ___   ___  _ __ \ \/ / 
+                  | '_ \| |/ _` / __| '_ ` _ \ / _ \| '_ \ \  /  
+                  | |_) | | (_| \__ \ | | | | | (_) | | | |/  \  
+                  | .__/|_|\__,_|___/_| |_| |_|\___/|_| |_/_/\_\ 
+                  |_|                                            
 
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
- Stefano Corni         Univerisy of Padova, Padova, Italy
+ Stefano Corni         University of Padova, Padova, Italy
  Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
  Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-04-09 10:37:37 CEST
- Git branch         : new_master
+ Configuration date : 2025-06-10 09:29:35 CEST
+ Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
  Blas type          : MKL
@@ -44,14 +44,16 @@
  Max. Freq.         : 0.4000E+01 eV
  Step Freq.         : 0.1111E+00 eV
  --------------------------------------------------------------------------------
- Parallel execution : matrix
+ Parallel execution : frequencies
  Algorithm method   : Inversion
  Adaptive Tuning    : T
  --------------------------------------------------------------------------------
  Target             : bem
  GMSH File          : bem_dpcm_geom_rod.msh
+ BEM Variant        : dpcm
  Green Function     : approximate
- Permettivity       : silver etchegoin
+ Permittivity       : silver etchegoin
+ Permittivity File  : none
  Solvent            : vacuum
  Epsilon Solvent    :    1.000
  Sphere Radius      :   94.486 a.u.
@@ -61,7 +63,7 @@
  Charge Constraint  : F
  --------------------------------------------------------------------------------
 
-                    Input Tesserae Centroids (Ang)
+                           Input Tesserae Centroids (Ang)
 
  --------------------------------------------------------------------------------
        Tess.                     X                   Y                   Z
@@ -1013,28 +1015,12 @@
          945                 6.241853            5.459889           47.302834
          946                -1.074107           -4.800715           48.725571
  --------------------------------------------------------------------------------
- Cycle     1 out of    10
+ Cycle     1 out of     2
  --------------------------------------------------------------------------------
- Cycle     2 out of    10
- --------------------------------------------------------------------------------
- Cycle     3 out of    10
- --------------------------------------------------------------------------------
- Cycle     4 out of    10
- --------------------------------------------------------------------------------
- Cycle     5 out of    10
- --------------------------------------------------------------------------------
- Cycle     6 out of    10
- --------------------------------------------------------------------------------
- Cycle     7 out of    10
- --------------------------------------------------------------------------------
- Cycle     8 out of    10
- --------------------------------------------------------------------------------
- Cycle     9 out of    10
- --------------------------------------------------------------------------------
- Cycle    10 out of    10
+ Cycle     2 out of     2
  --------------------------------------------------------------------------------
 
- I am cleaning up the backup (*.nanofq.bk)
+ I am cleaning up the backup (*.plasmonX.bk)
 
  --------------------------------------------------------------------------------
  Results for w = 0.110E+00 a.u.   0.413E+03 nm   0.300E+01 eV
@@ -1278,8 +1264,8 @@
                            🎸 Ob-La-Di, Ob-La-Done! 🎶                           
 
  --------------------------------------------------------------------------------
-                                                  CPU Time:     0 h 00 min 02 sec
+                                                  CPU Time:     0 h 00 min 03 sec
                                               Elapsed Time:     0 h 00 min 01 sec
  --------------------------------------------------------------------------------
-              Normal Termination of nanoFQ program in date 09/04/2025 at 14:17:27
+                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:33
  --------------------------------------------------------------------------------

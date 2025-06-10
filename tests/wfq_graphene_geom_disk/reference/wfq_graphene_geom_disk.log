@@ -1,29 +1,29 @@
  --------------------------------------------------------------------------------
-                                               ______ ____  
-                                              |  ____/ __ \ 
-                       _ __   __ _ _ __   ___ | |__ | |  | |
-                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
-                      | | | | (_| | | | | (_) | |   | |__| |
-                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+                         _                                __  __ 
+                   _ __ | | __ _ ___ _ __ ___   ___  _ __ \ \/ / 
+                  | '_ \| |/ _` / __| '_ ` _ \ / _ \| '_ \ \  /  
+                  | |_) | | (_| \__ \ | | | | | (_) | | | |/  \  
+                  | .__/|_|\__,_|___/_| |_| |_|\___/|_| |_/_/\_\ 
+                  |_|                                            
 
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
- Stefano Corni         Univerisy of Padova, Padova, Italy
+ Stefano Corni         University of Padova, Padova, Italy
  Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
+ Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
- Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-03-05 12:44:36 CET
- Git branch         : new_master
+ Configuration date : 2025-06-10 09:29:35 CEST
+ Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
  Blas type          : MKL
  Integers 64bit     : ON
  OpenMP             : ON
  --------------------------------------------------------------------------------
- Input File         : wfq_graphene_geom_disk.tmp
+ Input File         : wfq_graphene_geom_disk.yaml
  Output File        : wfq_graphene_geom_disk.log
  OMP Threads        :   8
  Memory (GB)        :   31.07
@@ -45,7 +45,7 @@
  Step Freq.         : 0.1000E+00 eV
  --------------------------------------------------------------------------------
  Parallel execution : frequencies
- Algorithm method   : Inverstion
+ Algorithm method   : Inversion
  Adaptive Tuning    : T
  --------------------------------------------------------------------------------
  Target             : wfq
@@ -67,6 +67,7 @@
  A_ij               :  0.174E+01 a.u.
  fermi_d            :  0.100E+03 a.u.
  fermi_s            :  0.120E+01 a.u.
+ Fermi energy       :  0.400E+00 eV
  density            :  0.468E-02 a.u.
  --------------------------------------------------------------------------------
 
@@ -554,13 +555,12 @@
          477    C           15.990000           11.362253            0.000000
          478    C           14.760000           13.492676            0.000000
  --------------------------------------------------------------------------------
- --------------------------------------------------------------------------------
  Cycle     1 out of     2
  --------------------------------------------------------------------------------
  Cycle     2 out of     2
  --------------------------------------------------------------------------------
 
- I am cleaning up the backup (*.nanofq.bk)
+ I am cleaning up the backup (*.plasmonX.bk)
 
  --------------------------------------------------------------------------------
  Results for w = 0.367E-02 a.u.   0.124E+05 nm   0.100E+00 eV
@@ -793,7 +793,7 @@
  Long Ext. Cross. Sect. Y =         0.173691E+02 a.u.
  Long Ext. Cross. Sect. Z =         0.000000E+00 a.u.
  --------------------------------------------------------------------------------
- Maxima Analysis: NumExFreq =  10
+ Maxima Analysis: NumExFreq =     10
 
           NState      Freq(eV)     Isotr. Abs. Cross. Sec.  (a.u.)
             1          0.600              0.13403E+03
@@ -807,5 +807,5 @@
                                                   CPU Time:     0 h 00 min 01 sec
                                               Elapsed Time:     0 h 00 min 01 sec
  --------------------------------------------------------------------------------
-              Normal Termination of nanoFQ program in date 05/03/2025 at 14:51:10
+                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:13
  --------------------------------------------------------------------------------

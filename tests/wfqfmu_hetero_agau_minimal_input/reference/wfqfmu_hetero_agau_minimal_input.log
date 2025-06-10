@@ -1,29 +1,29 @@
  --------------------------------------------------------------------------------
-                                               ______ ____  
-                                              |  ____/ __ \ 
-                       _ __   __ _ _ __   ___ | |__ | |  | |
-                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
-                      | | | | (_| | | | | (_) | |   | |__| |
-                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+                         _                                __  __ 
+                   _ __ | | __ _ ___ _ __ ___   ___  _ __ \ \/ / 
+                  | '_ \| |/ _` / __| '_ ` _ \ / _ \| '_ \ \  /  
+                  | |_) | | (_| \__ \ | | | | | (_) | | | |/  \  
+                  | .__/|_|\__,_|___/_| |_| |_|\___/|_| |_/_/\_\ 
+                  |_|                                            
 
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
- Stefano Corni         Univerisy of Padova, Padova, Italy
+ Stefano Corni         University of Padova, Padova, Italy
  Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
  Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-04-06 16:13:39 CEST
- Git branch         : new_master
+ Configuration date : 2025-06-10 09:29:35 CEST
+ Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
  Blas type          : MKL
  Integers 64bit     : ON
  OpenMP             : ON
  --------------------------------------------------------------------------------
- Input File         : wfqfmu_hetero_agau_minimal_input.tmp
+ Input File         : wfqfmu_hetero_agau_minimal_input.yaml
  Output File        : wfqfmu_hetero_agau_minimal_input.log
  OMP Threads        :   8
  Memory (GB)        :   31.07
@@ -46,7 +46,7 @@
  Freq     1         : 0.212E+01 eV
  --------------------------------------------------------------------------------
  Parallel execution : matrix
- Algorithm method   : Inverstion
+ Algorithm method   : Inversion
  Adaptive Tuning    : T
  --------------------------------------------------------------------------------
  Target             : wfqfmu
@@ -71,6 +71,7 @@
  fermi_d            :  0.120E+02 a.u.
  fermi_s            :  0.110E+01 a.u.
  density            :  0.869E-02 a.u.
+ wFQFMu IB alpha    :  silver etchegoin
  wFQFMu file        :  none
  --------------------------------------------------------------------------------
  AtomType           : Au
@@ -87,6 +88,7 @@
  fermi_d            :  0.120E+02 a.u.
  fermi_s            :  0.110E+01 a.u.
  density            :  0.809E-02 a.u.
+ wFQFMu IB alpha    :  gold etchegoin
  wFQFMu file        :  none
  --------------------------------------------------------------------------------
  Interaction        : Ag->Au
@@ -3242,7 +3244,7 @@
    16  -0.467E-03  -0.159E-04 |  0.170E-02  -0.162E-05 |  0.336E-03  -0.185E-04
    17   0.697E-03   0.316E-04 | -0.444E-03  -0.186E-04 |  0.189E-02  -0.524E-05
 
-ChErr   0.987E-17   0.108E-18 | -0.542E-19   0.156E-18 | -0.126E-16   0.151E-18
+ChErr   0.445E-17   0.881E-19 | -0.266E-17  -0.271E-18 | -0.152E-17   0.111E-18
  --------------------------------------------------------------------------------
                                       wFMu Dipoles
 
@@ -3326,7 +3328,7 @@ ChErr   0.987E-17   0.108E-18 | -0.542E-19   0.156E-18 | -0.126E-16   0.151E-18
  --------------------------------------------------------------------------------
  --------------------------------------------------------------------------------
 
- I am cleaning up the backup (*.nanofq.bk)
+ I am cleaning up the backup (*.plasmonX.bk)
 
  --------------------------------------------------------------------------------
  Results for w = 0.779E-01 a.u.   0.585E+03 nm   0.212E+01 eV
@@ -3352,7 +3354,7 @@ ChErr   0.987E-17   0.108E-18 | -0.542E-19   0.156E-18 | -0.126E-16   0.151E-18
  Long Ext. Cross. Sect. Y =         0.829812E-01 a.u.
  Long Ext. Cross. Sect. Z =         0.942445E-01 a.u.
  --------------------------------------------------------------------------------
- Peak memory used  :    137.797 KB       
+ Peak memory used  :    144.570 KB       
  --------------------------------------------------------------------------------
 
                            🎸 Ob-La-Di, Ob-La-Done! 🎶                           
@@ -3361,5 +3363,5 @@ ChErr   0.987E-17   0.108E-18 | -0.542E-19   0.156E-18 | -0.126E-16   0.151E-18
                                                   CPU Time:     0 h 00 min 00 sec
                                               Elapsed Time:     0 h 00 min 00 sec
  --------------------------------------------------------------------------------
-              Normal Termination of nanoFQ program in date 06/04/2025 at 16:17:15
+                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:20
  --------------------------------------------------------------------------------

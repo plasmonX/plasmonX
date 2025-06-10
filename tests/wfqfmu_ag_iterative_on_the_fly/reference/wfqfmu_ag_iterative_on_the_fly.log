@@ -1,29 +1,29 @@
  --------------------------------------------------------------------------------
-                                               ______ ____  
-                                              |  ____/ __ \ 
-                       _ __   __ _ _ __   ___ | |__ | |  | |
-                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
-                      | | | | (_| | | | | (_) | |   | |__| |
-                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+                         _                                __  __ 
+                   _ __ | | __ _ ___ _ __ ___   ___  _ __ \ \/ / 
+                  | '_ \| |/ _` / __| '_ ` _ \ / _ \| '_ \ \  /  
+                  | |_) | | (_| \__ \ | | | | | (_) | | | |/  \  
+                  | .__/|_|\__,_|___/_| |_| |_|\___/|_| |_/_/\_\ 
+                  |_|                                            
 
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
- Stefano Corni         Univerisy of Padova, Padova, Italy
+ Stefano Corni         University of Padova, Padova, Italy
  Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
  Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-04-06 16:13:39 CEST
- Git branch         : new_master
+ Configuration date : 2025-06-10 09:29:35 CEST
+ Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
  Blas type          : MKL
  Integers 64bit     : ON
  OpenMP             : ON
  --------------------------------------------------------------------------------
- Input File         : wfqfmu_ag_iterative_on_the_fly.tmp
+ Input File         : wfqfmu_ag_iterative_on_the_fly.yaml
  Output File        : wfqfmu_ag_iterative_on_the_fly.log
  OMP Threads        :   8
  Memory (GB)        :   31.07
@@ -46,12 +46,12 @@
  Freq     1         : 0.300E+01 eV
  --------------------------------------------------------------------------------
  Parallel execution : frequencies
- Algorithm method   : Iterative
+ Algorithm method   : Iterative on the fly
  Adaptive Tuning    : F
  Iteration number   : 1000
  Max GMRES cycles   : 1000
  Tolerance          : 0.100E-08
- RMSE convergence   : T
+ Tolerance (RMSE)   : 0.122E-07
  --------------------------------------------------------------------------------
  Target             : wfqfmu
  ForceField         : fqfmu
@@ -75,6 +75,7 @@
  fermi_d            :  0.120E+02 a.u.
  fermi_s            :  0.920E+00 a.u.
  density            :  0.869E-02 a.u.
+ wFQFMu IB alpha    :  none
  wFQFMu file        :  jc_silver_polar.csv
  --------------------------------------------------------------------------------
 
@@ -123,7 +124,7 @@
  --------------------------------------------------------------------------------
  Cycle     1 out of     1
 
- GMRES Iterative Algorithm. Freq: 3.000 eV. Threshold =  0.10000E-08
+ GMRES Iterative Algorithm. Freq: 3.000 eV. Threshold =  0.12166E-07
 
  - Polarization: X
       Iteration     Residual
@@ -139,26 +140,25 @@
          10       0.29720E-04
          11       0.29089E-04
          12       0.14489E-04
-         13       0.91610E-05
-         14       0.51677E-05
-         15       0.41411E-05
-         16       0.29423E-05
-         17       0.28236E-05
-         18       0.26951E-05
-         19       0.92432E-06
-         20       0.91930E-06
+         13       0.91360E-05
+         14       0.41441E-05
+         15       0.41290E-05
+         16       0.38197E-05
+         17       0.38168E-05
+         18       0.27541E-05
+         19       0.94331E-06
+         20       0.91929E-06
          21       0.91568E-06
-         22       0.85799E-06
-         23       0.18567E-06
-         24       0.15959E-06
+         22       0.70500E-06
+         23       0.21212E-06
+         24       0.16249E-06
          25       0.12386E-06
-         26       0.95107E-07
-         27       0.53624E-07
-         28       0.20489E-07
-         29       0.16260E-07
-         30       0.15307E-07
-         31       0.17516E-08
-         32       0.78327E-10
+         26       0.97978E-07
+         27       0.81198E-07
+         28       0.28265E-07
+         29       0.16274E-07
+         30       0.15255E-07
+         31       0.49383E-09
 
  - Polarization: Y
       Iteration     Residual
@@ -177,22 +177,20 @@
          13       0.69207E-05
          14       0.44747E-05
          15       0.22095E-05
-         16       0.92904E-06
-         17       0.57473E-06
-         18       0.50727E-06
-         19       0.48316E-06
-         20       0.38614E-06
-         21       0.36406E-06
-         22       0.28533E-06
-         23       0.21154E-06
-         24       0.11919E-06
-         25       0.91841E-07
-         26       0.90984E-07
-         27       0.80513E-07
-         28       0.22203E-07
-         29       0.26145E-08
-         30       0.24916E-08
-         31       0.37143E-09
+         16       0.93015E-06
+         17       0.61046E-06
+         18       0.55887E-06
+         19       0.55511E-06
+         20       0.38638E-06
+         21       0.36428E-06
+         22       0.35122E-06
+         23       0.21182E-06
+         24       0.11915E-06
+         25       0.90170E-07
+         26       0.88460E-07
+         27       0.80283E-07
+         28       0.22205E-07
+         29       0.64664E-08
 
  - Polarization: Z
       Iteration     Residual
@@ -209,27 +207,25 @@
          11       0.10173E-04
          12       0.70448E-05
          13       0.70321E-05
-         14       0.43372E-05
-         15       0.22111E-05
-         16       0.15141E-05
-         17       0.13440E-05
-         18       0.11208E-05
-         19       0.80583E-06
-         20       0.42789E-06
-         21       0.36822E-06
-         22       0.33726E-06
-         23       0.21715E-06
-         24       0.11921E-06
-         25       0.90984E-07
-         26       0.90865E-07
-         27       0.85504E-07
-         28       0.22205E-07
-         29       0.26364E-08
-         30       0.26200E-08
-         31       0.45646E-09
+         14       0.43367E-05
+         15       0.22122E-05
+         16       0.13871E-05
+         17       0.99054E-06
+         18       0.98912E-06
+         19       0.78721E-06
+         20       0.42716E-06
+         21       0.36812E-06
+         22       0.30251E-06
+         23       0.21686E-06
+         24       0.11922E-06
+         25       0.91689E-07
+         26       0.91346E-07
+         27       0.85570E-07
+         28       0.22206E-07
+         29       0.35964E-08
  --------------------------------------------------------------------------------
 
- I am cleaning up the backup (*.nanofq.bk)
+ I am cleaning up the backup (*.plasmonX.bk)
 
  --------------------------------------------------------------------------------
  Results for w = 0.110E+00 a.u.   0.413E+03 nm   0.300E+01 eV
@@ -255,7 +251,7 @@
  Long Ext. Cross. Sect. Y =         0.398492E+01 a.u.
  Long Ext. Cross. Sect. Z =         0.398492E+01 a.u.
  --------------------------------------------------------------------------------
- Peak memory used  :    725.715 KB       
+ Peak memory used  :    723.402 KB       
  --------------------------------------------------------------------------------
 
                            🎸 Ob-La-Di, Ob-La-Done! 🎶                           
@@ -264,5 +260,5 @@
                                                   CPU Time:     0 h 00 min 00 sec
                                               Elapsed Time:     0 h 00 min 00 sec
  --------------------------------------------------------------------------------
-              Normal Termination of nanoFQ program in date 06/04/2025 at 16:18:35
+                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:50
  --------------------------------------------------------------------------------

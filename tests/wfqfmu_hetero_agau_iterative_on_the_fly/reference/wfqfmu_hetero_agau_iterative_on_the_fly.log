@@ -1,22 +1,22 @@
  --------------------------------------------------------------------------------
-                                               ______ ____  
-                                              |  ____/ __ \ 
-                       _ __   __ _ _ __   ___ | |__ | |  | |
-                      | '_ \ / _` | '_ \ / _ \|  __|| |  | |
-                      | | | | (_| | | | | (_) | |   | |__| |
-                      |_| |_|\__,_|_| |_|\___/|_|    \___\_\
+                         _                                __  __ 
+                   _ __ | | __ _ ___ _ __ ___   ___  _ __ \ \/ / 
+                  | '_ \| |/ _` / __| '_ ` _ \ / _ \| '_ \ \  /  
+                  | |_) | | (_| \__ \ | | | | | (_) | | | |/  \  
+                  | .__/|_|\__,_|___/_| |_| |_|\___/|_| |_/_/\_\ 
+                  |_|                                            
 
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  Chiara Cappelli       Scuola Normale Superiore, Pisa, Italy
- Stefano Corni         Univerisy of Padova, Padova, Italy
+ Stefano Corni         University of Padova, Padova, Italy
  Luca Bonatti          Scuola Normale Superiore, Pisa, Italy
  Pablo Grobas Illobre  Scuola Normale Superiore, Pisa, Italy
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-04-17 16:11:36 CEST
- Git branch         : new_master
+ Configuration date : 2025-06-10 09:29:35 CEST
+ Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
  Blas type          : MKL
@@ -46,7 +46,7 @@
  Freq     1         : 0.212E+01 eV
  --------------------------------------------------------------------------------
  Parallel execution : matrix
- Algorithm method   : Iterative
+ Algorithm method   : Iterative on the fly
  Adaptive Tuning    : F
  Iteration number   : 1000
  Max GMRES cycles   : 1000
@@ -75,6 +75,7 @@
  fermi_d            :  0.120E+02 a.u.
  fermi_s            :  0.110E+01 a.u.
  density            :  0.869E-02 a.u.
+ wFQFMu IB alpha    :  none
  wFQFMu file        :  jc_silver_polar.csv
  --------------------------------------------------------------------------------
  AtomType           : Au
@@ -91,6 +92,7 @@
  fermi_d            :  0.120E+02 a.u.
  fermi_s            :  0.110E+01 a.u.
  density            :  0.809E-02 a.u.
+ wFQFMu IB alpha    :  none
  wFQFMu file        :  jc_gold_polar.csv
  --------------------------------------------------------------------------------
  Interaction        : Ag->Au
@@ -467,7 +469,7 @@ ChErr   0.120E-08   0.101E-08 | -0.115E-08  -0.619E-09 |  0.891E-09   0.407E-09
  --------------------------------------------------------------------------------
  --------------------------------------------------------------------------------
 
- I am cleaning up the backup (*.nanofq.bk)
+ I am cleaning up the backup (*.plasmonX.bk)
 
  --------------------------------------------------------------------------------
  Results for w = 0.779E-01 a.u.   0.585E+03 nm   0.212E+01 eV
@@ -502,5 +504,5 @@ ChErr   0.120E-08   0.101E-08 | -0.115E-08  -0.619E-09 |  0.891E-09   0.407E-09
                                                   CPU Time:     0 h 00 min 00 sec
                                               Elapsed Time:     0 h 00 min 00 sec
  --------------------------------------------------------------------------------
-                      Normal Termination of nanoFQ in date 18/04/2025 at 11:27:01
+                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:51
  --------------------------------------------------------------------------------

@@ -93,6 +93,7 @@ add_plasmonX_runtest(analysis_density_3d_y_wfqfmu_au                      "plasm
 add_plasmonX_runtest(analysis_density_3d_y_wfqfmu_au_plt                  "plasmonX_analysis;density;3d;y;gold;au;wfqfmu;plt")
 add_plasmonX_runtest(analysis_density_2d_x_wfq_sodium                     "plasmonX_analysis;density;2d;x;xy;sodium;wfq;csv;py")
 add_plasmonX_runtest(analysis_density_2d_x_wfq_sodium_n_planes            "plasmonX_analysis;density;2d;x;xy;sodium;wfq;csv;py;planes")
+add_plasmonX_runtest(analysis_density_2d_y_xy_wfqfmu_ag                   "plasmonX_analysis;density;2d;y;xy;silver;wfqfmu;csv;py")
 add_plasmonX_runtest(analysis_field_2d_x_yz_wfq_sodium                    "plasmonX_analysis;field;2d;x;yz;sodium;wfq;csv;py")
 add_plasmonX_runtest(analysis_field_2d_z_xz_wfqfmu_ag                     "plasmonX_analysis;field;2d;z;xz;silver;ag;wfqfmu;csv;py")
 add_plasmonX_runtest(analysis_field_2d_z_xz_wfqfmu_ag_reduced             "plasmonX_analysis;field;2d;reduced;z;xz;silver;ag;wfqfmu;csv;py")

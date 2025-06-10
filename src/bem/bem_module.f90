@@ -554,7 +554,7 @@ contains
                                    trim(bem%variant)
       write(out_%iunit,'(1x,a)') "Green Function     : "//&
                                    trim(bem%green_function)
-      write(out_%iunit,'(1x,a)') "Permettivity       : "//&
+      write(out_%iunit,'(1x,a)') "Permittivity       : "//&
                                   trim(bem%permittivity_type)
       write(out_%iunit,'(1x,a)') "Permittivity File  : "//&
                                   trim(bem%permittivity_file)
