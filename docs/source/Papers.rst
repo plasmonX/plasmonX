@@ -1,19 +1,19 @@
 Papers
 ======
 
-**PlasmonX** (and its development versions) has been used in the following papers:
+**plasmonX** (and its development versions) has been used in the following papers:
 
 11. P. Grobas Illobre, L. Bonatti, P. Lafiosca, T. Giovannini, C. Cappelli.
     “Mixed atomistic–implicit quantum/classical approach to molecular nanoplasmonics”
     *J. Chem. Phys.*, **2025**, *162*, 044103.
     `DOI: 10.1063/5.0245629 <https://doi.org/10.1063/5.0245629>`_
 
-10. P. Lafiosca, L. Nicoli, S. Pipolo, S. Corni, T. Giovannini*, C. Cappelli.
+10. P. Lafiosca, L. Nicoli, S. Pipolo, S. Corni, T. Giovannini, C. Cappelli.
     “Real-Time Formulation of Atomistic Electromagnetic Models for Plasmonics”
     *J. Phys. Chem. C*, **2024**, *128*, 17513–17525.
     `DOI: 10.1021/acs.jpcc.4c04002 <https://doi.org/10.1021/acs.jpcc.4c04002>`_
 
-9. L. Nicoli, S. Sodomaco, P. Lafiosca, T. Giovannini*, C. Cappelli.
+9. L. Nicoli, S. Sodomaco, P. Lafiosca, T. Giovannini, C. Cappelli.
    “Atomistic Multiscale Modeling of Colloidal Plasmonic Nanoparticles”
    *ACS Phys. Chem. Au*, **2024**, *4*, 669–678.
    `DOI: 10.1021/acsphyschemau.4c00052 <https://doi.org/10.1021/acsphyschemau.4c00052>`_
@@ -33,7 +33,7 @@ Papers
    *ACS Photonics*, **2022**, *9*, 3025–3034.
    `DOI: 10.1021/acsphotonics.2c00761 <https://doi.org/10.1021/acsphotonics.2c00761>`_
 
-5. L. Bonatti, L. Nicoli, T. Giovannini*, C. Cappelli.
+5. L. Bonatti, L. Nicoli, T. Giovannini, C. Cappelli.
    “In-silico design of graphene plasmonic hot-spots”
    *Nanoscale Adv.*, **2022**, *4*, 2294–2302.
    `DOI: 10.1039/D2NA00088A <https://doi.org/10.1039/D2NA00088A>`_
@@ -49,7 +49,7 @@ Papers
    *J. Phys. Chem. Lett.*, **2020**, *11*, 7595–7602.
    `DOI: 10.1021/acs.jpclett.0c02051 <https://doi.org/10.1021/acs.jpclett.0c02051>`_
 
-2. L. Bonatti, G. Gil, T. Giovannini*, S. Corni, C. Cappelli.
+2. L. Bonatti, G. Gil, T. Giovannini, S. Corni, C. Cappelli.
    “Plasmonic Resonances of Metal Nanoparticles: Atomistic vs. Continuum Approaches”
    *Front. Chem.*, **2020**, *8*, 340.
    `DOI: 10.3389/fchem.2020.00340 <https://doi.org/10.3389/fchem.2020.00340>`_

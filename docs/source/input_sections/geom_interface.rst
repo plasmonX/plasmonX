@@ -193,7 +193,7 @@ Notes
 
       <div style="margin: 0; padding: 0;"></div>
 
-  - ``a``, ``b``: shape parameters controlling the paraboloid curvature :math:`z = x^2 / a^2 + y^2 / b^2`
+  - ``a``, ``b``: shape parameters controlling the paraboloid curvature :math:`z = a x^2 - b y^2`
   - ``height``: height of the tip
   - ``atomtype``: atomtype
 

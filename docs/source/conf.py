@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'PlasmonX'
+project = 'plasmonX'
 copyright = '2025 The Authors'
 author = 'Tommaso Giovannini, Luca Bonatti, Stefano Corni, Pablo Grobas Illobre, Piero Lafiosca, Luca Nicoli, Chiara Cappelli'
 
@@ -59,7 +59,7 @@ latex_elements = {
     \includegraphics[width=0.4\textwidth]{logo_latex.png}\par
     \vspace{1cm}
 
-    {\Huge\bfseries PlasmonX\par}
+    {\Huge\bfseries plasmonX\par}
     \vspace{1cm}
 
     {\Large Tommaso Giovannini, Luca Bonatti, Stefano Corni, Pablo Grobas Illobre,
@@ -101,7 +101,7 @@ latex_elements = {
 latex_additional_files = ['images/logo_latex.png']
 
 latex_documents = [
-    ('index', 'plasmonX.tex', 'PlasmonX',
+    ('index', 'plasmonX.tex', 'plasmonX',
      'Tommaso Giovannini et al.', 'manual'),
 ]
 

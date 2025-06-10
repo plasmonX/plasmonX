@@ -7,7 +7,7 @@
 Post-Processing
 ===============
 
-**PlasmonX** provides a command-line tool called ``plasmonX_analysis`` for post-processing output data generated from simulations.
+**plasmonX** provides a command-line tool called ``plasmonX_analysis`` for post-processing output data generated from simulations.
 
 This tool extracts and visualizes information from the compressed `.tar.gz` output file.
 

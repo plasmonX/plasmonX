@@ -1,7 +1,7 @@
 User Manual
 ===========
 
-Once installed and tested by following the instructions at :ref:`Installation`, **PlasmonX** can be run with:
+Once installed and tested by following the instructions at :ref:`Installation`, **plasmonX** can be run with:
 
 .. code-block:: bash
 

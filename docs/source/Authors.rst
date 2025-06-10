@@ -1,7 +1,7 @@
 Authors
 =======
 
-**PlasmonX** is a collaborative project between research groups at:
+**plasmonX** is a collaborative project between research groups at:
 
 - Scuola Normale Superiore, Pisa, Italy
 - University of Rome Tor Vergata, Rome, Italy

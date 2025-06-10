@@ -60,25 +60,19 @@ Input Geometry
 
    .. code-block:: console
    
-      --------------------------------------------------------------------------------
                                        Input Geometry (Ang)
-      --------------------------------------------------------------------------------
 
    If ``control: - principal axes`` is required, the rotated geometry is found under the header:
 
    .. code-block:: console
    
-      --------------------------------------------------------------------------------
-                                    Rotated Geometry (Ang)
-      --------------------------------------------------------------------------------
+                                     Rotated Geometry (Ang)
       
    For a BEM calculation, the tesserae centroids are found under the header:
 
    .. code-block:: console
    
-      --------------------------------------------------------------------------------
-                         Input Tesserae Centroids (Ang)
-      --------------------------------------------------------------------------------
+                                Input Tesserae Centroids (Ang)
 
 ----
 
@@ -91,9 +85,7 @@ Calculation Cycles
 
    .. code-block:: console
    
-      --------------------------------------------------------------------------------
       Cycle     1 out of    38
-      --------------------------------------------------------------------------------
 
    This helps track progress of multi-frequency calculations.
 
@@ -108,9 +100,7 @@ Backup for restart
 
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
       I am cleaning up the backup (*plasmonX.bk)
-      --------------------------------------------------------------------------------
 
 ----
 
@@ -123,23 +113,18 @@ Results
 
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
       Energy =    -0.06107855 a.u.
-      --------------------------------------------------------------------------------
 
    For ``what: -static response`` calculation, the static polarizability is printed at the end of the calculation under the header:
 
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
                                polarizability tensor (a.u.)
-      --------------------------------------------------------------------------------
 
    For ``what: -dynamic response`` calculation, the dynamic results are printed for each frequency. Example:
 
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
       Results for w = 0.220E-02 a.u.   0.207E+05 nm   0.600E-01 eV
 
       Isotr. Real Polar.       =         0.256586E+05 a.u.
@@ -162,7 +147,6 @@ Results
       Long Ext. Cross. Sect. X =         0.557149E-02 a.u.
       Long Ext. Cross. Sect. Y =         0.212585E-03 a.u.
       Long Ext. Cross. Sect. Z =         0.212585E-03 a.u.
-      --------------------------------------------------------------------------------
 
    - The frequency value is printed in various units (a.u., nm, eV)
    - Real and imaginary components of polarizability (isotropic and along X, Y, Z)
@@ -179,7 +163,6 @@ Maxima Analysis
    
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
       Maxima Analysis: NumExFreq =    300
 
                NState      Freq(eV)     Isotr. Abs. Cross. Sec.  (a.u.)
@@ -193,13 +176,11 @@ Maxima Analysis
 Memory Usage
 ^^^^^^^^^^^^
 
-   At the end of the simulation, PlasmonX reports the peak memory usage during the run, e.g.:
+   At the end of the simulation, plasmonX reports the peak memory usage during the run, e.g.:
    
    .. code-block:: console
 
-      --------------------------------------------------------------------------------
       Peak memory used  :     13.768 MB       
-      --------------------------------------------------------------------------------
 
 ----
 

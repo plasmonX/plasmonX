@@ -57,9 +57,9 @@ The following sections describe the full list of available keywords, expected ty
 **Minimal Input**
 
 
-**PlasmonX** provides the possibility to use default values to give the most user friendly experience. 
+**plasmonX** provides the possibility to use default values to give the most user friendly experience. 
 
-Here are some minimal input examples to get started quickly with **PlasmonX**.
+Here are some minimal input examples to get started quickly with **plasmonX**.
 Click on any of the following to jump directly to the corresponding configuration:
 
 - :ref:`Minimal Example -- Sodium <example_wfq_sodium>` (:math:`\omega\mathrm{FQ}`)

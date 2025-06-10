@@ -7,7 +7,7 @@
 Output File(s)
 ==============
 
-By default, **PlasmonX** produces two output files:
+By default, **plasmonX** produces two output files:
 
 1. A `.log` file containing the main results.
 2. A `.tar.gz` folder containing info file (if not disable in :doc:`input_sections/control`).

@@ -1,4 +1,4 @@
-.. PlasmonX documentation master file, created by
+.. plasmonX documentation master file, created by
    sphinx-quickstart on Fri Apr 18 17:12:24 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -7,7 +7,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
 
-PlasmonX: an Open-Source Code for Nanoplasmonics
+plasmonX: an Open-Source Code for Nanoplasmonics
 ================================================
 
 .. raw:: html
@@ -21,9 +21,9 @@ PlasmonX: an Open-Source Code for Nanoplasmonics
 
    \chapter{Introduction}
 
-This is the main page of **PlasmonX**. 
+This is the main page of **plasmonX**. 
 
-**PlasmonX** provides an implementation of atomistic and implicit approaches for nanoplasmonics, :math:`\omega\text{FQ}`, :math:`\omega\text{FQF}\mu`, BEM (DPCM and IEFPCM variants), in the quasi-static approximation.
+**plasmonX** provides an implementation of atomistic and implicit approaches for nanoplasmonics, :math:`\omega\text{FQ}`, :math:`\omega\text{FQF}\mu`, BEM (DPCM and IEFPCM variants), in the quasi-static approximation.
 
 .. only:: latex
 
@@ -77,7 +77,7 @@ This is the main page of **PlasmonX**.
 
       <h2>Acknowledgments</h2>
 
-**PlasmonX** has received various fundings: 
+**plasmonX** has received various fundings: 
 
 - Progetti Interni Coordinati 2016, Scuola Normale Superiore 
 - European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation program (Grant Agreement No. 818064) -- ERC-COG GEMS

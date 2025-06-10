@@ -1,10 +1,10 @@
-# PlasmonX: an Open-Source Code for Nanoplasmonics
+# plasmonX: an Open-Source Code for Nanoplasmonics
 
 <p align="center">
   <img src="docs/source/images/logo_name.png" alt="PlasmonX logo" width="300"/>
 </p>
 
-**PlasmonX** is a Fortran-based program implementing atomistic and implicit models for nanoplasmonics simulations in the quasi-static approximation:
+**plasmonX** is a Fortran-based program implementing atomistic and implicit models for nanoplasmonics simulations in the quasi-static approximation:
 
 - ωFQ
 - ωFQFμ
@@ -14,7 +14,7 @@
 
 ## Documentation
 
-PlasmonX documentation (installation, input file structure, examples, etc.) is available here:
+plasmonX documentation (installation, input file structure, examples, etc.) is available here:
 **[ReadTheDocs](https://plasmonx.readthedocs.io/)**
 
 ---
@@ -63,6 +63,6 @@ For any issue or request:
 
 ## Quick Start
 
-To compile and run PlasmonX, see the full installation instructions in the [documentation](https://plasmonx.readthedocs.io/) (under construction).
+To compile and run plasmonX, see the full installation instructions in the [documentation](https://plasmonx.readthedocs.io/) (under construction).
 
 ---

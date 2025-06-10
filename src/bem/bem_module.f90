@@ -508,7 +508,7 @@ contains
       character(len=76) :: format_1 = "(7x,'Tess.',21x,'X',19x,'Y',19x,'Z')"
       character(len=50) :: format_2 = "(3x,i9,5x,3(f20.6))"
   
-      write(out_%iunit,'(/,20x,a,/)') trim(what)//" Tesserae Centroids (Ang)"
+      write(out_%iunit,'(/,27x,a,/)') trim(what)//" Tesserae Centroids (Ang)"
       write(out_%iunit,out_%sticks)
       write(out_%iunit,format_1)
       write(out_%iunit,out_%sticks)
