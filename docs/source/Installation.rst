@@ -7,6 +7,7 @@ Choose your platform:
 
 - `Install on Linux <#install-on-linux>`__
 - `Install on macOS <#install-on-macos>`__
+- `Install on Windows <#install-on-windows>`__
 
 
 Install on Linux
@@ -46,14 +47,19 @@ Install on Linux
            bash Miniconda3-latest-Linux-x86_64.sh
            source ~/.bashrc
 
-3. Install gfortran [tested versions: 9, 10, 11]
+3. Install gfortran [tested versions: 9 - 13]
 
    .. code-block:: bash
    
       sudo apt-get install gfortran
 
-4. (Suggested) Install MKL for Lapack/BLAS
-   `link <https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html?packages=oneapi-toolkit&oneapi-toolkit-os=linux&oneapi-lin=offline>`_
+4. Install Lapack and BLAS: 
+
+   .. code-block:: bash
+   
+      sudo apt-get install libblas-dev liblapack-dev
+
+   Suggested for better performance: Install MKL. Follow the instructions at the `link <https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html?packages=oneapi-toolkit&oneapi-toolkit-os=linux&oneapi-lin=offline>`_.
 
 5. Install CMake [minumum version required: 3.15]
 
@@ -116,7 +122,7 @@ Install on macOS
            bash Miniconda3-latest-MacOSX-x86_64.sh
            source ~/.bash_profile
 
-3. Install gfortran [tested versions: 9, 10, 11]
+3. Install gfortran [tested versions: 9 - 13]
 
    .. code-block:: bash
    
@@ -146,3 +152,17 @@ Install on macOS
    .. code-block:: bash
 
       ctest
+
+Install on Windows
+------------------
+
+1. Install Windows Subsystem for Linux (WSL) on Windows and a LTS version of Ubuntu (latest suggested). Follow the instructions `here <https://documentation.ubuntu.com/wsl/latest/howto/install-ubuntu-wsl2/>`_.
+
+2. Once activated the Ubuntu UNIX terminal, edit the file ``/etc/wsl.conf`` by inserting:
+
+   .. code-block:: bash
+
+      [automount]
+      options = "metadata"
+
+3. Follow the instructions `Install on Linux <#install-on-linux>`__ using option **2.2**.
