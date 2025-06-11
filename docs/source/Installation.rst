@@ -39,7 +39,7 @@ Install on Linux
            conda env create -f python/requirements.yaml
            conda activate plasmonX-env
 
-        If you don't have conda, you can install Miniconda with:
+        If you don't have conda, you can install Miniconda with [do not run it into plasmonX folder]:
 
         .. code-block:: bash
 
@@ -114,7 +114,7 @@ Install on macOS
            conda env create -f python/requirements.yaml
            conda activate plasmonX-env
 
-        If you don't have conda, you can install Miniconda with:
+        If you don't have conda, you can install Miniconda with [do not run it into plasmonX folder]:
 
         .. code-block:: bash
 

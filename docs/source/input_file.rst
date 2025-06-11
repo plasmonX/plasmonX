@@ -133,9 +133,6 @@ Minimal :math:`\omega\text{FQF}\mu` -- Silver
    field:
      external freq: 3.0
 
-   control:
-     - no info file
-
    input_geometry:
      shape: decahedron
      atomtype: Ag
