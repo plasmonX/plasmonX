@@ -107,6 +107,19 @@ Install on macOS
 
            pip3 install -r python/requirements.txt
 
+        If you need to install Homebrew [do not run it into plasmonX folder]:
+        
+        .. code-block:: bash
+        
+           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        
+        On Apple Silicon systems, you may need to add Homebrew to your shell environment:
+        
+        .. code-block:: bash
+        
+           echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+           eval "$(/opt/homebrew/bin/brew shellenv)"
+
    2.2. Alternatively, use conda:
 
         .. code-block:: bash

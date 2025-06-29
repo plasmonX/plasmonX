@@ -89,6 +89,7 @@ This is the main page of **plasmonX**.
    :caption: Contents:
 
    Authors
+   Prerequisites
    Installation
    User_Manual
    Papers
