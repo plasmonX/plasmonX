@@ -183,7 +183,7 @@ contains
       implicit none
        
       !input/output variables
-      class(target_type), intent(in) :: target_
+      class(target_type), intent(inout) :: target_
       complex(dp), dimension(target_%n_var,3), intent(inout) :: rhs_w
       complex(dp), dimension(target_%n_var,3), intent(out)   :: variables_w
   
@@ -209,8 +209,8 @@ contains
       implicit none
        
       !input/output variables
-      class(target_type), intent(in) :: target_
-      integer, intent(in)            :: i_freq
+      class(target_type), intent(inout) :: target_
+      integer, intent(in)               :: i_freq
       complex(dp), dimension(target_%n_var,3), intent(inout) :: rhs_w
       complex(dp), dimension(target_%n_var,3), intent(out)   :: variables_w
   

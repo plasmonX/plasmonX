@@ -177,7 +177,7 @@ contains
       implicit none
   
       !input/output variables
-      class(wfqfmu_type), intent(in)   :: target_
+      class(wfqfmu_type), intent(inout) :: target_
       complex(dp), dimension(target_%n_var,3), intent(inout) :: rhs_w
       complex(dp), dimension(target_%n_var,3), intent(out)   :: variables_w
   
@@ -185,14 +185,26 @@ contains
       complex(dp), dimension(:,:), allocatable :: rhs_0_complex
   
       if(target_%heterogeneous) then
+         !rhs_0_complex = rhs_0 static
+         call mem_man%alloc(target_%rhs_static,target_%n_q,3, &
+                            "target_%rhs_static")
+         !static RHS
+         call construct_static_field_rhs_q(target_, target_%rhs_static)
          call mem_man%alloc(rhs_0_complex, target_%n_q, 3, "rhs_0_complex")
-         !rhs_0_complex = rhs_w(1:target_%n_q,:)
-         call zcopy(target_%n_q*3, rhs_w(1:target_%n_q,:), 1, rhs_0_complex, 1)
+         if (field%polarization.eq.'all') then
+            rhs_0_complex = cmplx(target_%rhs_static(1:target_%n_q,:),zero,&
+                                  kind=dp)
+         else
+            rhs_0_complex(:,field%polarization_index) = &
+            cmplx(target_%rhs_static(:,field%polarization_index),&
+                                     zero,kind=dp)
+         endif
+         call mem_man%dealloc(target_%rhs_static,"target_%rhs_static")
          call construct_rhs_w_q_complex(target_,half,rhs_0_complex, &
                                         target_%H_minus_L,          &
                                         rhs_w(1:target_%n_q,:))
-         if (out_%ivrb.ge.3) call print_dynamic_field_rhs(target_,rhs_w)
          call mem_man%dealloc(rhs_0_complex, "rhs_0_complex")
+         if (out_%ivrb.ge.3) call print_dynamic_field_rhs(target_,rhs_w)
       endif
   
       !variables_w = rhs_w
@@ -213,19 +225,36 @@ contains
       implicit none
   
       !input/output variables
-      class(wfqfmu_type), intent(in)   :: target_
+      class(wfqfmu_type), intent(inout)   :: target_
       integer, intent(in) :: i_freq
       complex(dp), dimension(target_%n_var,3), intent(inout) :: rhs_w
       complex(dp), dimension(target_%n_var,3), intent(out)   :: variables_w
   
       !internal variables
       real(dp) :: freq_au
+      complex(dp), dimension(:,:), allocatable :: rhs_0_complex
   
       if(target_%heterogeneous) then
+         !rhs_0_complex = rhs_0 static
+         call mem_man%alloc(target_%rhs_static,target_%n_q,3,"target_%rhs_static")
+         !static RHS
+         call construct_static_field_rhs_q(target_, target_%rhs_static)
+         call mem_man%alloc(rhs_0_complex, target_%n_q, 3, "rhs_0_complex")
+         if (field%polarization.eq.'all') then
+            rhs_0_complex = cmplx(target_%rhs_static(1:target_%n_q,:),zero,&
+                                  kind=dp)
+         else
+            rhs_0_complex(:,field%polarization_index) = &
+            cmplx(target_%rhs_static(:,field%polarization_index),&
+                                     zero,kind=dp)
+         endif
+         call mem_man%dealloc(target_%rhs_static,"target_%rhs_static")
+
          freq_au = field%freq(i_freq)
          call construct_rhs_w_q_complex_on_the_fly(target_,half,freq_au, &
-                                                   rhs_w(1:target_%n_q,:),&
+                                                   rhs_0_complex,&
                                                    rhs_w(1:target_%n_q,:))
+         call mem_man%dealloc(rhs_0_complex,"rhs_0_complex")
          if (out_%ivrb.ge.3) call print_dynamic_field_rhs(target_,rhs_w)
       endif
   

@@ -447,6 +447,8 @@ contains
       complex(dp) :: w_i
       complex(dp) :: w_j
 
+      call array_clear_complex(target_%n_q**2, H_minus_L)
+
       do i = 1, target_%n_atoms
          ! w_i = 2 * n_i * tau_i / (1 - i w tau_i)
          w_i = two * parameters%density(target_%map_atomtypes(i)) /   &

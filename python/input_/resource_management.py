@@ -12,20 +12,31 @@ def get_memory_in_gb():
     total_memory = psutil.virtual_memory().total
     return total_memory / (1024 ** 3)  # Converti da byte a GB
 
-def check_best_algorithm(data, natoms, n_omp, memory):
+def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
     """
     Determines the optimal algorithm method based on the number of atoms (natoms),
     available memory, and the static force field type.
 
     Args:
         data (dict): Input data containing algorithm and force field configurations.
+        atomtypes (list): List of atom types extracted from geometry.
         natoms (int): Number of atoms in the system.
         n_omp (int): Number of OpenMP threads available.
         memory (float): Available memory in GB.
     """
     algorithm = data.get("algorithm", {})
+
+    errors = []
+    heterogeneous = False
+    if natoms > 0 : #atomistic
+        if (len(atomtypes) > 1) : #more than one atomtype
+            heterogeneous = True
+            if (algorithm.get("parallel execution") == "frequencies") and algorithm["adaptive tuning"] == "no":
+                errors.append("Heterogeneous calculation and parallel execution: frequencies not allowed")
+            return errors
+
     if algorithm["adaptive tuning"] == "no":
-        return 
+        return errors
 
     # grep the field intensity
     field = data.get("field", {})
@@ -48,7 +59,7 @@ def check_best_algorithm(data, natoms, n_omp, memory):
                 algorithm["gmres dimension"] = 0
                 algorithm["tolerance"] = 0.0
                 algorithm["rmse convergence"] = False
-        return
+        return errors
 
 
     # Case 2: Atomistic calculation (natoms > 0)
@@ -58,7 +69,7 @@ def check_best_algorithm(data, natoms, n_omp, memory):
 
     if dynamic_forcefield == "none":
         # Static or energy calculation, no action required
-        return
+        return errors
 
     # Determine nvar based on the static force field type
     if static_forcefield in ["fq", "fq_pqeq"]:
@@ -77,11 +88,19 @@ def check_best_algorithm(data, natoms, n_omp, memory):
     if total_memory_gb <= memory/2.0:
         # Use inversion method
         if algorithm["method"] == "inversion":
-            algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
-            return
+            algorithm["parallel execution"] = (
+                "matrix" if heterogeneous
+                else "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp
+                else "matrix"
+            )
+            return errors
         else:
             algorithm["method"] = "inversion"
-            algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
+            algorithm["parallel execution"] = (
+                "matrix" if heterogeneous
+                else "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp
+                else "matrix"
+            )
             algorithm["number of iterations"] = 0
             algorithm["gmres dimension"] = 0
             algorithm["tolerance"] = 0.0
@@ -116,3 +135,5 @@ def check_best_algorithm(data, natoms, n_omp, memory):
             
             if "rmse convergence" not in algorithm:
                 algorithm["rmse convergence"] = True
+
+    return errors

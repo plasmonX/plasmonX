@@ -306,7 +306,11 @@ def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_fi
     initialize_output_file(start_cpu_time, start_wall_time, out_file, configurations, errors)
 
     #change algorithm based on calculation
-    check_best_algorithm(data, natoms, n_omp, memory)
+    errors.extend(check_best_algorithm(data, atomtypes, natoms, n_omp, memory))
+    if errors:
+        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", out_file, errors)
+        sys.exit()
+
 
     # These are the defaults
     fields = [

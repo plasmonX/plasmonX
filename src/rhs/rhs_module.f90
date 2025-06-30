@@ -268,7 +268,7 @@ contains
       real(dp), intent(in) :: scale_
       complex(dp), dimension(target_%n_q,target_%n_q), intent(in) :: K_plus_H
       complex(dp), dimension(target_%n_q,3), intent(in)           :: rhs_0
-      complex(dp), dimension(target_%n_q,3), intent(inout)        :: rhs_w_q
+      complex(dp), dimension(target_%n_q,3), intent(out)          :: rhs_w_q
   
       !internal variables
       complex(dp) :: scale_cmp 
