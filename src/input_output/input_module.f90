@@ -249,6 +249,10 @@ module input_module
 
          !reassign tolerance for RMSE
          algorithm%threshold = algorithm%threshold*sqrt(dble(target_%n_var)) 
+
+         !set correct n_omp_thread_used for memory checks
+         if(algorithm%matrix_in_parallel) n_threads_omp_used = 1
+
       close(inp_%iunit) 
   
    end subroutine read_
