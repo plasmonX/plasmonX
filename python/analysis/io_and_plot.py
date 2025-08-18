@@ -85,6 +85,8 @@ def read_command_line():
                         help="Offset for constructing the grid [default = +- 10 Ang. from max/min atom coords]")
     parser.add_argument("-format_grid", "--format_grid", type=str, default='cube',
                         help="output format for calculations involving grid [default = cube]")
+    parser.add_argument("-separate_q_mu", "--separate_q_mu", action="store_true",
+                        help="Separate q and mu contributions in wfqfmu density [only for what=density]")
     parser.add_argument("-omp", "--omp_threads", type=int, default=0,
                         help="Number of OMP threads. Default: maximum available")
     parser.add_argument("-mem", "--memory_available", type=float, required=False,
@@ -125,7 +127,7 @@ def read_command_line():
     if args.what in ['field', 'density']:
         if not args.num_ex_freq:
             print("\nYou did not specify the number of frequency [-n option]")
-            args.num_ex_freq = int(input("Please do it: "))
+            exit(1)
 
         if args.volume and not args.min_grid:
             print("\n-volume but no -min_grid in input")
@@ -133,6 +135,14 @@ def read_command_line():
 
         if args.volume and not args.max_grid:
             print("\n-volume but no -max_grid in input")
+            exit(1)
+
+    if args.separate_q_mu: 
+        if args.what != "density": 
+            print("\nSeparate q and mu only available for density")
+            exit(1)
+        if args.plane != "null": 
+            print("\nSeparate q and mu currently not available for plane calculations")
             exit(1)
 
     frequencies = []
@@ -172,6 +182,7 @@ def write_parameters_to_file(args, min_grid, max_grid, frequencies, n_omp_thread
            file.write(f"max_grid = default\n")
         file.write(f"offset_grid = {args.offset_grid}\n")
         file.write(f"format_grid = {args.format_grid}\n")
+        file.write(f"separate_q_mu = {args.separate_q_mu}\n")
         file.write(f"n_omp_threads = {n_omp_threads}\n")
 
 

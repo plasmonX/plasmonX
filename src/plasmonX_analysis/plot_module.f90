@@ -133,6 +133,7 @@ contains
       character(len=12)  :: string_freq
       character(len=1000) :: plt_file
       character(len=1000) :: cube_file
+      character(len=1000) :: root_3d
       real(dp) :: integral_field_volume, maximum_field_volume
       real(dp), dimension(2,3) :: max_quantity = zero ! maximum
       integer,  dimension(2,3,3) :: i_max ! index_of_the_max
@@ -219,37 +220,65 @@ contains
                      call out_analysis%error('Density plot not allowed for BEM')
                   !calculation density on grid
                   allocate(grid%density_3d(grid%nx, grid%ny, grid%nz))
+                  !if q and mu separated, allocate the proper arrays
+                  if (control_analysis%separate_q_mu) then
+                     allocate(grid%density_3d_q(grid%nx, grid%ny, grid%nz))
+                     allocate(grid%density_3d_mu(grid%nx, grid%ny, grid%nz))
+                  endif
                   call grid%calculate_density_3d(variables_w(:, &
                                                field%index_rhs_polarization(j)))
                   max_quantity(1,j) = maxval(dble(grid%density_3d))
                   i_max(1,j,:)      = maxloc(dble(grid%density_3d))
                   max_quantity(2,j) = maxval(aimag(grid%density_3d))
                   i_max(2,j,:)      = maxloc(aimag(grid%density_3d))
+                  !common root for output files
+                  root_3d = trim(out_analysis%root_folder) //         &
+                            trim(out_analysis%root_filename)// "-" // & 
+                            field%polarization_name(j)// "-"//        &
+                            trim(string_freq)
                   !plot based on plt or cube option
                   if(trim(grid%format_).eq.'plt') then
-                     plt_file = trim(out_analysis%root_folder) //         &
-                                trim(out_analysis%root_filename)// "-" // & 
-                                field%polarization_name(j)// "-"//        &
-                                trim(string_freq)//'-densityRe.plt'
+                     !write total density plt files
+                     plt_file = trim(root_3d) // '-densityRe.plt'
                      call write_plt_file(plt_file, dble(grid%density_3d))
-                     plt_file = trim(out_analysis%root_folder) //         &
-                                trim(out_analysis%root_filename)// "-" // & 
-                                field%polarization_name(j)// "-"//        &
-                                trim(string_freq)//'-densityIm.plt'
+                     plt_file = trim(root_3d) // '-densityIm.plt'
                      call write_plt_file(plt_file, aimag(grid%density_3d))
+                     if (control_analysis%separate_q_mu) then
+                        !write FQ density plt files
+                        plt_file = trim(root_3d) // '-densityRe_wFQ.plt'
+                        call write_plt_file(plt_file, dble(grid%density_3d_q))
+                        plt_file = trim(root_3d) // '-densityIm_wFQ.plt'
+                        call write_plt_file(plt_file, aimag(grid%density_3d_q))
+                        !write FMu density plt files
+                        plt_file = trim(root_3d) // '-densityRe_wFMu.plt'
+                        call write_plt_file(plt_file, dble(grid%density_3d_mu))
+                        plt_file = trim(root_3d) // '-densityIm_wFMu.plt'
+                        call write_plt_file(plt_file, aimag(grid%density_3d_mu))
+                     endif
                   else if(trim(grid%format_).eq.'cube') then
-                     cube_file = trim(out_analysis%root_folder) //         &
-                                 trim(out_analysis%root_filename)// "-" // & 
-                                 field%polarization_name(j)// "-"//        &
-                                 trim(string_freq)//'-densityRe.cube'
+                     !write total density cube files
+                     cube_file = trim(root_3d) // '-densityRe.cube'
                      call write_cube_file(cube_file, dble(grid%density_3d))
-                     cube_file = trim(out_analysis%root_folder) //         &
-                                 trim(out_analysis%root_filename)// "-" // & 
-                                 field%polarization_name(j)// "-"//        &
-                                 trim(string_freq)//'-densityIm.cube'
+                     cube_file = trim(root_3d) // '-densityIm.cube'
                      call write_cube_file(cube_file, aimag(grid%density_3d))
+                     if (control_analysis%separate_q_mu) then
+                        !write FQ density cube files
+                        cube_file = trim(root_3d) // '-densityRe_wFQ.cube'
+                        call write_cube_file(cube_file, dble(grid%density_3d_q))
+                        cube_file = trim(root_3d) // '-densityIm_wFQ.cube'
+                        call write_cube_file(cube_file, aimag(grid%density_3d_q))
+                        !write FMu density cube files
+                        cube_file = trim(root_3d) // '-densityRe_wFMu.cube'
+                        call write_cube_file(cube_file, dble(grid%density_3d_mu))
+                        cube_file = trim(root_3d) // '-densityIm_wFMu.cube'
+                        call write_cube_file(cube_file, aimag(grid%density_3d_mu))
+                     endif
                   endif
                   deallocate(grid%density_3d)
+                  if (control_analysis%separate_q_mu) then
+                     deallocate(grid%density_3d_q)
+                     deallocate(grid%density_3d_mu)
+                  endif
                endif ! field or density for cube or plt
                call print_quantity_analysis_3d(control_analysis%what, &
                                                j,                     &

@@ -34,6 +34,8 @@ module grid_module
       real(dp), dimension(:,:), allocatable      :: field_2d
       real(dp), dimension(:,:,:), allocatable    :: field_3d
       complex(dp), dimension(:,:,:), allocatable :: density_3d
+      complex(dp), dimension(:,:,:), allocatable :: density_3d_q
+      complex(dp), dimension(:,:,:), allocatable :: density_3d_mu
       complex(dp), dimension(:,:), allocatable   :: density_2d
       !grid defined by the used
       logical :: user_defined = .false.
@@ -255,22 +257,46 @@ contains
       integer :: k, j, i
       real(dp), dimension(3) :: point_coord
       complex(dp) :: density
+      complex(dp), dimension(3) :: densities ! (1) FQ (2) FMu (3) Total
       integer :: idx, n_total
   
       n_total = grid%nx * grid%ny * grid%nz
-      !$omp parallel do private(idx,i,j,k,point_coord,density) schedule(dynamic)
-      do idx = 0, n_total - 1
-         i = mod(idx, grid%nx) + 1
-         j = mod((idx / grid%nx), grid%ny) + 1
-         k = idx / (grid%nx * grid%ny) + 1
-         point_coord(1) = grid%min_coord(1) + (i-1)*grid%step(1)
-         point_coord(2) = grid%min_coord(2) + (j-1)*grid%step(2)
-         point_coord(3) = grid%min_coord(3) + (k-1)*grid%step(3)
+      ! standard total density
+      if (.not.control_analysis%separate_q_mu) then
+         !$omp parallel do private(idx,i,j,k,point_coord,density) &
+         !$omp schedule(dynamic)
+         do idx = 0, n_total - 1
+            i = mod(idx, grid%nx) + 1
+            j = mod((idx / grid%nx), grid%ny) + 1
+            k = idx / (grid%nx * grid%ny) + 1
+            point_coord(1) = grid%min_coord(1) + (i-1)*grid%step(1)
+            point_coord(2) = grid%min_coord(2) + (j-1)*grid%step(2)
+            point_coord(3) = grid%min_coord(3) + (k-1)*grid%step(3)
   
-         density = target_%calculate_density_at_point(point_coord, variables_w)
-         grid%density_3d(i,j,k) = density
-      enddo
-      !$omp end parallel do
+            density = target_%calculate_density_at_point(point_coord, &
+                                                         variables_w)
+            grid%density_3d(i,j,k) = density
+         enddo
+         !$omp end parallel do
+      else ! separate_q_mu for wfqfmu calculations
+         !$omp parallel do private(idx,i,j,k,point_coord,densities) &
+         !$omp schedule(dynamic)
+         do idx = 0, n_total - 1
+            i = mod(idx, grid%nx) + 1
+            j = mod((idx / grid%nx), grid%ny) + 1
+            k = idx / (grid%nx * grid%ny) + 1
+            point_coord(1) = grid%min_coord(1) + (i-1)*grid%step(1)
+            point_coord(2) = grid%min_coord(2) + (j-1)*grid%step(2)
+            point_coord(3) = grid%min_coord(3) + (k-1)*grid%step(3)
+  
+            densities = target_%calculate_density_at_point_q_mu_separated(     &
+                                                      point_coord, variables_w)
+            grid%density_3d_q(i,j,k)  = densities(1)
+            grid%density_3d_mu(i,j,k) = densities(2)
+            grid%density_3d(i,j,k)    = densities(3)
+         enddo
+         !$omp end parallel do
+      endif
        
    end subroutine calculate_density_3d
 

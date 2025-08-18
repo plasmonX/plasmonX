@@ -223,6 +223,9 @@ contains
            
       case ("format_grid")
          read(value_variable, *) grid%format_
+
+      case ("separate_q_mu")
+         read(value_variable, *) control_analysis%separate_q_mu
            
       case ("n_omp_threads")
          read(value_variable, *) control_analysis%n_threads_omp

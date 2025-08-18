@@ -127,6 +127,7 @@ module target_module
       procedure :: calculate_cross_section
       procedure :: calculate_induced_field_at_point
       procedure :: calculate_density_at_point
+      procedure :: calculate_density_at_point_q_mu_separated
    end type target_type
     
    class (target_type), pointer, save :: target_
@@ -2105,5 +2106,33 @@ contains
       density = zero
    
    end function calculate_density_at_point
+
+
+   !> Function for calculating the plasmon density at a specific point 
+   !! separating q and mu contributions
+   !!    Input   : target_      -- model 
+   !!    Input   : point_coord  -- coordinates of the point
+   !!    Input   : variables_w  -- w-variables
+   !!    Output  : densities    -- 3D array: (1) FQ (2) FMu (3) Total
+   function calculate_density_at_point_q_mu_separated(target_,     &
+                                                      point_coord, &
+                                                      variables_w) &
+            result(densities)
+   
+      implicit none
+       
+      !input/output variables
+      class(target_type), intent(in)     :: target_
+      real(dp), dimension(3), intent(in) :: point_coord
+      complex(dp), dimension(target_%n_var), intent(in) :: variables_w
+      complex(dp), dimension(3) :: densities
+   
+      if(target_%name_.ne.'wfqmu') &
+         call out_%error("Target name: "//trim(target_%name_)//&
+                         " not recognised")
+   
+      densities(:) = zero
+   
+   end function calculate_density_at_point_q_mu_separated
 
 end module target_module

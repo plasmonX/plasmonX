@@ -21,6 +21,7 @@ module control_analysis_module
       real(dp)            :: start_plane
       real(dp)            :: scale_e0
       logical             :: volume_requested = .false.
+      logical             :: separate_q_mu = .false.
       integer             :: n_threads_omp = 1
 
       contains

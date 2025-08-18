@@ -62,6 +62,8 @@ module wfqfmu_module
                    calculate_induced_field_at_point_wfqfmu
       procedure :: calculate_density_at_point             => &
                    calculate_density_at_point_wfqfmu      
+      procedure :: calculate_density_at_point_q_mu_separated => &
+                   calculate_density_at_point_q_mu_separated_wfqfmu
    end type wfqfmu_type
     
    type (wfqfmu_type), target, save :: wfqfmu
@@ -1036,5 +1038,46 @@ contains
       enddo                  
        
    end function calculate_density_at_point_wfqfmu
+
+
+   !> Function for calculating the plasmon density at a specific point 
+   !! separating q and mu contributions
+   !!    Input   : target_      -- model 
+   !!    Input   : point_coord  -- coordinates of the point
+   !!    Input   : variables_w  -- w-variables
+   !!    Output  : densities    -- 3D array: (1) FQ (2) FMu (3) Total
+   function calculate_density_at_point_q_mu_separated_wfqfmu(target_,     &
+                                                             point_coord, &
+                                                             variables_w) &
+            result(densities)
+  
+      implicit none
+       
+      !input/output variables
+      class(wfqfmu_type), intent(in)     :: target_
+      real(dp), dimension(3), intent(in) :: point_coord
+      complex(dp), dimension(target_%n_var), intent(in) :: variables_w
+      complex(dp), dimension(3) :: densities
+  
+      !internal variables
+      integer  :: i
+      integer  :: index_mu
+      real(dp), dimension(3) :: d_IJ
+       
+      densities(:) = zero
+      do i = 1, target_%n_atoms  
+         d_IJ(1)   = (target_%coord(1,i)-point_coord(1))*tobohr
+         d_IJ(2)   = (target_%coord(2,i)-point_coord(2))*tobohr
+         d_IJ(3)   = (target_%coord(3,i)-point_coord(3))*tobohr
+         !wfq contribution
+         call calculate_density_q(target_,i,d_IJ,variables_w(i),densities(1))
+         !wfmu contribution
+         index_mu = 3*(i-1) + target_%n_atoms + 1
+         call calculate_density_mu(target_,i,d_IJ,variables_w(index_mu),densities(2))
+         !total density
+         densities(3) = densities(1) + densities(2)
+      enddo                  
+       
+   end function calculate_density_at_point_q_mu_separated_wfqfmu
 
 end module wfqfmu_module
