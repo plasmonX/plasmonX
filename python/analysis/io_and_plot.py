@@ -31,17 +31,14 @@ def read_command_line():
     parser.add_argument("-min_freq", "--min_freq", type=float, default=-1.0,
                         help="[float]\n"
                              "min. freq (eV) \n"
-                             "for lore or gaus (start freq for conv. [default = 0.0d0])\n"
                              "for PQR or FIELD or DENSITY (alternative to -freq)")
     parser.add_argument("-max_freq", "--max_freq", type=float, default=-1.0,
                         help="[float]\n"
                              "max. freq (eV) \n"
-                             "for lore or gaus (end freq for conv. [default = 5.0d0])\n"
                              "for PQR or FIELD or DENSITY (alternative to -freq)")
     parser.add_argument("-step", "--step", type=float, default=-1.0,
                         help="[float]\n"
                              "step (eV) \n"
-                             "for lore or gaus (graining for conv. [default = 1.0d-3])\n"
                              "for PQR or FIELD or DENSITY (alternative to -freq)")
     parser.add_argument("-scale_e0", "--scale_e0", type=float, default=1.0,
                         help="[float]\n"
