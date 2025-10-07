@@ -505,7 +505,7 @@ contains
       integer :: unit_cube = 14
       integer :: i, j, k
       integer :: counter
-      character(len=11) :: format_1     = "(i5,3f12.6)"
+      character(len=11) :: format_1     = "(i8,3f12.6)"
       character(len=20) :: format_atoms = "(i5,1x,f10.6,3f12.6)"
   
       write(out_analysis%iunit,'(1x,a)') "Created CUBE file: "// trim(cube_file)
