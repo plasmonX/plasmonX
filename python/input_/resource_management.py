@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import psutil
+import os
 
 def get_memory_in_gb():
     """
@@ -12,26 +13,45 @@ def get_memory_in_gb():
     total_memory = psutil.virtual_memory().total
     return total_memory / (1024 ** 3)  # from byte a GB
 
-def nvar_from_static_ff(ff):
-    if ff == "fq":
-        return 1
-    elif ff == "fqfmu":
-        return 4
-    else:
-        return 0  # 
+def get_tesserae_msh_file(msh_file):
+    if not msh_file or msh_file == "none" or not os.path.isfile(msh_file):
+        return 0
+    count, in_elements = 0, False
+    with open(msh_file, "r") as f:
+        for line in f:
+            s = line.strip()
+            if s.startswith("$Elements"):
+                in_elements = True
+                continue
+            if in_elements:
+                if s.startswith("$EndElements"):
+                    break
+                if len(s.split()) == 8:
+                    count += 1
+    return count    
 
-def memory_per_frequency_gb(natoms, ff_static):
+def nvar_from_static_ff(ff, natoms, nts):
+    if ff == "fq":
+        return natoms
+    elif ff == "fqfmu":
+        return 4*natoms
+    else:
+        if nts > 0:
+            return nts  # 
+        else:
+           return 0
+
+def memory_per_frequency_gb(nvar):
     # estimate memory per frequency
-    nvar = nvar_from_static_ff(ff_static)
     # we estimate only for atomistic calculations
-    if natoms <= 0 or nvar == 0:
+    if nvar == 0:
         return 0.0
 
     # Compute approximate required memory for inversion 
     # 1 matrix real and 1 complex
-    matrix_gb = 6.0 * ((nvar * natoms) ** 2) * 8.0 / (1024.0 ** 3)
+    matrix_gb = 6.0 * (nvar** 2) * 8.0 / (1024.0 ** 3)
     # 1 array complex
-    vector_gb = 4.0 * (nvar * natoms) * 3.0 * 8.0 / (1024.0 ** 3)
+    vector_gb = 4.0 * nvar* 3.0 * 8.0 / (1024.0 ** 3)
 
     return matrix_gb + vector_gb
 
@@ -52,6 +72,7 @@ def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
     algorithm = data.get("algorithm", {}) or {}
     forcefield = data.get("forcefield", {}) or {}
     field = data.get("field", {}) or {}
+    bem = data.get("bem", {}) or {}
 
     errors = []
 
@@ -68,14 +89,19 @@ def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
     dynamic_forcefield = (forcefield.get("dynamic", "none") or "none").lower()
     requested_parallel = algorithm.get("parallel execution")
 
-    # let us check the usage memory for wMM methods at maximum
-    if natoms > 0 and dynamic_forcefield != "none":
+    msh_file = (bem.get("mesh file", "none") or "none").lower()
+    nts = get_tesserae_msh_file(msh_file)
+
+    nvar = nvar_from_static_ff(static_forcefield, natoms, nts)
+
+    # let us check the usage memory for wMM methods or BEM at maximum
+    if nvar > 0:
         nfreq = int(field.get("nfreq", 0) or 0)
 
         concurrent_freq = 1
         concurrent_freq = max(1, min(nfreq, int(n_omp or 1)))
 
-        per_freq_gb = memory_per_frequency_gb(natoms, static_forcefield)
+        per_freq_gb = memory_per_frequency_gb(nvar)
         required_gb_freq_parallel = per_freq_gb * concurrent_freq
 
         safe_budget_gb = float(memory or 0.0) 
@@ -87,6 +113,7 @@ def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
                     errors.append(
                         (f"Insufficient memory for frequency-parallel execution\n"
                          f"   Estimated: {required_gb_freq_parallel:.2f} GB \n"
+                         f"   Estimated: {per_freq_gb:.2f} GB / frequency\n"
                          f"   Available: {safe_budget_gb:.2f} GB \n"
                          f"Switch to 'matrix' parallelization or use the iterative method.")
                     )
@@ -109,18 +136,40 @@ def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
     #grep the field intensity
     field_intensity = field.get("field intensity", None)
 
-    # Case 1: BEM calculation (natoms == 0)
-    if natoms == 0:
+    # Case 1: BEM calculation 
+    if nts > 0:
         if algorithm.get("method") not in ["inversion", "iterative"]:
             algorithm["method"] = "inversion"
-            algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
+            if required_gb_freq_parallel <= safe_budget_gb:
+                algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
+            else:
+                if per_freq_gb <= safe_budget_gb :
+                    algorithm["parallel execution"] = "matrix"
+                else: 
+                    errors.append(
+                        (f"Insufficient memory for BEM execution\n"
+                         f"   Estimated: {per_freq_gb:.2f} GB \n"
+                         f"   Available: {safe_budget_gb:.2f} GB \n"
+                         f"To run BEM, reduce the number of the tesserae")
+                    )
             algorithm["number of iterations"] = 0
             algorithm["gmres dimension"] = 0
             algorithm["tolerance"] = 0.0
             algorithm["rmse convergence"] = False
         else:
             if (algorithm.get("method") == "inversion"):
-                algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
+                if required_gb_freq_parallel <= safe_budget_gb:
+                    algorithm["parallel execution"] = "frequencies" if data.get("field", {}).get("nfreq", 0) > n_omp else "matrix"
+                else:
+                    if per_freq_gb <= safe_budget_gb :
+                        algorithm["parallel execution"] = "matrix"
+                    else : 
+                        errors.append(
+                            (f"Insufficient memory for BEM execution\n"
+                             f"   Estimated: {per_freq_gb:.2f} GB \n"
+                             f"   Available: {safe_budget_gb:.2f} GB \n"
+                             f"To run BEM, reduce the number of the tesserae")
+                        )
                 algorithm["number of iterations"] = 0
                 algorithm["gmres dimension"] = 0
                 algorithm["tolerance"] = 0.0
