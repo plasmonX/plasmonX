@@ -1,4 +1,4 @@
-!> Submodule Exact Green Function (BEM module)
+!> Submodule Accurate Green Function (BEM module)
 !!
 !! This module contains the subroutine that perform the following steps:
 !!  1. flat_integration_diagonal ! diagonal elements
@@ -14,15 +14,15 @@
 !! Author       : Tommaso Giovannini
 !! Date         : 2025
 !!
-submodule (bem_module) exact_green_function
+submodule (bem_module) accurate_green_function
  
    implicit none
  
 contains
 
-   !> Subroutine for constructing the exact Green function 
+   !> Subroutine for constructing the accurate Green function 
    !!    In/Out  : bem      -- bem_type
-   module subroutine construct_exact_green_function(bem)
+   module subroutine construct_accurate_green_function(bem)
   
       implicit none
        
@@ -34,7 +34,7 @@ contains
       call bem%selection_of_refined_elements()
       call bem%refinement_diagonal_elements()
   
-   end subroutine construct_exact_green_function
+   end subroutine construct_accurate_green_function
 
 
    !> Subroutine for flat integration diagonal part
@@ -676,8 +676,8 @@ contains
       real(dp) :: green_sum_tangent_2 
       real(dp) :: max_distance_polar_coord_1e_4
   
-      call mem_man%alloc(bem%green_diagonal_exact, 3,bem%n_var, &
-                         "bem%green_diagonal_exact")
+      call mem_man%alloc(bem%green_diagonal_accurate, 3,bem%n_var, &
+                         "bem%green_diagonal_accurate")
       max_distance_polar_coord_1e_4 = maxval(bem%distance_polar_coord)*1.0d-4
   
       k = 0
@@ -711,19 +711,19 @@ contains
                                     vec_z*bem%tangent_2(3,i) ) / &
                                    bem%distance_polar_coord(k)**3
          enddo
-         bem%green_diagonal_exact(1,i) = bem%normal   (1,i)  * &
+         bem%green_diagonal_accurate(1,i) = bem%normal   (1,i)  * &
                                          green_sum_normal    + &
                                          bem%tangent_1(1,i)  * &
                                          green_sum_tangent_1 + & 
                                          bem%tangent_2(1,i)  * &
                                          green_sum_tangent_2  
-         bem%green_diagonal_exact(2,i) = bem%normal   (2,i)  * &
+         bem%green_diagonal_accurate(2,i) = bem%normal   (2,i)  * &
                                          green_sum_normal    + &
                                          bem%tangent_1(2,i)  * &
                                          green_sum_tangent_1 + & 
                                          bem%tangent_2(2,i)  * &
                                          green_sum_tangent_2 
-         bem%green_diagonal_exact(3,i) = bem%normal   (3,i)  * &
+         bem%green_diagonal_accurate(3,i) = bem%normal   (3,i)  * &
                                          green_sum_normal    + &
                                          bem%tangent_1(3,i)  * &
                                          green_sum_tangent_1 + & 
@@ -731,8 +731,8 @@ contains
                                          green_sum_tangent_2  
       enddo
       !printing
-      if(out_%ivrb.ge.4) call out_%print_matrix("green_diagonal_exact", &
-                              transpose(bem%green_diagonal_exact),bem%n_var,3)
+      if(out_%ivrb.ge.4) call out_%print_matrix("green_diagonal_accurate", &
+                              transpose(bem%green_diagonal_accurate),bem%n_var,3)
   
    end subroutine refinement_diagonal_elements
 
@@ -816,20 +816,20 @@ contains
       enddo
       do i = 1, bem%n_var
           
-         bem%green_diagonal_exact(1,i) = bem%normal(1,i) * &
-                                         (-2*pi + sum(matrix_tmp(:,i))) + &
-                                         bem%green_diagonal_exact(1,i)
-         bem%green_diagonal_exact(2,i) = bem%normal(2,i) * &
-                                         (-2*pi + sum(matrix_tmp(:,i))) + &
-                                         bem%green_diagonal_exact(2,i)
-         bem%green_diagonal_exact(3,i) = bem%normal(3,i) * &
-                                         (-2*pi + sum(matrix_tmp(:,i))) + &
-                                         bem%green_diagonal_exact(3,i)
-         matrix_constant(i,i) = - ( bem%green_diagonal_exact(1,i) * &
-                                    bem%normal(1,i)               + &
-                                    bem%green_diagonal_exact(2,i) * &
-                                    bem%normal(2,i)               + &
-                                    bem%green_diagonal_exact(3,i) * &
+         bem%green_diagonal_accurate(1,i) = bem%normal(1,i) * &
+                                            (-2*pi + sum(matrix_tmp(:,i))) + &
+                                            bem%green_diagonal_accurate(1,i)
+         bem%green_diagonal_accurate(2,i) = bem%normal(2,i) * &
+                                            (-2*pi + sum(matrix_tmp(:,i))) + &
+                                            bem%green_diagonal_accurate(2,i)
+         bem%green_diagonal_accurate(3,i) = bem%normal(3,i) * &
+                                            (-2*pi + sum(matrix_tmp(:,i))) + &
+                                            bem%green_diagonal_accurate(3,i)
+         matrix_constant(i,i) = - ( bem%green_diagonal_accurate(1,i) * &
+                                    bem%normal(1,i)                  + &
+                                    bem%green_diagonal_accurate(2,i) * &
+                                    bem%normal(2,i)                  + &
+                                    bem%green_diagonal_accurate(3,i) * &
                                     bem%normal(3,i) )
       enddo
   
@@ -837,4 +837,4 @@ contains
   
    end subroutine final_refinement_green_function
 
-end submodule exact_green_function
+end submodule accurate_green_function

@@ -15,7 +15,7 @@
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-06-10 09:29:35 CEST
+ Configuration date : 2025-10-07 11:01:20 CEST
  Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
@@ -23,10 +23,10 @@
  Integers 64bit     : ON
  OpenMP             : ON
  --------------------------------------------------------------------------------
- Input File         : bem_ief_exact_inversion.yaml
- Output File        : bem_ief_exact_inversion.log
+ Input File         : bem_ief_accurate_inversion.yaml
+ Output File        : bem_ief_accurate_inversion.log
  OMP Threads        :   8
- Memory (GB)        :   31.07
+ Memory (GB)        :   31.06
  --------------------------------------------------------------------------------
  What               : dynamic response
  Verbose            : 0
@@ -52,7 +52,7 @@
  Target             : bem
  GMSH File          : matlab.msh
  BEM Variant        : iefpcm
- Green Function     : exact
+ Green Function     : accurate
  Permittivity       : silver etchegoin
  Permittivity File  : none
  Solvent            : vacuum
@@ -392,5 +392,5 @@
                                                   CPU Time:     0 h 00 min 00 sec
                                               Elapsed Time:     0 h 00 min 00 sec
  --------------------------------------------------------------------------------
-                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:29
+                    Normal Termination of plasmonX in date 07/10/2025 at 11:04:17
  --------------------------------------------------------------------------------

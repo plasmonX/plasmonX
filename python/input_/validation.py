@@ -560,7 +560,7 @@ def validate_bem(yaml_file, data, what, atomtypes, keywords, project_root):
             else:
                 bem["sphere radius"] = convert_length_to_au(bem["sphere radius"], None)
         else: 
-            errors.append(f"Sphere radius and exact green function in BEM section is not allowed")
+            errors.append(f"Sphere radius and accurate green function in BEM section is not allowed")
 
     # solvent
     if "solvent" not in bem:

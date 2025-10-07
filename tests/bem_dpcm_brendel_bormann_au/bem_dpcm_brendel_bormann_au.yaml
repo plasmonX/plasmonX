@@ -13,7 +13,7 @@ bem:
   mesh file: matlab.msh
   normal scalar factor: -1.0
   permittivity: gold brendel bormann
-  green function: exact
+  green function: accurate
   variant: dpcm
 
 control:

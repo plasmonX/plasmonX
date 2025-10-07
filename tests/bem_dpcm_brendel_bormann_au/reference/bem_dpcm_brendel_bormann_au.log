@@ -15,7 +15,7 @@
  Piero Lafiosca        Scuola Normale Superiore, Pisa, Italy
  Luca Nicoli           Scuola Normale Superiore, Pisa, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-06-10 09:29:35 CEST
+ Configuration date : 2025-10-07 11:01:20 CEST
  Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
@@ -26,7 +26,7 @@
  Input File         : bem_dpcm_brendel_bormann_au.yaml
  Output File        : bem_dpcm_brendel_bormann_au.log
  OMP Threads        :   8
- Memory (GB)        :   31.07
+ Memory (GB)        :   31.06
  --------------------------------------------------------------------------------
  What               : dynamic response
  Verbose            : 0
@@ -51,7 +51,7 @@
  Target             : bem
  GMSH File          : matlab.msh
  BEM Variant        : dpcm
- Green Function     : exact
+ Green Function     : accurate
  Permittivity       : none
  Permittivity File  : /home/tommaso/programmi/plasmonX/src/parameters/bb_permittivity_au.csv
  Solvent            : vacuum
@@ -625,8 +625,8 @@
                            🎸 Ob-La-Di, Ob-La-Done! 🎶                           
 
  --------------------------------------------------------------------------------
-                                                  CPU Time:     0 h 00 min 03 sec
-                                              Elapsed Time:     0 h 00 min 01 sec
+                                                  CPU Time:     0 h 00 min 01 sec
+                                              Elapsed Time:     0 h 00 min 00 sec
  --------------------------------------------------------------------------------
-                    Normal Termination of plasmonX in date 10/06/2025 at 11:28:36
+                    Normal Termination of plasmonX in date 07/10/2025 at 11:07:29
  --------------------------------------------------------------------------------

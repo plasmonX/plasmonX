@@ -11,16 +11,8 @@ bem:
   mesh file: matlab.msh
   normal scalar factor: -1.0
   permittivity: silver etchegoin
-  green function: exact
-  variant: dpcm
-
-algorithm:
-  method: iterative
-  adaptive tuning: 'no'
-  tolerance: 1.0e-08
-
-output:
-  verbose: 3
+  green function: accurate
+  variant: iefpcm
 
 control:
   - no info file

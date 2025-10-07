@@ -46,7 +46,7 @@ module bem_module
       real(dp), dimension(:,:), allocatable  :: tangent_2   
       ! normal vector
       real(dp), dimension(:,:), allocatable  :: normal      
-      !variable for exact green function
+      !variable for accurate green function
       ! tabulated values x
       real(dp), dimension(:), allocatable    :: x_tab       
       ! tabulated values y
@@ -61,10 +61,10 @@ module bem_module
       real(dp), dimension(:,:), allocatable  :: polar_coord          
       ! integration coordinates
       real(dp), dimension(:,:), allocatable  :: integration_coord    
-      ! selected elements to be used for exact BEM 
+      ! selected elements to be used for accurate BEM 
       real(dp), dimension(:,:), allocatable  :: selected_elements    
-      ! exact green function diagonal
-      real(dp), dimension(:,:), allocatable  :: green_diagonal_exact 
+      ! accurate green function diagonal
+      real(dp), dimension(:,:), allocatable  :: green_diagonal_accurate 
       ! IEF green derivate
       real(dp), dimension(:,:), allocatable  :: green_der_ief
       ! IEF SA^-1 -- complex for final multiplication
@@ -123,8 +123,8 @@ module bem_module
                    calculate_dynamic_polar_bem
       procedure :: calculate_induced_field_at_point => &
                    calculate_induced_field_at_point_bem
-      ! exact green function subroutines, defined in the interface
-      procedure :: construct_exact_green_function
+      ! accurate green function subroutines, defined in the interface
+      procedure :: construct_accurate_green_function
       procedure :: flat_integration_diagonal
       procedure :: quadrature_rule
       procedure :: tesserae_integration_polar_coordinates
@@ -139,7 +139,7 @@ module bem_module
  
    interface
  
-      include "exact_green_function_interface.f90"
+      include "accurate_green_function_interface.f90"
  
    end interface
 
@@ -596,7 +596,7 @@ contains
       call mem_man%dealloc(bem%tangent_2, "bem%tangent_2")
       call mem_man%dealloc(bem%normal, "bem%normal")
       call mem_man%dealloc(bem%permittivity, "bem%permittivity")
-      if(bem%green_function.eq.'exact') then
+      if(bem%green_function.eq.'accurate') then
          call mem_man%dealloc(bem%x_tab, "bem%x_tab")
          call mem_man%dealloc(bem%y_tab, "bem%y_tab")
          call mem_man%dealloc(bem%w_tab, "bem%w_tab")
@@ -609,8 +609,8 @@ contains
                               "bem%integration_coord")
          call mem_man%dealloc(bem%selected_elements, &
                               "bem%selected_elements")
-         call mem_man%dealloc(bem%green_diagonal_exact, &
-                              "bem%green_diagonal_exact")
+         call mem_man%dealloc(bem%green_diagonal_accurate, &
+                              "bem%green_diagonal_accurate")
       endif
          
    end subroutine deallocate_bem
@@ -690,8 +690,8 @@ contains
       real(dp), parameter                   :: diag_param = 1.0694d0
       real(dp), dimension(:), allocatable   :: tmp_a_inv
   
-      if(bem%green_function.eq.'exact') & 
-         call bem%construct_exact_green_function()
+      if(bem%green_function.eq.'accurate') & 
+         call bem%construct_accurate_green_function()
       
       !IEFPCM - We need some more matrices
       if(trim(bem%variant).eq."iefpcm") &
@@ -704,8 +704,8 @@ contains
             z_ij = target_%coord(3,i) - target_%coord(3,j)   
             dist_ij   = dsqrt(x_ij**2 + y_ij**2 + z_ij**2)
             dist_ij_3 = dist_ij**3
-            !Exact Green function
-            if(target_%green_function.eq.'exact') then 
+            !accurate Green function
+            if(target_%green_function.eq.'accurate') then 
                if(bem%selected_elements(i,j).ge.zero) then  
                   matrix_constant(i,j) = target_%area(j)* &
                                          (x_ij*target_%normal(1,i) + &
@@ -714,11 +714,11 @@ contains
                else
                   !diagonal elements
                   if(i.eq.j) then
-                     matrix_constant(i,j) = - (bem%green_diagonal_exact(1,i)* &
+                     matrix_constant(i,j) = - (bem%green_diagonal_accurate(1,i)* &
                                                bem%normal(1,i)              + & 
-                                               bem%green_diagonal_exact(2,i)* &
+                                               bem%green_diagonal_accurate(2,i)* &
                                                bem%normal(2,i)              + &
-                                               bem%green_diagonal_exact(3,i)* &
+                                               bem%green_diagonal_accurate(3,i)* &
                                                bem%normal(3,i) )
                   !off diagonal elements
                   else
@@ -738,7 +738,7 @@ contains
                   matrix_constant(i,i) = diag_param * & 
                             sqrt(four*pi*target_%area(i))/(two*target_%sphere_r)
                endif !diagonal
-            endif !green function 'approx' or 'exact'
+            endif !green function 'approx' or 'accurate'
             !iefpcm
             if (trim(bem%variant).eq.'iefpcm') then
                if(i.eq.j) then
@@ -771,8 +771,8 @@ contains
       if(out_%ivrb.ge.4) & 
          call out_%print_matrix('BEM Green Der', -matrix_constant, &
                                  target_%n_var, target_%n_var)
-      !final refinement for Exact Green Function
-      if(bem%green_function.eq.'exact') then 
+      !final refinement for accurate Green Function
+      if(bem%green_function.eq.'accurate') then 
           call bem%final_refinement_green_function(matrix_constant)
           if(out_%ivrb.ge.4) &
              call out_%print_matrix('BEM Green Der Refined', -matrix_constant, &

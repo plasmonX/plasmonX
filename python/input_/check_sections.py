@@ -143,7 +143,7 @@ configurations = {
                               "gold brendel-bormann",
                               "gold brendel bormann",
                               "gold palik"},
-            "green function": {"exact",
+            "green function": {"accurate",
                                "approximate"},
             "variant" : {"dpcm",
                          "iefpcm"}

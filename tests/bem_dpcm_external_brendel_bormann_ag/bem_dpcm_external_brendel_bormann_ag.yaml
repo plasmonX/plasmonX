@@ -13,7 +13,7 @@ bem:
   mesh file: matlab.msh
   normal scalar factor: -1.0
   permittivity file: epsilon_ag.csv
-  green function: exact
+  green function: accurate
   variant: dpcm
 
 control:

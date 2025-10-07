@@ -1,13 +1,13 @@
-   !> Subroutine for constructing the exact Green function 
+   !> Subroutine for constructing the accurate Green function 
    !!    In/Out  : bem      -- bem_type
-   module subroutine construct_exact_green_function(bem)
+   module subroutine construct_accurate_green_function(bem)
 
       implicit none
       
       !input/output variables
       class(bem_type), intent(inout) :: bem
 
-   end subroutine construct_exact_green_function
+   end subroutine construct_accurate_green_function
 
 
    !> Subroutine for flat integration diagonal part

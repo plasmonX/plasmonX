@@ -5,7 +5,7 @@ cmake_policy(SET CMP0079 NEW)
 # Create a static library for shared modules
 add_library(plasmonX_modules STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/bem/bem_module.f90
-    ${CMAKE_CURRENT_SOURCE_DIR}/bem/exact_green_function.f90
+    ${CMAKE_CURRENT_SOURCE_DIR}/bem/accurate_green_function.f90
     ${CMAKE_CURRENT_SOURCE_DIR}/wfq/wfq_module.f90
     ${CMAKE_CURRENT_SOURCE_DIR}/wfq/wfqfmu_module.f90
     ${CMAKE_CURRENT_SOURCE_DIR}/forcefield/fq_module.f90

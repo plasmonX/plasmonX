@@ -11,7 +11,7 @@ bem:
   mesh file: matlab.msh
   normal scalar factor: -1.0
   permittivity: silver etchegoin
-  green function: exact
+  green function: accurate
   variant: dpcm
 
 output:
