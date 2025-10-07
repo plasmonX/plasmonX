@@ -81,7 +81,7 @@ contains
          analysis_internal = analysis
          if(analysis) then
             freq_min = field%min_freq
-            freq_max = field%min_freq
+            freq_max = field%max_freq
             freq_step = field%step_freq
          endif
       else

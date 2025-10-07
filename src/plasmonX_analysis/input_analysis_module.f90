@@ -116,7 +116,8 @@ contains
             if (iost.ne.0) exit
             call inp_analysis%parse_line(line)
          end do
-  
+         call field%set_frequencies()
+
       close(inp_analysis%iunit) 
   
    end subroutine read_file
@@ -163,15 +164,24 @@ contains
   
       case ("num_ex_freq")
          read(value_variable, *) field%n_freq
-           
-      case ("frequencies")
          if(field%n_freq.gt.0) then
             allocate(field%freq(field%n_freq),stat=ierr)
             if(ierr.gt.0) call out_%error('Insufficient space &
                                           &for Freq allocation')
             call array_clear(field%n_freq,field%freq)
-            call parse_array(value_variable, field%freq)
          endif
+
+      case ("frequencies")
+         call parse_array(value_variable, field%freq)
+           
+      case ("min_freq")
+         read(value_variable, *) field%min_freq
+
+      case ("max_freq")
+         read(value_variable, *) field%max_freq
+
+      case ("step_freq")
+         read(value_variable, *) field%step_freq
            
       case ("scale_e0")
          read(value_variable, *) control_analysis%scale_e0

@@ -7,6 +7,95 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 import matplotlib
 import os
+import sys, math
+
+def _fmt_float(x: float) -> str:
+    s = f"{x:.6f}".rstrip('0').rstrip('.')
+    if '.' in s:
+        dec = s.split('.')[1]
+        if len(dec) < 2:
+            s = f"{x:.2f}"
+    else:
+        s = f"{x:.2f}"
+    return s
+
+def complete_from_three(minf, maxf, stepv, nfreq):
+    if nfreq is None:
+        # min + max + step -> n
+        return (minf, maxf, stepv, int(math.ceil((maxf - minf) / stepv)) + 1)
+    if maxf is None:
+        # min + step + n -> max
+        return (minf, minf + (nfreq - 1) * stepv, stepv, nfreq)
+    if minf is None:
+        # max + step + n -> min
+        return (maxf - (nfreq - 1) * stepv, maxf, stepv, nfreq)
+    if stepv is None:
+        # n + min + max -> step
+        return (minf, maxf, 0.0 if nfreq <= 1 else (maxf - minf) / (nfreq - 1), nfreq)
+    # niente da fare
+    return (minf, maxf, stepv, nfreq)
+
+def frequency_lines(args, frequencies):
+    """
+      (1) Explicit list -freq
+      (2) min/max/step/n 
+    """
+    lines = []
+
+    # Normalizza parametri (considera i default negativi come "non dati")
+    minf  = float(args.min_freq)  if (args.min_freq  is not None and args.min_freq  >= 0.0) else None
+    maxf  = float(args.max_freq)  if (args.max_freq  is not None and args.max_freq  >= 0.0) else None
+    stepv = float(args.step)      if (args.step      is not None and args.step      >  0.0) else None
+    nfreq = int(args.num_ex_freq) if (args.num_ex_freq is not None and args.num_ex_freq > 0) else None
+
+    have_triple = sum(v is not None for v in (minf, maxf, stepv, nfreq)) >= 3
+    have_list   = (args.frequencies is not None) and bool(frequencies)
+    if(have_triple and have_list) :
+        print(
+            f"\nError: You provide min/max/step/n and a list of frequencies.",
+            file=sys.stderr
+        )
+        sys.exit(1)
+
+
+    triple_full = None
+    if have_triple:
+        triple_full = complete_from_three(minf, maxf, stepv, nfreq)
+        minf, maxf, stepv, nfreq = triple_full
+
+    if have_list:
+        nums = ", ".join(_fmt_float(f) for f in frequencies)
+        n_inp_freq = 0 if not nums.strip() else nums.count(',') + 1
+        if (nfreq != None): 
+            if(nfreq != n_inp_freq): 
+                print(
+                    f"\nError: the number of frequencies does not correspond to the listed frequencies",
+                    file=sys.stderr
+                )
+                sys.exit(1)
+        line_freq = f"frequencies = [{nums}]"
+        if len(line_freq) > 1000:
+            print(
+                f"\nError: the 'frequencies' line would exceed 1000 characters "
+                f"(got {len(line)}). \nProvide min/max/step/n or a shorter -freq list.",
+                file=sys.stderr
+            )
+            sys.exit(1)
+
+    if have_triple:
+        return [
+            f"num_ex_freq = {int(nfreq)}",
+            f"min_freq = {_fmt_float(minf)}",
+            f"max_freq = {_fmt_float(maxf)}",
+            f"step_freq = {_fmt_float(stepv)}",
+        ]
+    elif have_list: 
+        return [
+            f"num_ex_freq = {int(n_inp_freq)}",
+            line_freq, 
+        ]
+    else: 
+        return []
 
 def read_command_line():
     parser = argparse.ArgumentParser(
@@ -122,8 +211,14 @@ def read_command_line():
         exit(1)
 
     if args.what in ['field', 'density']:
-        if not args.num_ex_freq:
-            print("\nYou did not specify the number of frequency [-n option]")
+        have_list = bool(args.frequencies)
+        have_min  = args.min_freq  is not None and args.min_freq  >= 0.0
+        have_max  = args.max_freq  is not None and args.max_freq  >= 0.0
+        have_step = args.step      is not None and args.step      >  0.0
+        have_n    = args.num_ex_freq is not None and args.num_ex_freq > 0
+
+        if not (have_list or sum([have_min, have_max, have_step, have_n]) >= 3):
+            print("\nError: provide either -freq, or any three among -min_freq/-max_freq/-step/-n.", file=sys.stderr)
             exit(1)
 
         if args.volume and not args.min_grid:
@@ -146,23 +241,14 @@ def read_command_line():
     if args.frequencies:
         frequencies = list(map(float, args.frequencies.split(',')))
 
-
-    # Generate frequencies if step, min_freq, and max_freq are provided
-    if args.step > 0 and args.min_freq < args.max_freq and args.num_ex_freq > 0:
-        frequencies = np.arange(args.min_freq, args.max_freq + args.step/2, args.step)
-        frequencies = [float(f) for f in frequencies]
-        
-
     return args, min_grid, max_grid, frequencies
 
 def write_parameters_to_file(args, min_grid, max_grid, frequencies, n_omp_threads):
     with open('parameters.txt', 'w') as file:
         file.write(f"input_file = {args.input_file}\n")
         file.write(f"what = {args.what}\n")
-        file.write(f"num_ex_freq = {args.num_ex_freq}\n")
-        if frequencies and args.num_ex_freq <= 30:
-            file.write(f"frequencies = {frequencies}\n")
-        file.write(f"step = {args.step}\n")
+        for line in frequency_lines(args, frequencies):
+            file.write(line + "\n")
         file.write(f"scale_e0 = {args.scale_e0}\n")
         file.write(f"plane = {args.plane}\n")
         file.write(f"n_plane = {args.n_plane}\n")
