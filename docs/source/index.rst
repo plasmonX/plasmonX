@@ -21,8 +21,6 @@ plasmonX: an Open-Source Code for Nanoplasmonics
 
    \chapter{Introduction}
 
-This is the main page of **plasmonX**. 
-
 **plasmonX** provides an implementation of atomistic and implicit approaches for nanoplasmonics, :math:`\omega\text{FQ}`, :math:`\omega\text{FQF}\mu`, BEM (DPCM and IEFPCM variants), in the quasi-static approximation.
 
 .. only:: latex

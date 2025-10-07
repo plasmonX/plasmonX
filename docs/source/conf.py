@@ -101,7 +101,7 @@ latex_elements = {
 latex_additional_files = ['images/logo_latex.png']
 
 latex_documents = [
-    ('index', 'plasmonX.tex', 'plasmonX',
+    ('index', 'plasmonX_manual.tex', 'plasmonX',
      'Tommaso Giovannini et al.', 'manual'),
 ]
 
