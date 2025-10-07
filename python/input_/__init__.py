@@ -2,6 +2,7 @@ from .io_operations import yaml_to_fortran_input, check_input_file, run_fortran_
 from .resource_management import get_memory_in_gb
 from .timing_utils import start_timers, print_execution_summary
 from .check_sections import  create_keywords, check_section, check_unknown_section, create_starting_keywords
+from .references import define_references_to_be_printed
 
 __all__ = [
     "yaml_to_fortran_input",
@@ -14,4 +15,5 @@ __all__ = [
     "check_section",
     "check_unknown_section",
     "create_starting_keywords",
+    "define_references_to_be_printed",
 ]

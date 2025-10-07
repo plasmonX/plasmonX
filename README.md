@@ -50,7 +50,7 @@ plasmonX documentation (installation, input file structure, examples, etc.) is a
 
 - **Luca Bonatti** – Scuola Normale Superiore
 - **Chiara Cappelli** – Scuola Normale Superiore
-- **Stefano Corni** – University of Padova
+- **Stefano Corni** – University of Padova & CNR Institute of Nanoscience, Modena, Italy
 - **Piero Lafiosca** – Scuola Normale Superiore
 - **Tommaso Giovannini** – University of Rome Tor Vergata 
 - **Pablo Grobas Illobre** – Scuola Normale Superiore

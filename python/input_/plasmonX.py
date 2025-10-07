@@ -80,14 +80,20 @@ def main():
 
     fortran_file = args.input_file[:-5]+".tmp"
 
+    citations = []
+
     #create the fortran input file
-    yaml_to_fortran_input(start_cpu_time, start_wall_time, args.input_file, fortran_file, output_, n_omp_threads, available_GB, project_root, configurations)
+    yaml_to_fortran_input(start_cpu_time, start_wall_time, args.input_file, fortran_file, output_, n_omp_threads, available_GB, project_root, configurations, citations)
 
     #run the calculation 
     stdout, stderr, success, fortran_cpu_time = run_fortran_code(build_path + "/plasmonX", fortran_file)
     
     #final output
-    print_execution_summary('plasmonX', start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_)
+    print_execution_summary('plasmonX', start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_, citations=citations)
+
+    #rm file fortran input file
+    if os.path.exists(fortran_file):
+        os.remove(fortran_file)
 
     # Redirect stdout and stderr
     sys.stdout.write(stdout)

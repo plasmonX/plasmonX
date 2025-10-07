@@ -57,7 +57,7 @@ def get_termination_message(success, stderr):
         else:
             return "💀 Ob-La-Di, Ob-La-Doom! 💀", "Error Termination"
 
-def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_file, errors=None):
+def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_file, errors=None, citations=None):
     """
     Write an execution summary including timing information and termination message.
 
@@ -70,6 +70,7 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
         stderr (str): Standard error output from execution.
         output_file (str): Path to the output file.
         errors (list, optional): List of errors to include in the summary.
+        citations (list, optional): List of citations to include in the summary.
     """    
 
     # Formatted times
@@ -78,7 +79,7 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
     termination_text, termination_status = get_termination_message(success, stderr)
 
     # Errors 
-    sticks = " " + "-" * 80                                                           
+    sticks = " " + "-" * 80
     output_summary = []                                                               
     errors = errors or []                                                             
     if errors:
@@ -99,17 +100,22 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
     cpu_line  = f"    CPU Time: {str(cpu_h).rjust(5)} h {str(cpu_m).zfill(2)} min {str(cpu_s).zfill(2)} sec"
     wall_line = f"Elapsed Time: {str(wall_h).rjust(5)} h {str(wall_m).zfill(2)} min {str(wall_s).zfill(2)} sec"
 
+    if citations:
+        output_summary.append(" Required citations:\n")
+        for c in citations:
+            output_summary.append(f" {c.strip()}")  
+        output_summary.append(sticks)
+    
     # Final output
-    output_summary.extend([
-        f"\n{termination_text.center(79)}\n",
+    output_summary.extend([ 
+        f"\n{termination_text.center(79)}\n", 
         sticks,
-        cpu_line.rjust(81),
-        wall_line.rjust(81),
-        sticks,
-        f"{termination_status} of {code} in date {datetime.now().strftime('%d/%m/%Y at %H:%M:%S')}".rjust(81),
-        sticks
-    ])
-
+        cpu_line.rjust(81), 
+        wall_line.rjust(81), 
+        sticks, 
+        f"{termination_status} of {code} in date {datetime.now().strftime('%d/%m/%Y at %H:%M:%S')}".rjust(81), 
+        sticks ])
+    
     # Output file
     with open(output_file, "a") as f:
         f.write("\n".join(output_summary) + "\n")

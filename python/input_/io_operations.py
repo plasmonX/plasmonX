@@ -15,6 +15,7 @@ from .resource_management import check_best_algorithm
 from .timing_utils import print_execution_summary
 from .geom_interface import geom_generation
 from .check_sections import create_starting_keywords, check_unknown_section, check_section
+from .references import define_references_to_be_printed
 from collections import OrderedDict
 
 def load_yaml_with_duplicate_check(path):
@@ -257,10 +258,10 @@ def initialize_output_file(start_cpu_time, start_wall_time, output_file, configu
             f.write(f" {key.ljust(max_key_length)} : {value}\n")
         f.write(f" {sticks}\n")
     if errors:
-        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", output_file, errors)
+        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", output_file, errors=errors)
         sys.exit()
 
-def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_file, out_file, n_omp, memory, project_root, configurations):
+def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_file, out_file, n_omp, memory, project_root, configurations, citations):
     """
     Process a YAML input file and generate a corresponding FORTRAN input file.
 
@@ -308,7 +309,7 @@ def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_fi
     #change algorithm based on calculation
     errors.extend(check_best_algorithm(data, atomtypes, natoms, n_omp, memory))
     if errors:
-        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", out_file, errors)
+        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", out_file, errors=errors)
         sys.exit()
 
 
@@ -377,6 +378,8 @@ def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_fi
         (field, used_defaults if field == "used defaults for atom_types or parameters" else default_value)
         for field, default_value in fields
     ]
+
+    citations.extend(define_references_to_be_printed(data, atomtypes))
 
     with open(fortran_file, "w") as file:
         # Write generic fields (not atom_types e parameters)
