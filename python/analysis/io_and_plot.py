@@ -149,7 +149,9 @@ def read_command_line():
 
     # Generate frequencies if step, min_freq, and max_freq are provided
     if args.step > 0 and args.min_freq < args.max_freq and args.num_ex_freq > 0:
-        frequencies = [args.min_freq + i * args.step for i in range(int((args.max_freq - args.min_freq) / args.step) + 1)]
+        frequencies = np.arange(args.min_freq, args.max_freq + args.step/2, args.step)
+        frequencies = [float(f) for f in frequencies]
+        
 
     return args, min_grid, max_grid, frequencies
 
