@@ -73,6 +73,10 @@ if __name__ == "__main__":
     # summary
     print_execution_summary('plasmonX analysis', start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_)
 
+    #rm file fortran input file
+    if os.path.exists("parameters.txt"):
+        os.remove("parameters.txt")
+
     # Redirect stdout and stderr
     sys.stdout.write(stdout)
     sys.stderr.write(stderr)

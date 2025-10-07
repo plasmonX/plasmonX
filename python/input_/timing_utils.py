@@ -100,7 +100,7 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
     cpu_line  = f"    CPU Time: {str(cpu_h).rjust(5)} h {str(cpu_m).zfill(2)} min {str(cpu_s).zfill(2)} sec"
     wall_line = f"Elapsed Time: {str(wall_h).rjust(5)} h {str(wall_m).zfill(2)} min {str(wall_s).zfill(2)} sec"
 
-    if citations:
+    if citations and termination_status != "Error Termination":
         output_summary.append(" Required citations:\n")
         for c in citations:
             output_summary.append(f" {c.strip()}")  
