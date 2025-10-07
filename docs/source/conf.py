@@ -59,7 +59,7 @@ latex_elements = {
     \includegraphics[width=0.4\textwidth]{logo_latex.png}\par
     \vspace{1cm}
 
-    {\Huge\bfseries plasmonX\par}
+    {\Huge\bfseries plasmonX 1.0\par}
     \vspace{1cm}
 
     {\Large Tommaso Giovannini, Luca Bonatti, Stefano Corni, Pablo Grobas Illobre,
@@ -101,7 +101,7 @@ latex_elements = {
 latex_additional_files = ['images/logo_latex.png']
 
 latex_documents = [
-    ('index', 'plasmonX_manual.tex', 'plasmonX',
+    ('index', 'plasmonX_manual.tex', 'plasmonX 1.0',
      'Tommaso Giovannini et al.', 'manual'),
 ]
 
