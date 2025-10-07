@@ -14,7 +14,7 @@ Valid keywords
 +==========================+===================+========================================================================+====================+
 | ``mesh file``            | string            | Path to mesh in `.msh` format (generally obtained from GMSH)           | ``input_file.msh`` |
 +--------------------------+-------------------+------------------------------------------------------------------------+--------------------+
-| ``green function``       | string            | ``exact``, ``approximate``                                             | ``approximate``    |
+| ``green function``       | string            | ``accurate``, ``approximate``                                          | ``approximate``    |
 +--------------------------+-------------------+------------------------------------------------------------------------+--------------------+
 | ``variant``              | string            | ``dpcm``, ``iefpcm``                                                   | ``dpcm``           |
 +--------------------------+-------------------+------------------------------------------------------------------------+--------------------+
@@ -35,14 +35,14 @@ Notes
 -----
 
 - ``mesh file`` : 3D molecular surface in `.msh` format with vertex positions, normals, etc. This is generally obtained from `GMSH <https://gmsh.info/>`_ software. Assumed in Angstrom.
-- ``green function``: specifies whether exact or approximate Green's function integrals must be computed
+- ``green function``: specifies whether accurate or approximate Green's function integrals must be computed
 
    .. raw:: html
 
       <div style="margin: 0; padding: 0;"></div>
 
-   - ``exact``: full numerical evaluation of Green’s function integrals.
-   - ``approximate``: uses simplified expressions (faster, less accurate).
+   - ``accurate``: full numerical evaluation of Green’s function integrals.
+   - ``approximate``: uses simplified expressions (faster, less accurate, centroid-based).
 - ``variant`` : specifies the right-hand-side formalism.
 
    .. raw:: html
