@@ -103,7 +103,7 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
     if citations and termination_status != "Error Termination":
         output_summary.append(" Required citations:\n")
         for c in citations:
-            output_summary.append(f" {c.strip()}")  
+            output_summary.append(c.rstrip('\r\n'))  
         output_summary.append(sticks)
     
     # Final output

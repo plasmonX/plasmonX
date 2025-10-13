@@ -10,8 +10,7 @@ def define_references_to_be_printed(data, atomtypes):
     https://doi.org/"""
 
     #T. Giovannini et al. Nano Lett. 2025, 25, 10802. 
-    cit[9]  = """ - wFQFMu [if picocavities]
-    https://doi.org/10.1021/acs.nanolett.5c01999 
+    cit[9]  = """    https://doi.org/10.1021/acs.nanolett.5c01999 
 """
     #P. Grobas Illobre et al. J. Chem. Phys. 2025, 162, 044103. 
     cit[8]  = """ - BEM
@@ -78,14 +77,15 @@ def define_references_to_be_printed(data, atomtypes):
             citations.append(cit[7])
         else: 
             citations.append(cit[5])
-            citations.append(cit[9])
 
     if bem != {}: 
         citations.append(cit[8])
 
     if (algorithm.get("method", "")).lower() in ["iterative", "iterative on the fly"]:
         citations.append(cit[4])
+        if dynamic_forcefield == "wfqfmu":
+            citations.append(cit[9])
 
-    citations.append(cit[10])
+    #citations.append(cit[10])
 
     return citations 
