@@ -20,7 +20,8 @@ plasmonX documentation (installation, input file structure, examples, etc.) is a
 Alternatively, you can compile the documentation locally from the `docs` directory by running:
 
 ```bash
-make latexpdf
+make latexpdf 
+```
 
 The generated PDF version of the documentation will be available in `docs/build/latex/plasmonX_documentation.pdf`.
 
