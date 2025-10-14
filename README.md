@@ -17,6 +17,13 @@
 plasmonX documentation (installation, input file structure, examples, etc.) is available here:
 **[ReadTheDocs](https://plasmonx.readthedocs.io/)**
 
+Alternatively, you can compile the documentation locally from the `docs` directory by running:
+
+```bash
+make latexpdf
+
+The generated PDF version of the documentation will be available in `docs/build/latex/plasmonX_documentation.pdf`.
+
 ---
 
 ## Main References
