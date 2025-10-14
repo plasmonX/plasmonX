@@ -71,6 +71,6 @@ For any issue or request:
 
 ## Quick Start
 
-To compile and run plasmonX, see the full installation instructions in the [documentation](https://plasmonx.readthedocs.io/) (under construction).
+To compile and run plasmonX, see the full installation instructions in the [documentation](https://plasmonx.readthedocs.io/)
 
 ---
