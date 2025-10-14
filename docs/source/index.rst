@@ -13,9 +13,9 @@ plasmonX: an Open-Source Code for Nanoplasmonics
 .. raw:: html
 
     <p align="left">
-      <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" />
+      <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" style="height:24px;" />
       <a href="https://github.com/plasmonX/plasmonX">
-        <img src="https://img.shields.io/badge/release-1.0-brightgreen.svg" />
+        <img src="https://img.shields.io/badge/release-1.0-brightgreen.svg" style="height:24px;" />
       </a>
 
     </p>
