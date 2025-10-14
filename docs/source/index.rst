@@ -82,7 +82,7 @@ plasmonX: an Open-Source Code for Nanoplasmonics
 
 - Progetti Interni Coordinati 2016, Scuola Normale Superiore 
 - European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation program (Grant Agreement No. 818064) -- ERC-COG GEMS
-- UR-FARE Ricerca in Italia: Framework per l'attrazione ed il rafforzamento delle eccellenze per la Ricerca in Italia - III edizione. Prot. R20YTA2BKZ
+- MUR-FARE Ricerca in Italia: Framework per l'attrazione ed il rafforzamento delle eccellenze per la Ricerca in Italia - III edizione. Prot. R20YTA2BKZ
 - European Research Council (ERC) under the grant ERC-CoG-681285 TAME-Plasmons
 - Ricerca Scientifica di Ateneo 2024 (INNOVATIONS), University of Rome Tor Vergata 
 
