@@ -1,0 +1,5 @@
+sphinx>=7
+sphinx-rtd-theme>=2
+myst-parser>=3        # solo se usi .md
+sphinx-autodoc-typehints>=2
+sphinx-copybutton>=0.5
