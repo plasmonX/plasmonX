@@ -23,7 +23,7 @@ Alternatively, you can compile the documentation locally from the `docs` directo
 make latexpdf 
 ```
 
-The generated PDF version of the documentation will be available in `docs/build/latex/plasmonX_documentation.pdf`.
+The generated PDF version of the documentation will be available in `docs/build/latex/plasmonX_manual.pdf`.
 
 ---
 
