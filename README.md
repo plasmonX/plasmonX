@@ -29,6 +29,11 @@ The generated PDF version of the documentation will be available in `docs/build/
 
 ## Main References
 
+### **plasmonX** (preprint)
+- T. Giovannini, P. Grobas Illobre, P. Lafiosca, L. Nicoli, L. Bonatti, S. Corni, C. Cappelli.
+  *arXiv:2510.12731*, **2025**
+  [DOI: 10.48550/arXiv.2510.12731](https://doi.org/10.48550/arXiv.2510.12731)
+
 ### **ωFQ**
 - T. Giovannini, M. Rosa, S. Corni, C. Cappelli.
   *Nanoscale*, **2019**, *11*, 6004–6015.
