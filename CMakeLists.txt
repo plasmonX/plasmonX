@@ -248,6 +248,16 @@ if(NOT GIT_BRANCH)
     set(GIT_BRANCH "unknown-branch")
 endif()
 
+#get git commit
+execute_process(
+  COMMAND git rev-parse --short HEAD
+  OUTPUT_VARIABLE GIT_COMMIT
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if(NOT GIT_COMMIT)
+    set(GIT_COMMIT "unknown-commit")
+endif()
+
 
 # Definition for pointers in plasmonX.py
 set(BUILD_PATH ${CMAKE_BINARY_DIR})
@@ -256,7 +266,8 @@ set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 execute_process(COMMAND date +%Z OUTPUT_VARIABLE SYSTEM_TIMEZONE OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(TIMESTAMP CONFIGURATION_DATE "%Y-%m-%d %H:%M:%S ${SYSTEM_TIMEZONE}")
 set(CONFIGURATION_DATE "${CONFIGURATION_DATE}")
-set(GIT_BRANCH ${GIT_BRANCH})  
+set(GIT_BRANCH ${GIT_BRANCH})
+set(GIT_COMMIT ${GIT_COMMIT})  
 set(FORTRAN_COMPILER "${CMAKE_Fortran_COMPILER_ID} ${CMAKE_Fortran_COMPILER_VERSION}")
 #LAPACK and BLAS
 function(detect_library_type library_list result_var)

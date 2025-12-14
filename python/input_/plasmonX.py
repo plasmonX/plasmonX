@@ -17,10 +17,25 @@ def main():
                         help="Optional: number of OMP threads to exploit [Default: the maximum available]")
     parser.add_argument("-mem", "--memory_available", type=float, required=False,
                         help="Optional: available memory in GB [Default: the maximum available]")
+    parser.add_argument("-v", "--version", action="store_true", 
+                        help="Print plasmonX version and build information")
     args = parser.parse_args()
 
     build_path = "@BUILD_PATH@"    #this is modified by CMake
     project_root = "@PROJECT_ROOT@"#this is modified by CMake
+
+    if args.version:
+        print(f"Configuration date : @CONFIGURATION_DATE@")
+        print(f"Build Path         : @BUILD_PATH@")
+        print(f"Project Root       : @PROJECT_ROOT@")
+        print(f"Git branch         : @GIT_BRANCH@")
+        print(f"Git commit         : @GIT_COMMIT@")
+        print(f"Fortran compiler   : @FORTRAN_COMPILER@")
+        print(f"LAPACK             : @LAPACK_TYPE@")
+        print(f"BLAS               : @BLAS_TYPE@")
+        print(f"64-bit integers    : @INT64_STATUS@")
+        print(f"OpenMP             : @OMP_STATUS@")
+        sys.exit(0)
 
     # Add the parent directory of the project to PYTHONPATH
     parent_dir = os.path.abspath(project_root+"/python/")
@@ -52,6 +67,7 @@ def main():
     configurations = {
         "Configuration date": "@CONFIGURATION_DATE@",
         "Git branch": "@GIT_BRANCH@",
+        "Git_commit": "@GIT_COMMIT@",
         "Fortran compiler": "@FORTRAN_COMPILER@",
         "Lapack type": "@LAPACK_TYPE@",
         "Blas type": "@BLAS_TYPE@",

@@ -7,8 +7,8 @@ This directory contains a collection of tests used to check the installation (ct
 - **fq_energy**: FQ energy (Ohno Kernel)
 - **fq_principal_axis_energy**: FQ energy and rotation of the structure in principal axis
 - **fq_polarizability**: FQ static polarizability
-- **fqfmu_energy**: FQFMu energy (Gaussian kernel)
-- **fqfmu_rq_rmu_energy**: FQFMu energy (Gaussian kernel, varying Rq and RMu parameters)
+- **fqfmu_energy**: FQFμ energy (Gaussian kernel)
+- **fqfmu_rq_rmu_energy**: FQFμ energy (Gaussian kernel, varying Rq and RMu parameters)
 
 ## ωFQ (sodium nanoparticles)
 
