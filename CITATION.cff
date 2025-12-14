@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: "If you use plasmonX in your work, please cite it as follows."
+
+title: "plasmonX"
+type: software
+
+authors:
+  - family-names: Giovannini
+    given-names: Tommaso
+    affiliation: "Department of Physics, University of Rome Tor Vergata, Italy"
+  - family-names: Grobas Illobre
+    given-names: Pablo
+    affiliation: "Scuola Normale Superiore, Pisa, Italy"
+  - family-names: Lafiosca
+    given-names: Piero
+    affiliation: "Scuola Normale Superiore, Pisa, Italy"
+  - family-names: Nicoli
+    given-names: Luca
+    affiliation: "Scuola Normale Superiore, Pisa, Italy"
+  - family-names: Bonatti
+    given-names: Luca
+    affiliation: "Scuola Normale Superiore, Pisa, Italy"
+  - family-names: Corni
+    given-names: Stefano
+    affiliation: "Department of Chemical Sciences, University of Padova; CNR Institute of Nanoscience, Modena"
+  - family-names: Cappelli
+    given-names: Chiara
+    affiliation: "Scuola Normale Superiore, Pisa, Italy"
+
+abstract: >
+  plasmonX is an open-source computational platform for simulating the nanoplasmonic response of complex nanostructures using atomistic approaches, such as fluctuating charge (ωFQ) and fluctuating charge and dipole (ωFQFμ), and implicit models, such as the boundary element method (BEM), with Python interfaces for input and post-processing. This file provides citation metadata for users.
+
+keywords:
+  - nanoplasmonics
+  - ωFQ
+  - ωFQFμ
+  - BEM
+
+license: GPL-3.0
+
+repository-code: "https://github.com/plasmonX/plasmonX"
+url: "https://plasmonx.readthedocs.io/"
+
+version: "pre-release-1.0"
+date-released: 2025-10-15
+
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Giovannini
+      given-names: Tommaso
+    - family-names: Grobas Illobre
+      given-names: Pablo
+    - family-names: Lafiosca
+      given-names: Piero
+    - family-names: Nicoli
+      given-names: Luca
+    - family-names: Bonatti
+      given-names: Luca
+    - family-names: Corni
+      given-names: Stefano
+    - family-names: Cappelli
+      given-names: Chiara
+  title: "plasmonX: an Open-Source Code for Nanoplasmonics"
+  year: 2025
+  doi: "10.48550/arXiv.2510.12731"
