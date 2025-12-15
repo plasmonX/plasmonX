@@ -9,7 +9,6 @@ Choose your platform:
 - `Install on macOS <#install-on-macos>`__
 - `Install on Windows <#install-on-windows>`__
 
-
 Install on Linux
 ----------------
 
@@ -67,7 +66,7 @@ Install on Linux
    
       sudo apt-get install cmake
 
-6. Run the setup.sh [type -h for options]
+6. Run ``setup.sh`` [see :ref:`SetupOptions` for available options]
 
    .. code-block:: bash
    
@@ -147,7 +146,7 @@ Install on macOS
 
       brew install cmake
 
-5. Run the setup.sh [type -h for options]
+5. Run ``setup.sh`` [see :ref:`SetupOptions` for available options]
 
    .. code-block:: bash
 
@@ -179,3 +178,52 @@ Install on Windows
       options = "metadata"
 
 3. Follow the instructions `Install on Linux <#install-on-linux>`__ using option **2.2**.
+
+.. _SetupOptions:
+
+Configuration with setup.sh
+---------------------------
+
+The compilation of plasmonX is configured using the helper script ``setup.sh``.
+
+Basic usage:
+
+.. code-block:: bash
+
+   PATH_TO_PLASMONX/setup.sh [-h] [-b build_dir] [-bt build_type] [-fc fortran_compiler] [-omp yes|no]
+
+The ``setup.sh`` script supports the following options:
+
++-----------+-----------+-------------------------------------------------------------+
+| Option    | Required  | Description                                                 |
++===========+===========+=============================================================+
+| ``-b``    | Optional  | Build directory. Default: ``build``                         |
++-----------+-----------+-------------------------------------------------------------+
+| ``-bt``   | Optional  | Build type: ``Release``, ``Debug``, ``Warning``             |
+|           |           | Default: ``Release``                                        |
++-----------+-----------+-------------------------------------------------------------+
+| ``-fc``   | Optional  | Fortran compiler executable (default: ``gfortran``)         |
++-----------+-----------+-------------------------------------------------------------+
+| ``-omp``  | Optional  | Enable OpenMP support: ``yes`` or ``no`` (default: ``yes``) |
++-----------+-----------+-------------------------------------------------------------+
+| ``-h``    | Optional  | Print the help message                                      |
++-----------+-----------+-------------------------------------------------------------+
+
+The selected build type controls the compiler flags passed to CMake
+via ``CMAKE_BUILD_TYPE``.
+
++-------------------+--------------------------------------------------------------+
+| Build type        | Enabled compilation options                                  |
++===================+==============================================================+
+| ``Release``       | High optimization (``-O3``), loop unrolling,                 |
+|                   | architecture-specific optimizations                          |
++-------------------+--------------------------------------------------------------+
+| ``Warning``       | Moderate optimization (``-O2``) with extended compiler       |
+|                   | warnings enabled                                             |
++-------------------+--------------------------------------------------------------+
+| ``Debug``         | No optimization (``-O0``), debug symbols, runtime checks,    |
+|                   | bounds checking, variable initialization                     |
++-------------------+--------------------------------------------------------------+
+
+The exact compiler flags depend on the Fortran compiler (GNU or Intel) and are defined internally in the CMake configuration (``CMakeLists.txt``).
+

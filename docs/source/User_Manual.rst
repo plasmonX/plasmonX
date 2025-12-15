@@ -5,7 +5,7 @@ Once installed and tested by following the instructions at :ref:`Installation`, 
 
 .. code-block:: bash
 
-   PATH_TO_BUILD/plasmonX.py [-h] -i input_file.yaml [-o output_file] [-omp omp_threads] [-mem memory_available]
+   PATH_TO_BUILD/plasmonX.py [-h] -i input_file.yaml [-o output_file] [-omp omp_threads] [-mem memory_available] [-v]
 
 The `plasmonX.py` script supports the following options:
 
@@ -19,6 +19,8 @@ The `plasmonX.py` script supports the following options:
 | ``-omp`` | Optional  | Number of OpenMP threads. Default: Max available |
 +----------+-----------+--------------------------------------------------+
 | ``-mem`` | Optional  | Memory in GB. Default: Max available             |
++----------+-----------+--------------------------------------------------+
+| ``-v``   | Optional  | Print the version and compilation information    |
 +----------+-----------+--------------------------------------------------+
 | ``-h``   | Optional  | Print the help message                           |
 +----------+-----------+--------------------------------------------------+
