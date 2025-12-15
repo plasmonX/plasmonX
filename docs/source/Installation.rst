@@ -210,7 +210,7 @@ The ``setup.sh`` script supports the following options:
 +-----------+-----------+-------------------------------------------------------------+
 
 The selected build type controls the compiler flags passed to CMake
-via ``CMAKE_BUILD_TYPE``.
+via ``CMAKE_BUILD_TYPE``:
 
 +-------------------+--------------------------------------------------------------+
 | Build type        | Enabled compilation options                                  |
