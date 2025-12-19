@@ -10,21 +10,21 @@ The section is **optional**. plasmonX will decide the best algorithm based on th
 Valid keywords
 --------------
 
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| Keyword                  | Type           | Allowed Values                                         |  Default        |
-+==========================+================+========================================================+=================+
-| ``method``               | string         | ``inversion``, ``iterative``, ``iterative on the fly`` |  --             |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| ``parallel execution``   | string         | ``matrix``, ``frequencies``                            |  --             |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| ``number of iterations`` | integer        | –                                                      | ``1``           |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| ``gmres dimension``      | integer        | –                                                      | ``1000``        |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| ``tolerance``            | float or string| –                                                      | ``1.0e-5``      |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
-| ``adaptive tuning``      | string         | ``yes``, ``no``                                        | ``yes``         |
-+--------------------------+----------------+--------------------------------------------------------+-----------------+
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| Keyword                  | Type           | Allowed Values                                         |  Default                   |
++==========================+================+========================================================+============================+
+| ``method``               | string         | ``inversion``, ``iterative``, ``iterative on the fly`` |  --                        |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| ``parallel execution``   | string         | ``matrix``, ``frequencies``                            |  --                        |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| ``number of iterations`` | integer        | –                                                      | ``1``                      |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| ``gmres dimension``      | integer        | –                                                      | ``1000``                   |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| ``tolerance``            | float or string| –                                                      | :math:`E_0 \times 10^{-5}` |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
+| ``adaptive tuning``      | string         | ``yes``, ``no``                                        | ``yes``                    |
++--------------------------+----------------+--------------------------------------------------------+----------------------------+
 
 Notes
 -----
@@ -48,7 +48,7 @@ Notes
    - ``matrix`` : the construction of the matrices is parallelized.
 - ``number of iterations`` determines the number of external iterations for `iterative` and `iterative on the fly` algorithm [not currently exploited]. 
 - ``gmres dimension`` determines the number of microiterations for `iterative` and `iterative on the fly` algorithm [default: ``1000``]. 
-- ``tolerance`` determines the convergence threshold (default: ``1.0e-5``). This value is scaled for ensure RMSE convergence.
+- ``tolerance`` determines the convergence threshold (default: :math:`E_0 \times 10^{-5}`). This value is scaled for ensure RMSE convergence.
 - ``adaptive tuning`` determines whether to allow **plasmonX** to change the input parameters for best execution. 
 
 Example
