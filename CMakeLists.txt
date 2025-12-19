@@ -189,6 +189,13 @@ execute_process(
     OUTPUT_VARIABLE GEOM_CURRENT_COMMIT
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
+# Commit breve GEOM
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/submodules/geom
+    OUTPUT_VARIABLE GEOM_GIT_COMMIT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
 # Variabile per decidere se eseguire i test
 set(SHOULD_RUN_GEOM_TESTS ON)

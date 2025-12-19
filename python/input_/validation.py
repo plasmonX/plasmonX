@@ -301,7 +301,7 @@ def validate_algorithm(data, what, keywords):
         if "gmres dimension" not in algorithm:
             algorithm["gmres dimension"] = 1000
         if "tolerance" not in algorithm:
-            algorithm["tolerance"] = 1.0e-9
+            algorithm["tolerance"] = 1.0e-5/data["field"]["field intensity"]
         else:
             # convert format
             tolerance_value = algorithm["tolerance"]
@@ -1603,10 +1603,10 @@ def validate_input(yaml_file, data, atomtypes, project_root):
     errors_what, what = validate_what(data, updated_keywords)
     errors.extend(errors_what)
 
-    #algorithm section
-    errors.extend(validate_algorithm(data, what[0], updated_keywords))
     # field
     errors.extend(validate_field(data, what[0], updated_keywords))
+    #algorithm section
+    errors.extend(validate_algorithm(data, what[0], updated_keywords))
 
     if atomtypes:
         # forcefield

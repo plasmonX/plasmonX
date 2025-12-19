@@ -30,6 +30,7 @@ def main():
         print(f"Project Root       : @PROJECT_ROOT@")
         print(f"Git branch         : @GIT_BRANCH@")
         print(f"Git commit         : @GIT_COMMIT@")
+        print(f"GEOM git commit    : @GEOM_GIT_COMMIT@")
         print(f"Fortran compiler   : @FORTRAN_COMPILER@")
         print(f"LAPACK             : @LAPACK_TYPE@")
         print(f"BLAS               : @BLAS_TYPE@")
@@ -71,7 +72,8 @@ def main():
     configurations = {
         "Configuration date": "@CONFIGURATION_DATE@",
         "Git branch": "@GIT_BRANCH@",
-        "Git_commit": "@GIT_COMMIT@",
+        "Git commit": "@GIT_COMMIT@",
+        "GEOM git commit": "@GEOM_GIT_COMMIT@",
         "Fortran compiler": "@FORTRAN_COMPILER@",
         "Lapack type": "@LAPACK_TYPE@",
         "Blas type": "@BLAS_TYPE@",
