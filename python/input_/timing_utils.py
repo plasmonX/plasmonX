@@ -57,7 +57,7 @@ def get_termination_message(success, stderr):
         else:
             return "💀 Ob-La-Di, Ob-La-Doom! 💀", "Error Termination"
 
-def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_file, errors=None, citations=None):
+def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_file, errors=None, citations=None, warnings=None):
     """
     Write an execution summary including timing information and termination message.
 
@@ -71,6 +71,7 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
         output_file (str): Path to the output file.
         errors (list, optional): List of errors to include in the summary.
         citations (list, optional): List of citations to include in the summary.
+        warnings (list, optional): List of warnings to include in the summary.
     """    
 
     # Formatted times
@@ -78,10 +79,26 @@ def print_execution_summary(code, start_cpu_time, start_wall_time, fortran_cpu_t
 
     termination_text, termination_status = get_termination_message(success, stderr)
 
-    # Errors 
     sticks = " " + "-" * 80
     output_summary = []                                                               
-    errors = errors or []                                                             
+    # Warnings
+    warnings = warnings or [] 
+    if warnings:
+        output_summary.append(" Input Warnings Detected: \n")
+        for warning in warnings:
+            if "\n" in warning:
+                for line in warning.splitlines():
+                    wrapped_lines = textwrap.wrap(line, width=80, break_long_words=False)
+                    for wl in wrapped_lines:
+                        output_summary.append(" " + wl)
+            else:
+                wrapped_warning = textwrap.wrap(warning, width=80, break_long_words=False)  # Avvolge il testo a max 80 caratteri per riga
+                for line in wrapped_warning:
+                    output_summary.append(" " + line)  # Aggiunge un singolo spazio a ogni riga
+        output_summary.append(sticks)
+
+    # Errors 
+    errors = errors or []
     if errors:
         output_summary.append("\n" + "Input Errors Detected".center(81) + "\n")
         output_summary.append(sticks)

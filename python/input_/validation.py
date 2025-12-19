@@ -405,6 +405,52 @@ def assign_epsilon_solvent(solvent):
 
     return epsilon
 
+def sphere_radius_from_msh(msh_file, errors):
+    """
+    Reads msh file and calculate the sphere radius
+
+    Args:
+        msh_file: msh input file
+        errors : list
+
+    Returns:
+        radius : radius in a.u.
+    """
+    if os.path.isfile(msh_file):
+        try:
+            with open(msh_file, "r") as f:
+                lines = f.readlines()
+                
+            # Trova la sezione $Nodes e il numero di nodi
+            node_section = False
+            min_coords = [float("inf")] * 3
+            max_coords = [float("-inf")] * 3
+            
+            for line in lines:
+                if "$Nodes" in line:
+                    node_section = True
+                    continue
+                if "$EndNodes" in line:
+                    break
+                if node_section:
+                    parts = line.split()
+                    if len(parts) >= 4:  # Deve contenere almeno 4 valori: ID e (x, y, z)
+                        x, y, z = map(float, parts[1:4])
+                        min_coords = [min(min_coords[i], coord) for i, coord in enumerate([x, y, z])]
+                        max_coords = [max(max_coords[i], coord) for i, coord in enumerate([x, y, z])]
+    
+            # Calcola il massimo intervallo tra min e max nelle tre direzioni
+            if float("inf") not in min_coords and float("-inf") not in max_coords:
+                max_diff = max(max_coords[i] - min_coords[i] for i in range(3)) #diameter
+                # we round to the largest integer, we divide by 2.0 -> radius, and we convert to au (assuming input in Ang)
+                radius = convert_length_to_au(float(round(max_diff, 1))/2.0, None) 
+                return radius
+            else:
+                errors.append("BEM: Failed to parse node coordinates from mesh file.")
+        except Exception as e:
+            errors.append(f"BEM: Error reading mesh file '{msh_file}': {str(e)}")
+
+    
 
 def validate_bem(yaml_file, data, what, atomtypes, keywords, project_root):
     """
@@ -419,24 +465,26 @@ def validate_bem(yaml_file, data, what, atomtypes, keywords, project_root):
 
     Returns:
         list: Errors identified during validation.
+        list: Warnings identified during validation.
     """
     errors = []
+    warnings = []
 
     # Get or set default for 'bem'
     bem = data.setdefault("bem", {})
 
     if not bem:
-        return errors
+        return errors, warnings
 
     # check the section types
     errors.extend(check_section("bem", bem, keywords))
     if errors != []:
-        return errors
+        return errors, warnings
 
     # 1) BEM is only valid for dynamic calculations
     if what in ["energy", "static response"]:
         errors.append("BEM can only be run for what: dynamic response.")
-        return errors
+        return errors, warnings
 
     # 2.1) Check atomtypes
     if atomtypes:
@@ -514,38 +562,7 @@ def validate_bem(yaml_file, data, what, atomtypes, keywords, project_root):
 
     # sphere radius
     if "sphere radius" not in bem and bem["green function"] == "approximate": #default: read msh_file and calculate it
-        if os.path.isfile(msh_file):
-            try:
-                with open(msh_file, "r") as f:
-                    lines = f.readlines()
-                    
-                # Trova la sezione $Nodes e il numero di nodi
-                node_section = False
-                min_coords = [float("inf")] * 3
-                max_coords = [float("-inf")] * 3
-                
-                for line in lines:
-                    if "$Nodes" in line:
-                        node_section = True
-                        continue
-                    if "$EndNodes" in line:
-                        break
-                    if node_section:
-                        parts = line.split()
-                        if len(parts) >= 4:  # Deve contenere almeno 4 valori: ID e (x, y, z)
-                            x, y, z = map(float, parts[1:4])
-                            min_coords = [min(min_coords[i], coord) for i, coord in enumerate([x, y, z])]
-                            max_coords = [max(max_coords[i], coord) for i, coord in enumerate([x, y, z])]
-    
-                # Calcola il massimo intervallo tra min e max nelle tre direzioni
-                if float("inf") not in min_coords and float("-inf") not in max_coords:
-                    max_diff = max(max_coords[i] - min_coords[i] for i in range(3)) #diameter
-                    # we round to the largest integer, we divide by 2.0 -> radius, and we convert to au (assuming input in Ang)
-                    bem["sphere radius"] = convert_length_to_au(float(round(max_diff, 1))/2.0, None) 
-                else:
-                    errors.append("BEM: Failed to parse node coordinates from mesh file.")
-            except Exception as e:
-                errors.append(f"BEM: Error reading mesh file '{msh_file}': {str(e)}")
+        bem["sphere radius"] = sphere_radius_from_msh(msh_file, errors)
     elif "sphere radius" in bem:
         if bem["green function"] == "approximate":
             if isinstance(bem["sphere radius"],str):
@@ -571,7 +588,12 @@ def validate_bem(yaml_file, data, what, atomtypes, keywords, project_root):
     except ValueError as e:
         errors.append(str(e))        
 
-    return errors
+    #radius
+    radius = sphere_radius_from_msh(msh_file, errors)
+    if radius <= convert_length_to_au(5.0, 'angstrom'):
+       warnings.append("BEM radius computed from MSH file is <= 5.0 Angstrom. The results may be inaccurate.")
+
+    return errors, warnings
 
 def validate_output(data, what, keywords):
     """
@@ -1600,7 +1622,9 @@ def validate_input(yaml_file, data, atomtypes, project_root):
         used_defaults = False
 
     # bem
-    errors.extend(validate_bem(yaml_file, data, what[0],atomtypes, updated_keywords, project_root))
+    errors_bem, warnings = validate_bem(yaml_file, data, what[0],atomtypes, updated_keywords, project_root)
+
+    errors.extend(errors_bem)
 
     # control
     errors.extend(validate_control(data, updated_keywords))
@@ -1608,4 +1632,4 @@ def validate_input(yaml_file, data, atomtypes, project_root):
     # output
     errors.extend(validate_output(data, what[0], updated_keywords))
 
-    return errors, used_defaults
+    return errors, warnings, used_defaults

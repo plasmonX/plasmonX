@@ -9,7 +9,7 @@ from datetime import datetime
 
 def main():
     parser = argparse.ArgumentParser(description="Run plasmonX program")
-    parser.add_argument("-i", "--input_file", type=str, required=True,
+    parser.add_argument("-i", "--input_file", type=str, required=False,
                         help="input file [.yaml file]")
     parser.add_argument("-o", "--output_file", type=str, required=False,
                         help="Optional: output file [Default: input_file with log extension")
@@ -35,6 +35,10 @@ def main():
         print(f"BLAS               : @BLAS_TYPE@")
         print(f"64-bit integers    : @INT64_STATUS@")
         print(f"OpenMP             : @OMP_STATUS@")
+        sys.exit(0)
+
+    if not(args.input_file):
+        print("plasmonX.py: error: the following arguments are required: -i/--input_file")
         sys.exit(0)
 
     # Add the parent directory of the project to PYTHONPATH
@@ -97,15 +101,16 @@ def main():
     fortran_file = args.input_file[:-5]+".tmp"
 
     citations = []
+    warnings = []
 
     #create the fortran input file
-    yaml_to_fortran_input(start_cpu_time, start_wall_time, args.input_file, fortran_file, output_, n_omp_threads, available_GB, project_root, configurations, citations)
+    yaml_to_fortran_input(start_cpu_time, start_wall_time, args.input_file, fortran_file, output_, n_omp_threads, available_GB, project_root, configurations, citations, warnings)
 
     #run the calculation 
     stdout, stderr, success, fortran_cpu_time = run_fortran_code(build_path + "/plasmonX", fortran_file)
     
     #final output
-    print_execution_summary('plasmonX', start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_, citations=citations)
+    print_execution_summary('plasmonX', start_cpu_time, start_wall_time, fortran_cpu_time, success, stderr, output_, citations=citations, warnings=warnings)
 
     #rm file fortran input file
     if os.path.exists(fortran_file):

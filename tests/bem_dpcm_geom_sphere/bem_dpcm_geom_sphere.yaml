@@ -17,8 +17,6 @@ control:
 
 input_geometry: 
   type: implicit
-  shape: rod
-  main_axis: Z
-  length: 100.0
-  width: 30.0
+  shape: sphere
+  radius: 6.0
   mesh_size: 5.0

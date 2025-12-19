@@ -221,7 +221,7 @@ def read_geometry(data, yaml_file, keywords):
 
     return processed_geometry, unique_atomtypes, natoms, nmol, string_input, errors
 
-def initialize_output_file(start_cpu_time, start_wall_time, output_file, configurations, errors):
+def initialize_output_file(start_cpu_time, start_wall_time, output_file, configurations, errors, warnings):
     """
     Initialize the output file with formatted header information.
 
@@ -231,6 +231,7 @@ def initialize_output_file(start_cpu_time, start_wall_time, output_file, configu
         output_file (str): Path to the output file.
         configurations (dict): Configuration dictionary.
         errors (list): List of errors to report, if any.
+        warnings (list): List of warnings to report, if any.
     """    
     sticks = "-" * 80  # 80 ----
     # calculate the length
@@ -258,10 +259,10 @@ def initialize_output_file(start_cpu_time, start_wall_time, output_file, configu
             f.write(f" {key.ljust(max_key_length)} : {value}\n")
         f.write(f" {sticks}\n")
     if errors:
-        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", output_file, errors=errors)
+        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", output_file, errors=errors, warnings=warnings)
         sys.exit()
 
-def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_file, out_file, n_omp, memory, project_root, configurations, citations):
+def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_file, out_file, n_omp, memory, project_root, configurations, citations, warnings):
     """
     Process a YAML input file and generate a corresponding FORTRAN input file.
 
@@ -275,6 +276,7 @@ def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_fi
         memory (int): Available memory in MB.
         project_root (str): Root path of the project.
         configurations (dict): Configuration templates and settings.
+        warnings : warnings messages
     """
 
     errors = []
@@ -301,15 +303,16 @@ def yaml_to_fortran_input(start_cpu_time, start_wall_time, yaml_file, fortran_fi
             nmol = 0
             processed_geometry = []
 
-        errors_input, used_defaults = validate_input(yaml_file, data, atomtypes, project_root)
+        errors_input, warnings_input, used_defaults = validate_input(yaml_file, data, atomtypes, project_root)
         errors.extend(errors_input)
+        warnings.extend(warnings_input)
 
-    initialize_output_file(start_cpu_time, start_wall_time, out_file, configurations, errors)
+    initialize_output_file(start_cpu_time, start_wall_time, out_file, configurations, errors, warnings)
 
     #change algorithm based on calculation
     errors.extend(check_best_algorithm(data, atomtypes, natoms, n_omp, memory))
     if errors:
-        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", out_file, errors=errors)
+        print_execution_summary('plasmonX',start_cpu_time, start_wall_time, 0, False, "", out_file, errors=errors, warnings=warnings)
         sys.exit()
 
 
