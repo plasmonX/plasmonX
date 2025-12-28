@@ -26,6 +26,7 @@ def main():
 
     if args.version:
         print(f"Configuration date : @CONFIGURATION_DATE@")
+        print(f"plasmonX version   : 1.0")
         print(f"Build Path         : @BUILD_PATH@")
         print(f"Project Root       : @PROJECT_ROOT@")
         print(f"Git branch         : @GIT_BRANCH@")
@@ -71,6 +72,7 @@ def main():
 
     configurations = {
         "Configuration date": "@CONFIGURATION_DATE@",
+        "plasmonX version": "1.0",
         "Git branch": "@GIT_BRANCH@",
         "Git commit": "@GIT_COMMIT@",
         "GEOM git commit": "@GEOM_GIT_COMMIT@",

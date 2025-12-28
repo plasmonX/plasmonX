@@ -106,28 +106,29 @@ def check_best_algorithm(data, atomtypes, natoms, n_omp, memory):
 
         safe_budget_gb = float(memory or 0.0) 
 
-        # do not overcome the available memory
-        if requested_parallel == "frequencies" and per_freq_gb > 0.0:
-            if required_gb_freq_parallel > safe_budget_gb:
-                if algorithm.get("adaptive tuning") == "no":
-                    errors.append(
-                        (f"Insufficient memory for frequency-parallel execution\n"
-                         f"   Estimated: {required_gb_freq_parallel:.2f} GB \n"
-                         f"   Estimated: {per_freq_gb:.2f} GB / frequency\n"
-                         f"   Available: {safe_budget_gb:.2f} GB \n"
-                         f"Switch to 'matrix' parallelization or use the iterative method.")
-                    )
-                    return errors
-        elif requested_parallel == "matrix" and per_freq_gb > 0.0:
-            if per_freq_gb > safe_budget_gb:
-                if algorithm.get("adaptive tuning") == "no":
-                    errors.append(
-                        (f"Insufficient memory for inversion algorithm\n"
-                         f"   Estimated: {per_freq_gb:.2f} GB \n"
-                         f"   Available: {safe_budget_gb:.2f} GB \n"
-                         f"Switch to the iterative method.")
-                    )
-                    return errors
+        if algorithm.get("method") == "inversion":
+            # do not overcome the available memory
+            if requested_parallel == "frequencies" and per_freq_gb > 0.0:
+                if required_gb_freq_parallel > safe_budget_gb:
+                    if algorithm.get("adaptive tuning") == "no":
+                        errors.append(
+                            (f"Insufficient memory for frequency-parallel execution\n"
+                             f"   Estimated: {required_gb_freq_parallel:.2f} GB \n"
+                             f"   Estimated: {per_freq_gb:.2f} GB / frequency\n"
+                             f"   Available: {safe_budget_gb:.2f} GB \n"
+                             f"Switch to 'matrix' parallelization or use the iterative method.")
+                        )
+                        return errors
+            elif requested_parallel == "matrix" and per_freq_gb > 0.0:
+                if per_freq_gb > safe_budget_gb:
+                    if algorithm.get("adaptive tuning") == "no":
+                        errors.append(
+                            (f"Insufficient memory for inversion algorithm\n"
+                             f"   Estimated: {per_freq_gb:.2f} GB \n"
+                             f"   Available: {safe_budget_gb:.2f} GB \n"
+                             f"Switch to the iterative method.")
+                        )
+                        return errors
 
     # If adaptive tuning and we arrived here, we can come back
     if algorithm.get("adaptive tuning") == "no":
