@@ -554,7 +554,7 @@ module input_module
          call validate_and_parse_real(line,"field step freq", field%step_freq)
       case ("field external freq")
          if(field%n_freq.gt.0.and.allocated(field%freq).and.&
-            field%min_freq.eq.zero.and.field%max_freq.eq.zero) then
+            is_equal(field%min_freq,zero).and.is_equal(field%max_freq,zero)) then
             read(value_,*) field%freq(1:field%n_freq)
          endif
       case ("field polarization")
