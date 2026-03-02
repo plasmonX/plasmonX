@@ -3,6 +3,21 @@ Papers
 
 **plasmonX** (and its development versions) has been used in the following papers:
 
+15. T. Giovannini*, P. Lafiosca, P. Grobas Illobre, L. Nicoli, L. Bonatti, S. Corni, C. Cappelli.
+    “plasmonX: an Open-Source Code for Nanoplasmonics”  
+    *Comput. Phys. Commun.* **2026**, *322*, 110035.
+    `DOI: 10.1016/j.cpc.2026.110035 <https://doi.org/10.1016/j.cpc.2026.110035>`_
+
+14. T. Tapani, J. M. Pettersson, N. Henriksson, C. M. Brunner, A. C. Zimmermann, E. Zäll, N. V. Hauff, L. Das, A. Sapunova, G. Balestra, M. Cuscunà, A. De Andres, T. Giovannini, D. Garoli, N. Maccaferri.
+    “Morphology-modified contributions of electronic transitions to the optical response of plasmonic nanoporous gold metamaterial”  
+    *Nat. Commun.* **2026**, *17*, 829. 
+    `DOI: 10.1038/s41467-026-68506-0 <https://doi.org/10.1038/s41467-026-68506-0>`_
+
+13. S. Sodomaco, P. Lafiosca, T. Giovannini*, C. Cappelli.
+    “Atomistic QM/Classical Modeling of Surface-Enhanced IR Absorption”
+    *J. Phys. Chem. C* **2026**, *130*, 1919--1930 
+    `DOI: 10.1021/acs.jpcc.5c07549 <https://doi.org/10.1021/acs.jpcc.5c07549>`_
+    
 12. T. Giovannini, L. Nicoli, S. Corni, C. Cappelli.  
     “The Electric Field Morphology of Plasmonic Picocavities”  
     *Nano Lett.* **2025**, *25*, 10802--10808  

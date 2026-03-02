@@ -41,8 +41,8 @@ license: GPL-3.0
 repository-code: "https://github.com/plasmonX/plasmonX"
 url: "https://plasmonx.readthedocs.io/"
 
-version: "pre-release-1.0"
-date-released: 2025-10-15
+version: "1.0"
+date-released: 2026-03-02
 
 preferred-citation:
   type: article
@@ -62,5 +62,8 @@ preferred-citation:
     - family-names: Cappelli
       given-names: Chiara
   title: "plasmonX: an Open-Source Code for Nanoplasmonics"
-  year: 2025
-  doi: "10.48550/arXiv.2510.12731"
+  year: 2026
+  journal: Comput. Phys. Commun.
+  volume: 322
+  page: 110035
+  doi: "10.1016/j.cpc.2026.110035"

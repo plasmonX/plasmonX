@@ -7,7 +7,8 @@ def define_references_to_be_printed(data, atomtypes):
 
     #T. Giovannini et al. arXiv.2025 
     cit[10] = """ - plasmonX 
-    https://arxiv.org/abs/2510.12731"""
+    https://doi.org/10.1016/j.cpc.2026.110035
+"""
 
     #T. Giovannini et al. Nano Lett. 2025, 25, 10802. 
     cit[9]  = """    https://doi.org/10.1021/acs.nanolett.5c01999 

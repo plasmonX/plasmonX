@@ -31,8 +31,8 @@ The generated PDF version of the documentation will be available in `docs/build/
 
 ### **plasmonX** (preprint)
 - T. Giovannini, P. Grobas Illobre, P. Lafiosca, L. Nicoli, L. Bonatti, S. Corni, C. Cappelli.
-  *arXiv:2510.12731*, **2025**
-  [DOI: 10.48550/arXiv.2510.12731](https://doi.org/10.48550/arXiv.2510.12731)
+  *Comput. Phys. Commun.*, **2026**, *322*, 110035.
+  [DOI: 10.1016/j.cpc.2026.110035](https://doi.org/10.1016/j.cpc.2026.110035)
 
 ### **ωFQ**
 - T. Giovannini, M. Rosa, S. Corni, C. Cappelli.
