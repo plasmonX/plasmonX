@@ -14,7 +14,7 @@
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-06-10 11:49:20 CEST
+ Configuration date : 2026-03-02 10:14:40 CET
  Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
@@ -81,5 +81,5 @@
                                                   CPU Time:     0 h 00 min 03 sec
                                               Elapsed Time:     0 h 00 min 01 sec
  --------------------------------------------------------------------------------
-           Normal Termination of plasmonX analysis in date 10/06/2025 at 11:50:01
+           Normal Termination of plasmonX analysis in date 19/07/2026 at 09:36:16
  --------------------------------------------------------------------------------

@@ -1214,23 +1214,23 @@ contains
                                        dexp(-distIJ_2/R_Mu_I_2)
          fD2 = (four/(sqrt(pi)*R_Mu_I_3)) * dexp(-distIJ_2/R_Mu_I_2)
       
-         Txx = (((-three*d_IJ(1)*d_IJ(1))/distIJ_5 + one/distij_3)*fD1 + &
+         Txx = (((three*d_IJ(1)*d_IJ(1))/distIJ_5 - one/distij_3)*fD1 - &
                 fD2*(d_IJ(1)*d_IJ(1))/distIJ_2) 
-         Txy = (((-three*d_IJ(1)*d_IJ(2))/distIJ_5               )*fD1 + & 
+         Txy = (((three*d_IJ(1)*d_IJ(2))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(1)*d_IJ(2))/distIJ_2) 
-         Txz = (((-three*d_IJ(1)*d_IJ(3))/distIJ_5               )*fD1 + & 
+         Txz = (((three*d_IJ(1)*d_IJ(3))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(1)*d_IJ(3))/distIJ_2)
-         Tyx = (((-three*d_IJ(2)*d_IJ(1))/distIJ_5               )*fD1 + & 
+         Tyx = (((three*d_IJ(2)*d_IJ(1))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(2)*d_IJ(1))/distIJ_2)
-         Tyy = (((-three*d_IJ(2)*d_IJ(2))/distIJ_5 + one/distij_3)*fD1 + & 
+         Tyy = (((three*d_IJ(2)*d_IJ(2))/distIJ_5 - one/distij_3)*fD1 - & 
                 fD2*(d_IJ(2)*d_IJ(2))/distIJ_2) 
-         Tyz = (((-three*d_IJ(2)*d_IJ(3))/distIJ_5               )*fD1 + & 
+         Tyz = (((three*d_IJ(2)*d_IJ(3))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(2)*d_IJ(3))/distIJ_2) 
-         Tzx = (((-three*d_IJ(3)*d_IJ(1))/distIJ_5               )*fD1 + & 
+         Tzx = (((three*d_IJ(3)*d_IJ(1))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(3)*d_IJ(1))/distIJ_2)
-         Tzy = (((-three*d_IJ(3)*d_IJ(2))/distIJ_5               )*fD1 + & 
+         Tzy = (((three*d_IJ(3)*d_IJ(2))/distIJ_5               )*fD1 - & 
                 fD2*(d_IJ(3)*d_IJ(2))/distIJ_2) 
-         Tzz = (((-three*d_IJ(3)*d_IJ(3))/distIJ_5 + one/distij_3)*fD1 + & 
+         Tzz = (((three*d_IJ(3)*d_IJ(3))/distIJ_5 - one/distij_3)*fD1 - & 
                 fD2*(d_IJ(3)*d_IJ(3))/distIJ_2)
          
          EFIeld(1) = EField(1) + variable_w(1) * Txx + &

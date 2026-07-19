@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 
-csv_file = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.csv'
-output = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.svg'
-output_png = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.png'
+csv_file = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00-densityRe.csv'
+output = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00-densityRe.svg'
+output_png = 'analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00-densityRe.png'
 
 data = []
 with open(csv_file, 'r') as file:
@@ -24,7 +24,7 @@ X, Y = np.meshgrid(xi, yi)
 Z = griddata((x, y), z, (X, Y), method='linear')
 
 fig = plt.figure(figsize=(10, 10))
-plt.pcolormesh(X, Y, Z, cmap='jet', shading='auto')
+plt.pcolormesh(X, Y, Z, cmap='seismic', shading='auto')
 cbar = plt.colorbar(extend='both')
 cbar.formatter.set_useMathText(True)
 cbar.update_ticks()

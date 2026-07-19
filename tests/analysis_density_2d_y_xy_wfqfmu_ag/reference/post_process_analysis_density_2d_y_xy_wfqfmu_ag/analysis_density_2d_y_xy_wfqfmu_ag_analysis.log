@@ -14,7 +14,7 @@
  --------------------------------------------------------------------------------
  Tommaso Giovannini    University of Rome Tor Vergata, Rome, Italy
  --------------------------------------------------------------------------------
- Configuration date : 2025-06-10 11:49:20 CEST
+ Configuration date : 2026-07-19 09:55:23 CEST
  Git branch         : master
  Fortran compiler   : GNU 9.4.0
  Lapack type        : MKL
@@ -25,7 +25,7 @@
  Input File         : analysis_density_2d_y_xy_wfqfmu_ag.tar.gz
  OMP Threads        :   8
  --------------------------------------------------------------------------------
- What               : field
+ What               : density
  Plane requested    : T
  Number of planes   :       1
  Start plane        :    0.00 Ang.
@@ -62,24 +62,26 @@
  --------------------------------------------------------------------------------
                            Grid Information (Angstrom)
  --------------------------------------------------------------------------------
-          StepX:       1.2855  StepY:       0.1244  StepZ:       0.0000
+          StepX:       1.2855  StepY:       0.8535  StepZ:       0.0000
  --------------------------------------------------------------------------------
           XminGrid:  -18.6400  XmaxGrid:   18.6400  X NPoints:     30
  --------------------------------------------------------------------------------
-          YminGrid:  -12.3661  YmaxGrid:   12.3859  Y NPoints:    200
+          YminGrid:  -12.3661  YmaxGrid:   12.3859  Y NPoints:     30
  --------------------------------------------------------------------------------
           ZminGrid:    0.0000  ZmaxGrid:    0.0000  Z NPoints:      0
  --------------------------------------------------------------------------------
  Plane:         1  Coord:                 0.00
 
- Created CSV file: post_process_analysis_density_2d_y_xy_wfqfmu_ag/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00.csv
+ Created CSV file: post_process_analysis_density_2d_y_xy_wfqfmu_ag/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00-densityRe.csv
+ --------------------------------------------------------------------------------
+ Created CSV file: post_process_analysis_density_2d_y_xy_wfqfmu_ag/planes/xy/analysis_density_2d_y_xy_wfqfmu_ag-Ey-3.0000000000-p-0.00-densityIm.csv
  --------------------------------------------------------------------------------
 
                            🎸 Ob-La-Di, Ob-La-Done! 🎶                           
 
  --------------------------------------------------------------------------------
-                                                  CPU Time:     0 h 00 min 02 sec
+                                                  CPU Time:     0 h 00 min 03 sec
                                               Elapsed Time:     0 h 00 min 01 sec
  --------------------------------------------------------------------------------
-           Normal Termination of plasmonX analysis in date 10/06/2025 at 11:49:57
+           Normal Termination of plasmonX analysis in date 19/07/2026 at 10:18:03
  --------------------------------------------------------------------------------
